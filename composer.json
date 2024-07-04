@@ -56,7 +56,10 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "test": "phpunit --colors=always",
+        "test-update": "phpunit --migrate-configuration",
+        "test-coverage": "XDEBUG_MODE=coverage phpunit --colors=always --coverage-html var/test/coverage"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -68,6 +71,10 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.60"
+        "friendsofphp/php-cs-fixer": "^3.59",
+        "phpstan/phpstan": "^1.11",
+        "phpunit/phpunit": "^10.5",
+        "symfony/maker-bundle": "^1.60",
+        "vimeo/psalm": "^5.25"
     }
 }
