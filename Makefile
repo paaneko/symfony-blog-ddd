@@ -1,4 +1,4 @@
-init: build composer-install up
+init: build composer-install up migrate
 
 build:
 	docker-compose build
@@ -14,6 +14,9 @@ up:
 
 down:
 	docker-compose down --remove-orphans
+
+migrate:
+	docker-compose exec php bin/console doctrine:migrations:migrate
 
 phpstan-check:
 	docker-compose run --rm php vendor/bin/phpstan analyse -l 9
