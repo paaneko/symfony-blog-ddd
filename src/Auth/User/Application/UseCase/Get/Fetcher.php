@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Auth\User\Application\UseCase\Get;
+
+use App\Auth\User\Application\Service\UserService;
+use App\Auth\User\Domain\Entity\Id;
+use App\Auth\User\Domain\Entity\User;
+
+class Fetcher
+{
+    /** @psalm-suppress PossiblyUnusedMethod */
+    public function __construct(private UserService $userService)
+    {
+    }
+
+    public function fetch(Query $query): User
+    {
+        $userId = new Id($query->id);
+
+        return $this->userService->get($userId);
+    }
+}

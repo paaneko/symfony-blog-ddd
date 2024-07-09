@@ -8,9 +8,9 @@
         findUnusedBaselineEntry="true"
         findUnusedCode="true"
 >
-    <!--    <issueHandlers>-->
-    <!--        <PossiblyUnusedProperty errorLevel="info" />-->
-    <!--    </issueHandlers>-->
+        <issueHandlers>
+            <PropertyNotSetInConstructor errorLevel="suppress" />
+        </issueHandlers>
 
     <projectFiles>
         <directory name="src"/>

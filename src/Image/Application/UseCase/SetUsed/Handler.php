@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Image\Application\UseCase\SetUsed;
+
+use App\Image\Application\Service\ImageService;
+use App\Image\Domain\Entity\Id;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+
+/** @psalm-suppress UnusedClass */
+#[AsMessageHandler]
+class Handler
+{
+    public function __construct(
+        private ImageService $imageService,
+        private EntityManagerInterface $entityManager
+    ) {
+    }
+
+    public function __invoke(Command $setUsedCommand): void
+    {
+        $image = $this->imageService->find(new Id($setUsedCommand->imageId));
+
+        if (is_null($image)) {
+            throw new \DomainException('Image not found');
+            // Add logger, and alarm because this critical error, that does not suppose to happen never
+            // Otherwise we can dispatch event that removes article
+        }
+
+        $image->setUsed();
+
+        $this->entityManager->flush();
+    }
+}

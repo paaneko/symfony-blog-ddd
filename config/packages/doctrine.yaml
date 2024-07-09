@@ -2,8 +2,16 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
         types:
-            article_id: App\Article\Entity\IdType
-            image_id: App\Image\Entity\IdType
+            article_id: App\Blog\Article\Domain\Entity\IdType
+            author_id: App\Blog\Article\Domain\Entity\AuthorIdType
+            article_category_id: App\Blog\Article\Domain\Entity\CategoryIdType
+            article_section_id: App\Blog\Article\Domain\Entity\SectionIdType
+            comment_id: App\Blog\Article\Domain\Entity\CommentIdType
+            category_id: App\Blog\Category\Domain\Entity\IdType
+            section_id: App\Blog\Section\Domain\Entity\IdType
+            main_image_id: App\Blog\Article\Domain\Entity\MainImageIdType
+            image_id: App\Image\Domain\Entity\IdType
+            user_id: App\Auth\User\Domain\Entity\IdType
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
@@ -18,15 +26,33 @@ doctrine:
             Article:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Article/Entity'
-                prefix: 'App\Article\Entity'
+                dir: '%kernel.project_dir%/src/Blog/Article/Domain'
+                prefix: 'App\Blog\Article\Domain'
                 alias: Article
+            Category:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Blog/Category/Domain'
+                prefix: 'App\Blog\Category\Domain'
+                alias: Category
+            Section:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Blog/Section/Domain'
+                prefix: 'App\Blog\Section\Domain'
+                alias: Section
             Image:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Image/Entity'
-                prefix: 'App\Image\Entity'
+                dir: '%kernel.project_dir%/src/Image/Domain'
+                prefix: 'App\Image\Domain'
                 alias: Image
+            User:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Auth/User/Domain'
+                prefix: 'App\Auth\User\Domain'
+                alias: User
 
         controller_resolver:
             auto_mapping: false
