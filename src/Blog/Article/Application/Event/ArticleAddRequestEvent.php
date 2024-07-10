@@ -7,7 +7,7 @@ namespace App\Blog\Article\Application\Event;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class OnArticleAddRequestedEvent extends Event
+class ArticleAddRequestEvent extends Event
 {
     #[Assert\NotBlank]
     #[Assert\Length(min: 15, max: 255, )]

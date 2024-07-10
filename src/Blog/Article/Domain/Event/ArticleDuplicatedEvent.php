@@ -6,6 +6,6 @@ namespace App\Blog\Article\Domain\Event;
 
 use App\SharedKernel\Event\DomainEventInterface;
 
-class ArticleCloneCreatedEvent implements DomainEventInterface
+class ArticleDuplicatedEvent implements DomainEventInterface
 {
 }

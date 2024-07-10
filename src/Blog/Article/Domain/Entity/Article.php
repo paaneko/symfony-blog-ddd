@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Domain\Entity;
 
-use App\Blog\Article\Domain\Event\ArticleCloneCreatedEvent;
+use App\Blog\Article\Domain\Event\ArticleDuplicatedEvent;
 use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
 use App\Blog\Article\Domain\ValueObject\AuthorId;
 use App\Blog\Article\Domain\ValueObject\Content;
@@ -77,7 +77,7 @@ class Article extends AggregateRoot
         $this->comments = new ArrayCollection();
 
         $this->recordDomainEvent(new ArticleCreatedEvent(
-            $mainImageId,
+            $mainImageId->getValue(),
         ));
     }
 
@@ -89,16 +89,21 @@ class Article extends AggregateRoot
 
     public function duplicate(): self
     {
-        $article = clone $this;
+        $clone = clone $this;
 
-        $article->id = Id::generate();
-        $article->title = new Title($this->title->getValue() . ' Clone');
-        $article->views = Views::init();
-        $article->dateTime = new \DateTimeImmutable();
+        $clone->id = Id::generate();
+        $clone->views = Views::init();
+        $clone->comments = new ArrayCollection();
+        $clone->dateTime = new \DateTimeImmutable();
 
-        $this->recordDomainEvent(new ArticleCloneCreatedEvent());
+        $this->recordDomainEvent(new ArticleDuplicatedEvent());
 
-        return $article;
+        return $clone;
+    }
+
+    public function incrementViews(): void
+    {
+        $this->views = $this->views->increment();
     }
 
     /** @psalm-suppress UnusedMethod */

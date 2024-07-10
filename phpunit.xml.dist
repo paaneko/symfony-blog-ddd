@@ -13,6 +13,13 @@
     </php>
     <testsuites>
         <testsuite name="unit">
+            <directory>src/Auth/User/Application/Test/Unit</directory>
+
+            <directory>src/Blog/Article/Application/Test/Unit</directory>
+            <directory>src/Blog/Article/Domain/Test/Unit</directory>
+
+            <directory>src/Image/Application/Test/Unit</directory>
+            <directory>src/Image/Domain/Test/Unit</directory>
         </testsuite>
         <testsuite name="integration">
         </testsuite>

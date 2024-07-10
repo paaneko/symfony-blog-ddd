@@ -7,7 +7,6 @@ namespace App\Blog\Article\Domain\Entity;
 use App\Blog\Article\Domain\ValueObject\Email;
 use App\Blog\Article\Domain\ValueObject\Message;
 use App\Blog\Article\Domain\ValueObject\Name;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -20,6 +19,7 @@ class Comment
 
     /**
      * @psalm-suppress UnusedProperty
+     *
      * @phpstan-ignore-next-line
      */
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'comments')]
@@ -36,14 +36,14 @@ class Comment
     private Message $message;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private DateTimeImmutable $createdAt;
+    private \DateTimeImmutable $createdAt;
 
     public function __construct(
         CommentId $id,
         Name $name,
         Email $email,
         Message $message,
-        DateTimeImmutable $createdAt
+        \DateTimeImmutable $createdAt
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -79,7 +79,7 @@ class Comment
     }
 
     /** @psalm-suppress PossiblyUnusedMethod */
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }

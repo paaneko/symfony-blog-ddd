@@ -6,7 +6,7 @@ namespace App\Auth\User\Application\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
-class OnUserVerifiedEvent extends Event
+class ArticleUserVerifiedEvent extends Event
 {
     private string $title;
 

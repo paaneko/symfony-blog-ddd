@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Infrastructure\Controller\Api;
 
-use App\Blog\Article\Application\Event\OnArticleAddRequestedEvent;
+use App\Blog\Article\Application\Event\ArticleAddRequestEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +26,7 @@ class AddArticleController extends AbstractController
     {
         $parameters = json_decode($request->getContent(), true);
 
-        $articleAddRequestedEvent = new OnArticleAddRequestedEvent(
+        $articleAddRequestedEvent = new ArticleAddRequestEvent(
             /* @phpstan-ignore-next-line */
             $parameters['title'],
             /* @phpstan-ignore-next-line */

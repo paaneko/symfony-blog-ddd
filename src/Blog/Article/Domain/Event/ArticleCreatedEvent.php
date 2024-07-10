@@ -11,11 +11,11 @@ use Symfony\Contracts\EventDispatcher\Event;
 final class ArticleCreatedEvent extends Event implements DomainEventInterface
 {
     public function __construct(
-        private MainImageId $mainImageId,
+        private string $mainImageId,
     ) {
     }
 
-    public function getMainImageId(): MainImageId
+    public function getMainImageId(): string
     {
         return $this->mainImageId;
     }
