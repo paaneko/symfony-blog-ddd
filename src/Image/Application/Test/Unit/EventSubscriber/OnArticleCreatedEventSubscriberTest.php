@@ -3,6 +3,7 @@
 namespace App\Image\Application\Test\Unit\EventSubscriber;
 
 use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
+use App\Blog\Article\Domain\Test\Builder\ArticleCreatedEventBuilder;
 use App\Image\Application\EventSubscriber\OnArticleCreatedEventSubscriber;
 use App\Image\Application\Service\ImageService;
 use App\Image\Domain\Entity\Image;
@@ -25,14 +26,12 @@ class OnArticleCreatedEventSubscriberTest extends TestCase
             ->method('find')
             ->willReturn($this->createMock(Image::class));
 
-        $event = new ArticleCreatedEvent('e1234567-e89b-12d3-a456-426614174000');
-
         $subscriber = new OnArticleCreatedEventSubscriber(
             $messageBus,
             $imageService
         );
 
-        $subscriber->setImageUsed($event);
+        $subscriber->setImageUsed((new ArticleCreatedEventBuilder())->build());
     }
     
     public function testItFailsIfProvidedImageDoNotExists()
@@ -43,14 +42,12 @@ class OnArticleCreatedEventSubscriberTest extends TestCase
         $imageService = $this->createMock(ImageService::class);
         $imageService->expects($this->once())->method('find')->willReturn(null);
 
-        $event = new ArticleCreatedEvent('e1234567-e89b-12d3-a456-426614174000');
-
         $subscriber = new OnArticleCreatedEventSubscriber(
             $messageBus,
             $imageService
         );
 
         $this->expectException(DomainException::class);
-        $subscriber->setImageUsed($event);
+        $subscriber->setImageUsed((new ArticleCreatedEventBuilder())->build());
     }
 }

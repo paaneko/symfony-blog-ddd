@@ -20,6 +20,8 @@
 
             <directory>src/Image/Application/Test/Unit</directory>
             <directory>src/Image/Domain/Test/Unit</directory>
+
+            <directory>src/Search/Blog/Application/Test/Unit</directory>
         </testsuite>
         <testsuite name="integration">
         </testsuite>

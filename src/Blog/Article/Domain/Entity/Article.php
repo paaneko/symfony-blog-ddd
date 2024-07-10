@@ -77,6 +77,8 @@ class Article extends AggregateRoot
         $this->comments = new ArrayCollection();
 
         $this->recordDomainEvent(new ArticleCreatedEvent(
+            $this->id->getValue(),
+            $title->getValue(),
             $mainImageId->getValue(),
         ));
     }
@@ -96,7 +98,10 @@ class Article extends AggregateRoot
         $clone->comments = new ArrayCollection();
         $clone->dateTime = new \DateTimeImmutable();
 
-        $this->recordDomainEvent(new ArticleDuplicatedEvent());
+        $this->recordDomainEvent(new ArticleDuplicatedEvent(
+            $clone->id->getValue(),
+            $clone->title->getValue()
+        ));
 
         return $clone;
     }

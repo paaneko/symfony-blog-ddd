@@ -5,7 +5,6 @@ namespace App\Blog\Article\Domain\Test\Unit;
 use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
 use App\Blog\Article\Domain\Event\ArticleDuplicatedEvent;
 use App\Blog\Article\Domain\Test\Builder\ArticleBuilder;
-use App\Blog\Article\Domain\Test\Builder\CommentBuilder;
 use PHPUnit\Framework\TestCase;
 
 class ArticleEventsTest extends TestCase
@@ -15,7 +14,9 @@ class ArticleEventsTest extends TestCase
         $article = (new ArticleBuilder())->build();
 
         $this->assertEquals([new ArticleCreatedEvent(
-            $article->getMainImageId())
+            $article->getId()->getValue(),
+            $article->getTitle()->getValue(),
+            $article->getMainImageId()->getValue())
         ], $article->pullDomainEvents());
     }
 
@@ -23,8 +24,11 @@ class ArticleEventsTest extends TestCase
     {
         $article = (new ArticleBuilder())->buildWithoutDomainEvents();
 
-        $article->duplicate();
+        $duplicate = $article->duplicate();
 
-        $this->assertEquals([new ArticleDuplicatedEvent()], $article->pullDomainEvents());
+        $this->assertEquals([new ArticleDuplicatedEvent(
+            $duplicate->getId()->getValue(),
+            $duplicate->getTitle()->getValue()
+        )], $article->pullDomainEvents());
     }
 }

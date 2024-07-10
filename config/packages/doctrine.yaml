@@ -12,6 +12,8 @@ doctrine:
             main_image_id: App\Blog\Article\Domain\Entity\MainImageIdType
             image_id: App\Image\Domain\Entity\IdType
             user_id: App\Auth\User\Domain\Entity\IdType
+            search_blog_index_id: App\Search\Blog\Domain\Entity\IdType
+            article_identifier_id: App\Search\Blog\Domain\Entity\ArticleIdentifierType
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
@@ -53,6 +55,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Auth/User/Domain'
                 prefix: 'App\Auth\User\Domain'
                 alias: User
+            Index:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Search/Blog/Domain'
+                prefix: 'App\Search\Blog\Domain'
+                alias: Index
 
         controller_resolver:
             auto_mapping: false

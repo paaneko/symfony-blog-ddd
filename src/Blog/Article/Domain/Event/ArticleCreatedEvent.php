@@ -11,8 +11,20 @@ use Symfony\Contracts\EventDispatcher\Event;
 final class ArticleCreatedEvent extends Event implements DomainEventInterface
 {
     public function __construct(
+        private string $id,
+        private string $title,
         private string $mainImageId,
     ) {
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
     }
 
     public function getMainImageId(): string
