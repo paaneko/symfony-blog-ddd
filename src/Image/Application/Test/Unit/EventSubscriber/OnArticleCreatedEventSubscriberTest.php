@@ -1,15 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Image\Application\Test\Unit\EventSubscriber;
 
-use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
 use App\Blog\Article\Domain\Test\Builder\ArticleCreatedEventBuilder;
 use App\Image\Application\EventSubscriber\OnArticleCreatedEventSubscriber;
 use App\Image\Application\Service\ImageService;
 use App\Image\Domain\Entity\Image;
-use DomainException;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -19,7 +18,7 @@ class OnArticleCreatedEventSubscriberTest extends TestCase
     {
         $messageBus = $this->createMock(MessageBusInterface::class);
         $messageBus->expects($this->once())
-            ->method('dispatch')->willReturn(new Envelope(new stdClass()));
+            ->method('dispatch')->willReturn(new Envelope(new \stdClass()));
 
         $imageService = $this->createMock(ImageService::class);
         $imageService->expects($this->once())
@@ -33,7 +32,7 @@ class OnArticleCreatedEventSubscriberTest extends TestCase
 
         $subscriber->setImageUsed((new ArticleCreatedEventBuilder())->build());
     }
-    
+
     public function testItFailsIfProvidedImageDoNotExists()
     {
         $messageBus = $this->createMock(MessageBusInterface::class);
@@ -47,7 +46,7 @@ class OnArticleCreatedEventSubscriberTest extends TestCase
             $imageService
         );
 
-        $this->expectException(DomainException::class);
+        $this->expectException(\DomainException::class);
         $subscriber->setImageUsed((new ArticleCreatedEventBuilder())->build());
     }
 }

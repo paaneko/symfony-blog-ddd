@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Article\Application\Test\Builder;
 
 use App\Blog\Article\Application\Event\ArticleAddRequestEvent;
@@ -19,7 +21,8 @@ class ArticleAddRequestEventBuilder
 
     private string $imageId;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->title = 'Lorem ipsum dolor sit amet';
         $this->content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in.';
         $this->categoryId = FakeUuid::generate();

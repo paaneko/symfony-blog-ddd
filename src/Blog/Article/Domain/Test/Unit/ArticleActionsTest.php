@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Article\Domain\Test\Unit;
 
 use App\Blog\Article\Domain\Test\Builder\ArticleBuilder;

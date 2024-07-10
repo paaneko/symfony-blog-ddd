@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Domain\Entity;
 
-use App\Blog\Article\Domain\Event\ArticleDuplicatedEvent;
 use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
+use App\Blog\Article\Domain\Event\ArticleDuplicatedEvent;
 use App\Blog\Article\Domain\ValueObject\AuthorId;
 use App\Blog\Article\Domain\ValueObject\Content;
 use App\Blog\Article\Domain\ValueObject\MainImageId;
@@ -106,6 +106,7 @@ class Article extends AggregateRoot
         return $clone;
     }
 
+    /** @psalm-suppress UnusedMethod */
     public function incrementViews(): void
     {
         $this->views = $this->views->increment();

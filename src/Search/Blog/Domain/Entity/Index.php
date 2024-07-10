@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Search\Blog\Domain\Entity;
 
 use App\Search\Blog\Domain\ValueObject\ArticleIdentifier;
@@ -43,11 +45,5 @@ class Index extends AggregateRoot
     public function getArticleTitle(): string
     {
         return $this->articleTitle;
-    }
-
-    /** @psalm-suppress PossiblyUnusedMethod */
-    public function getDomainEvents(): array
-    {
-        return $this->domainEvents;
     }
 }

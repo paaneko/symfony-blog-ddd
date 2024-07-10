@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Article\Application\Test\Unit\EventSubscriber;
 
 use App\Auth\User\Application\Test\Builder\ArticleUserVerifiedEventBuilder;

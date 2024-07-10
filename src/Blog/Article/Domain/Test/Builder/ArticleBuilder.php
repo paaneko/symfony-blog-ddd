@@ -7,7 +7,6 @@ namespace App\Blog\Article\Domain\Test\Builder;
 use App\Blog\Article\Domain\Entity\Article;
 use App\Blog\Article\Domain\Entity\Comment;
 use App\Blog\Article\Domain\Entity\Id;
-use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
 use App\Blog\Article\Domain\ValueObject\AuthorId;
 use App\Blog\Article\Domain\ValueObject\Content;
 use App\Blog\Article\Domain\ValueObject\MainImageId;
@@ -18,7 +17,6 @@ use App\Blog\Shared\Domain\Entity\ValueObject\SectionId;
 use App\SharedKernel\Test\FakeUuid;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Schema\View;
 
 class ArticleBuilder
 {
@@ -79,6 +77,7 @@ class ArticleBuilder
     {
         $clone = clone $this;
         $clone->comments[] = (new CommentBuilder())->build();
+
         return $clone;
     }
 

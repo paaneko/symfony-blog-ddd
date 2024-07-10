@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Auth\User\Domain\Test\Builder;
 
 use App\Auth\User\Domain\Entity\Id;

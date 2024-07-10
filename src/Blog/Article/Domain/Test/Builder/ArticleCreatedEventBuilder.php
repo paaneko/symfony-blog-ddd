@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Article\Domain\Test\Builder;
 
 use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
@@ -13,9 +15,10 @@ class ArticleCreatedEventBuilder
 
     private string $mainImageId;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->id = FakeUuid::generate();
-        $this->title = ('Lorem ipsum dolor sit amet');
+        $this->title = 'Lorem ipsum dolor sit amet';
         $this->mainImageId = FakeUuid::generate();
     }
 

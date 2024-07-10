@@ -8,7 +8,6 @@ use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
 use App\Image\Application\Service\ImageService;
 use App\Image\Application\UseCase\SetUsed\Command;
 use App\Image\Domain\Entity\Id;
-use DomainException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -18,8 +17,7 @@ class OnArticleCreatedEventSubscriber implements EventSubscriberInterface
     public function __construct(
         private MessageBusInterface $messageBus,
         private ImageService $imageService
-    )
-    {
+    ) {
     }
 
     public static function getSubscribedEvents(): array
@@ -33,8 +31,8 @@ class OnArticleCreatedEventSubscriber implements EventSubscriberInterface
     {
         $image = $this->imageService->find(new Id($event->getMainImageId()));
 
-        if ($image === null) {
-            throw new DomainException('Image not found');
+        if (null === $image) {
+            throw new \DomainException('Image not found');
         }
 
         $setUsedCommand = new Command(

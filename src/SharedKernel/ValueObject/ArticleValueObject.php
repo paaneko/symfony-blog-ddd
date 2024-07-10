@@ -1,8 +1,8 @@
 <?php
 
-namespace App\SharedKernel\ValueObject;
+declare(strict_types=1);
 
-use App\SharedKernel\Aggregate\AggregateRoot;
+namespace App\SharedKernel\ValueObject;
 
 abstract class ArticleValueObject extends AggregateRootId
 {

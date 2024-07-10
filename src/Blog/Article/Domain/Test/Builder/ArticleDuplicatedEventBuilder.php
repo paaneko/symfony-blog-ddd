@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Article\Domain\Test\Builder;
 
 use App\Blog\Article\Domain\Event\ArticleDuplicatedEvent;
@@ -11,9 +13,10 @@ class ArticleDuplicatedEventBuilder
 
     private string $title;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->id = FakeUuid::generate();
-        $this->title = ('Lorem ipsum dolor sit amet');
+        $this->title = 'Lorem ipsum dolor sit amet';
     }
 
     public function build(): ArticleDuplicatedEvent

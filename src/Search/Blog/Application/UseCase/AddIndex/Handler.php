@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Search\Blog\Application\UseCase\AddIndex;
 
 use App\Search\Blog\Application\Service\IndexService;
@@ -9,6 +11,7 @@ use App\Search\Blog\Domain\ValueObject\ArticleIdentifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+/** @psalm-suppress UnusedClass */
 #[AsMessageHandler]
 class Handler
 {

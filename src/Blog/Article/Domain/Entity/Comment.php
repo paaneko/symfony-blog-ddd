@@ -17,13 +17,10 @@ class Comment
     #[ORM\Column(type: CommentIdType::NAME, length: 255)]
     private CommentId $id;
 
-    /**
-     * @psalm-suppress UnusedProperty
-     *
-     * @phpstan-ignore-next-line
-     */
+    /** @psalm-suppress UnusedProperty */
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
+    /** @phpstan-ignore-next-line */
     private Article $article;
 
     #[ORM\Embedded(columnPrefix: false)]

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Auth\User\Application\Test\Unit\EventSubscriber;
 
 use App\Auth\User\Application\EventSubscriber\OnArticleAddRequestedEventSubscriber;

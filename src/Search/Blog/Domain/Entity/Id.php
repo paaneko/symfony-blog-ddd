@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Search\Blog\Domain\Entity;
 
 use Symfony\Component\Uid\Uuid;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Image\Domain\Test\Builder;
 
 use App\Image\Domain\Entity\Id;
@@ -25,6 +27,7 @@ class ImageBuilder
     {
         $clone = clone $this;
         $clone->isUsed = true;
+
         return $clone;
     }
 

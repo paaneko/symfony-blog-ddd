@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Article\Domain\Test\Builder;
 
 use App\Blog\Article\Domain\Entity\Article;
 use App\Blog\Article\Domain\Entity\Comment;
 use App\Blog\Article\Domain\Entity\CommentId;
-use App\Blog\Article\Domain\Entity\CommentIdType;
 use App\Blog\Article\Domain\ValueObject\Email;
 use App\Blog\Article\Domain\ValueObject\Message;
 use App\Blog\Article\Domain\ValueObject\Name;
