@@ -7,9 +7,6 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20240710122121 extends AbstractMigration
 {
     public function getDescription(): string
@@ -19,7 +16,6 @@ final class Version20240710122121 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE articles (id UUID NOT NULL, category_id UUID NOT NULL, section_id UUID DEFAULT NULL, author_id UUID NOT NULL, main_image_id UUID NOT NULL, date_time TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, title VARCHAR(255) NOT NULL, content TEXT NOT NULL, value INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN articles.date_time IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('CREATE TABLE categories (id UUID NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
@@ -35,7 +31,6 @@ final class Version20240710122121 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE comments DROP CONSTRAINT FK_5F9E962A7294869C');
         $this->addSql('DROP TABLE articles');
