@@ -33,7 +33,6 @@ class Handler
 
     public function __invoke(Command $createArticleCommand): void
     {
-        // Code Smells
         $sectionId = $createArticleCommand->sectionId;
 
         $article = new Article(
@@ -41,20 +40,13 @@ class Handler
             new Title($createArticleCommand->title),
             new Content($createArticleCommand->content),
             new CategoryId($createArticleCommand->categoryId),
-            // TODO Code Smells
             ($sectionId) ? new SectionId($sectionId) : null,
             new AuthorId($createArticleCommand->authorId),
             new MainImageId($createArticleCommand->imageId),
             Views::init(),
             new \DateTimeImmutable()
         );
-        /*
-         * TODO питання, де краще перевіряти чи існує категорія, або секція в бд?
-         * В середині транзакції чи перед транзакцією
-         * @see OnUserVerifiedEventSubscriber::createArticle()
-         * @see CategoryIdProvider
-         * @see SectionIdProvider
-         */
+
         try {
             $this->entityManager->beginTransaction();
             $this->articleService->add($article);
