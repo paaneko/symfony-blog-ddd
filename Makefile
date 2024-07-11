@@ -16,7 +16,7 @@ down:
 	docker-compose down --remove-orphans
 
 migrate:
-	docker-compose exec php bin/console doctrine:migrations:migrate
+	docker-compose run --rm php bin/console doctrine:migrations:migrate
 
 phpstan-check:
 	docker-compose run --rm php vendor/bin/phpstan analyse -l 9
