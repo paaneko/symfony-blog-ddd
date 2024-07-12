@@ -1,22 +1,18 @@
+imports:
+    - { resource: ../../src/Auth/User/Domain/config/doctrine.yaml }
+    - { resource: ../../src/Blog/Article/Domain/config/doctrine.yaml }
+    - { resource: ../../src/Blog/Category/Domain/config/doctrine.yaml }
+    - { resource: ../../src/Blog/Section/Domain/config/doctrine.yaml }
+    - { resource: ../../src/Image/Domain/config/doctrine.yaml }
+    - { resource: ../../src/Search/Blog/Domain/config/doctrine.yaml }
+
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
-        types:
-            article_id: App\Blog\Article\Domain\Entity\IdType
-            author_id: App\Blog\Article\Domain\Entity\AuthorIdType
-            article_category_id: App\Blog\Article\Domain\Entity\CategoryIdType
-            article_section_id: App\Blog\Article\Domain\Entity\SectionIdType
-            comment_id: App\Blog\Article\Domain\Entity\CommentIdType
-            category_id: App\Blog\Category\Domain\Entity\IdType
-            section_id: App\Blog\Section\Domain\Entity\IdType
-            main_image_id: App\Blog\Article\Domain\Entity\MainImageIdType
-            image_id: App\Image\Domain\Entity\IdType
-            user_id: App\Auth\User\Domain\Entity\IdType
-            search_blog_index_id: App\Search\Blog\Domain\Entity\IdType
-            article_identifier_id: App\Search\Blog\Domain\Entity\ArticleIdentifierType
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
+
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true

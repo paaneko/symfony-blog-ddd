@@ -6,15 +6,14 @@ namespace App\Blog\Article\Application\UseCase\Create;
 
 use App\Blog\Article\Application\Service\ArticleService;
 use App\Blog\Article\Domain\Entity\Article;
-use App\Blog\Article\Domain\Entity\Id;
-use App\Blog\Article\Domain\ValueObject\AuthorId;
-use App\Blog\Article\Domain\ValueObject\Content;
-use App\Blog\Article\Domain\ValueObject\MainImageId;
-use App\Blog\Article\Domain\ValueObject\Title;
-use App\Blog\Article\Domain\ValueObject\Views;
+use App\Blog\Article\Domain\ValueObject\ArticleAuthorId;
+use App\Blog\Article\Domain\ValueObject\ArticleContent;
+use App\Blog\Article\Domain\ValueObject\ArticleId;
+use App\Blog\Article\Domain\ValueObject\ArticleMainImageId;
+use App\Blog\Article\Domain\ValueObject\ArticleTitle;
+use App\Blog\Article\Domain\ValueObject\ArticleViews;
 use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
 use App\Blog\Shared\Domain\Entity\ValueObject\SectionId;
-use App\Blog\Shared\Domain\Providers\SectionIdProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -36,14 +35,14 @@ class Handler
         $sectionId = $createArticleCommand->sectionId;
 
         $article = new Article(
-            Id::generate(),
-            new Title($createArticleCommand->title),
-            new Content($createArticleCommand->content),
+            ArticleId::generate(),
+            new ArticleTitle($createArticleCommand->title),
+            new ArticleContent($createArticleCommand->content),
             new CategoryId($createArticleCommand->categoryId),
             ($sectionId) ? new SectionId($sectionId) : null,
-            new AuthorId($createArticleCommand->authorId),
-            new MainImageId($createArticleCommand->imageId),
-            Views::init(),
+            new ArticleAuthorId($createArticleCommand->authorId),
+            new ArticleMainImageId($createArticleCommand->imageId),
+            ArticleViews::init(),
             new \DateTimeImmutable()
         );
 

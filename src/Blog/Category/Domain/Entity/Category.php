@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Blog\Category\Domain\Entity;
 
-use App\Blog\Category\Domain\ValueObject\Name;
-use App\Blog\Category\Domain\ValueObject\Slug;
+use App\Blog\Category\Domain\Type\CategoryIdType;
+use App\Blog\Category\Domain\Type\CategoryNameType;
+use App\Blog\Category\Domain\Type\CategorySlugType;
+use App\Blog\Category\Domain\ValueObject\CategoryId;
+use App\Blog\Category\Domain\ValueObject\CategoryName;
+use App\Blog\Category\Domain\ValueObject\CategorySlug;
 use App\SharedKernel\Aggregate\AggregateRoot;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,16 +18,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Category extends AggregateRoot
 {
     #[ORM\Id]
-    #[ORM\Column(type: IdType::NAME)]
-    private Id $id;
+    #[ORM\Column(type: CategoryIdType::NAME)]
+    private CategoryId $id;
 
-    #[ORM\Embedded(columnPrefix: false)]
-    private Name $name;
+    #[ORM\Column(type: CategoryNameType::NAME, length: 255)]
+    private CategoryName $name;
 
-    #[ORM\Embedded(columnPrefix: false)]
-    private Slug $slug;
+    #[ORM\Column(type: CategorySlugType::NAME, length: 255)]
+    private CategorySlug $slug;
 
-    public function __construct(Id $id, Name $name, Slug $slug)
+    public function __construct(CategoryId $id, CategoryName $name, CategorySlug $slug)
     {
         $this->id = $id;
         $this->name = $name;
@@ -31,19 +35,19 @@ class Category extends AggregateRoot
     }
 
     /** @psalm-suppress PossiblyUnusedMethod */
-    public function getId(): Id
+    public function getId(): CategoryId
     {
         return $this->id;
     }
 
     /** @psalm-suppress PossiblyUnusedMethod */
-    public function getName(): Name
+    public function getName(): CategoryName
     {
         return $this->name;
     }
 
     /** @psalm-suppress PossiblyUnusedMethod */
-    public function getSlug(): Slug
+    public function getSlug(): CategorySlug
     {
         return $this->slug;
     }

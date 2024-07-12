@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Image\Application\UseCase\Upload;
 
 use App\Image\Application\Service\ImageService;
-use App\Image\Domain\Entity\Id;
 use App\Image\Domain\Entity\Image;
 use App\Image\Domain\Service\UploadServiceInterface;
-use App\Image\Domain\ValueObject\Name;
+use App\Image\Domain\ValueObject\ImageId;
+use App\Image\Domain\ValueObject\ImageName;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Handler
@@ -21,11 +21,11 @@ class Handler
     ) {
     }
 
-    public function handle(Command $addImageCommand): Id
+    public function handle(Command $addImageCommand): ImageId
     {
         $image = new Image(
-            $imageId = Id::generate(),
-            new Name($addImageCommand->uploadedFile->getClientOriginalName()),
+            $imageId = ImageId::generate(),
+            new ImageName($addImageCommand->uploadedFile->getClientOriginalName()),
             false
         );
 

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Blog\Article\Application\Service;
 
 use App\Blog\Article\Domain\Entity\Article;
-use App\Blog\Article\Domain\Entity\Id;
 use App\Blog\Article\Domain\Repository\ArticleRepositoryInterface;
+use App\Blog\Article\Domain\ValueObject\ArticleId;
 
 class ArticleService
 {
@@ -15,7 +15,7 @@ class ArticleService
     {
     }
 
-    public function find(Id $articleId): ?Article
+    public function find(ArticleId $articleId): ?Article
     {
         /* @phpstan-ignore-next-line */
         return $this->articleRepository->find($articleId);

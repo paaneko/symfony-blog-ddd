@@ -6,9 +6,9 @@ namespace App\Blog\Category\Application\UseCase\Add;
 
 use App\Blog\Category\Application\Service\CategoryService;
 use App\Blog\Category\Domain\Entity\Category;
-use App\Blog\Category\Domain\Entity\Id;
-use App\Blog\Category\Domain\ValueObject\Name;
-use App\Blog\Category\Domain\ValueObject\Slug;
+use App\Blog\Category\Domain\ValueObject\CategoryId;
+use App\Blog\Category\Domain\ValueObject\CategoryName;
+use App\Blog\Category\Domain\ValueObject\CategorySlug;
 use Doctrine\ORM\EntityManagerInterface;
 
 /** @psalm-suppress UnusedClass */
@@ -21,12 +21,12 @@ class Handler
     ) {
     }
 
-    public function handle(Command $addCategoryCommand): Id
+    public function handle(Command $addCategoryCommand): CategoryId
     {
         $category = new Category(
-            $categoryId = Id::generate(),
-            new Name($addCategoryCommand->name),
-            new Slug($addCategoryCommand->slug)
+            $categoryId = CategoryId::generate(),
+            new CategoryName($addCategoryCommand->name),
+            new CategorySlug($addCategoryCommand->slug)
         );
 
         $this->categoryService->add($category);

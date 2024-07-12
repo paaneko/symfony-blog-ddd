@@ -1,0 +1,15 @@
+doctrine:
+  dbal:
+    types:
+      article_author_id: App\Blog\Article\Domain\Type\ArticleAuthorIdType
+      article_category_id: App\Blog\Article\Domain\Type\ArticleCategoryIdType
+      article_content_id: App\Blog\Article\Domain\Type\ArticleContentType
+      article_id: App\Blog\Article\Domain\Type\ArticleIdType
+      article_main_image_id: App\Blog\Article\Domain\Type\ArticleMainImageIdType
+      article_section_id: App\Blog\Article\Domain\Type\ArticleSectionIdType
+      article_title: App\Blog\Article\Domain\Type\ArticleTitleType
+      article_views: App\Blog\Article\Domain\Type\ArticleViewsType
+      comment_email: App\Blog\Article\Domain\Type\CommentEmailType
+      comment_id: App\Blog\Article\Domain\Type\CommentIdType
+      comment_message: App\Blog\Article\Domain\Type\CommentMessageType
+      comment_name: App\Blog\Article\Domain\Type\CommentNameType

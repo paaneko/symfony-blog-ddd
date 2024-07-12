@@ -224,7 +224,7 @@ make init
 Клас, який дозволяє своїм підклассам після наслідування, виконувати роль VO-посилання на будь-який **root aggregate**. Тим самим дозволяючи агрегату в одному контексті використовувати та сворювати аліаси на агрегат іншого контексту.
 
 >**Use Cases:**  
->`@see` [User Value Object](src/SharedKernel/ValueObject/UserValueObject.php) - абстракнтий класс який наслідує [Aggregate Root Id](src/SharedKernel/ValueObject/AggregateRootId.php). І тепер модуль `User` контексту `Auth` використовується в модулі `Article` контексту `Blog` під аліасом [AuthorId](src/Blog/Article/Domain/ValueObject/AuthorId.php) в [Root Aggregate Article](src/Blog/Article/Domain/Entity/Article.php)
+>`@see` [User Value Object](src/SharedKernel/ValueObject/UserValueObject.php) - абстракнтий класс який наслідує [Aggregate Root Id](src/SharedKernel/ValueObject/AggregateRootId.php). І тепер модуль `User` контексту `Auth` використовується в модулі `Article` контексту `Blog` під аліасом [AuthorId](src/Blog/Article/Domain/ValueObject/ArticleAuthorId.php) в [Root Aggregate Article](src/Blog/Article/Domain/Entity/Article.php)
 
 **P.S. Всі аліаси, створені з цих VO, позбавлені можливості генерувати uuid.**
 

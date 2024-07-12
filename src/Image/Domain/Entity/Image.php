@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Image\Domain\Entity;
 
-use App\Image\Domain\ValueObject\Name;
+use App\Image\Domain\Type\ImageIdType;
+use App\Image\Domain\Type\ImageNameType;
+use App\Image\Domain\ValueObject\ImageId;
+use App\Image\Domain\ValueObject\ImageName;
 use App\SharedKernel\Aggregate\AggregateRoot;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,16 +16,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Image extends AggregateRoot
 {
     #[ORM\Id]
-    #[ORM\Column(type: IdType::NAME, length: 255)]
-    private Id $id;
+    #[ORM\Column(type: ImageIdType::NAME, length: 255)]
+    private ImageId $id;
 
-    #[ORM\Embedded]
-    private Name $name;
+    #[ORM\Column(type: ImageNameType::NAME, length: 255)]
+    private ImageName $name;
 
     #[ORM\Column(type: 'boolean')]
     private bool $isUsed;
 
-    public function __construct(Id $id, Name $name, bool $isUsed)
+    public function __construct(ImageId $id, ImageName $name, bool $isUsed)
     {
         $this->id = $id;
         $this->name = $name;
@@ -39,12 +42,12 @@ class Image extends AggregateRoot
         return $this->getId() . '/' . $this->getName()->getValue();
     }
 
-    public function getId(): Id
+    public function getId(): ImageId
     {
         return $this->id;
     }
 
-    public function getName(): Name
+    public function getName(): ImageName
     {
         return $this->name;
     }

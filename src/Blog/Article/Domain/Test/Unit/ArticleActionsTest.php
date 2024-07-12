@@ -6,7 +6,7 @@ namespace App\Blog\Article\Domain\Test\Unit;
 
 use App\Blog\Article\Domain\Test\Builder\ArticleBuilder;
 use App\Blog\Article\Domain\Test\Builder\CommentBuilder;
-use App\Blog\Article\Domain\ValueObject\Views;
+use App\Blog\Article\Domain\ValueObject\ArticleViews;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 
@@ -39,7 +39,7 @@ class ArticleActionsTest extends TestCase
         $this->assertEquals($article->getMainImageId(), $duplication->getMainImageId());
         $this->assertEquals($article->getCategoryId(), $duplication->getCategoryId());
         $this->assertEquals($article->getSectionId(), $duplication->getSectionId());
-        $this->assertEquals($duplication->getViews(), Views::init());
+        $this->assertEquals($duplication->getViews(), ArticleViews::init());
         $this->assertNotSame($article->getDateTime(), $duplication->getDateTime());
     }
 

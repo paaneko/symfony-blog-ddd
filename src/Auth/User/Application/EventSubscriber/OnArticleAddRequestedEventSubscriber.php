@@ -6,7 +6,7 @@ namespace App\Auth\User\Application\EventSubscriber;
 
 use App\Auth\User\Application\Event\ArticleUserVerifiedEvent;
 use App\Auth\User\Application\Service\UserService;
-use App\Auth\User\Domain\Entity\Id;
+use App\Auth\User\Domain\ValueObject\UserId;
 use App\Blog\Article\Application\Event\ArticleAddRequestEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -29,7 +29,7 @@ class OnArticleAddRequestedEventSubscriber implements EventSubscriberInterface
 
     public function validateUser(ArticleAddRequestEvent $event): void
     {
-        $userId = new Id($event->getAuthorId());
+        $userId = new UserId($event->getAuthorId());
 
         $user = $this->userService->find($userId);
 

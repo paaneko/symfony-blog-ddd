@@ -6,11 +6,20 @@ namespace App\Blog\Article\Domain\Entity;
 
 use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
 use App\Blog\Article\Domain\Event\ArticleDuplicatedEvent;
-use App\Blog\Article\Domain\ValueObject\AuthorId;
-use App\Blog\Article\Domain\ValueObject\Content;
-use App\Blog\Article\Domain\ValueObject\MainImageId;
-use App\Blog\Article\Domain\ValueObject\Title;
-use App\Blog\Article\Domain\ValueObject\Views;
+use App\Blog\Article\Domain\Type\ArticleAuthorIdType;
+use App\Blog\Article\Domain\Type\ArticleCategoryIdType;
+use App\Blog\Article\Domain\Type\ArticleContentType;
+use App\Blog\Article\Domain\Type\ArticleIdType;
+use App\Blog\Article\Domain\Type\ArticleMainImageIdType;
+use App\Blog\Article\Domain\Type\ArticleSectionIdType;
+use App\Blog\Article\Domain\Type\ArticleTitleType;
+use App\Blog\Article\Domain\Type\ArticleViewsType;
+use App\Blog\Article\Domain\ValueObject\ArticleAuthorId;
+use App\Blog\Article\Domain\ValueObject\ArticleContent;
+use App\Blog\Article\Domain\ValueObject\ArticleId;
+use App\Blog\Article\Domain\ValueObject\ArticleMainImageId;
+use App\Blog\Article\Domain\ValueObject\ArticleTitle;
+use App\Blog\Article\Domain\ValueObject\ArticleViews;
 use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
 use App\Blog\Shared\Domain\Entity\ValueObject\SectionId;
 use App\SharedKernel\Aggregate\AggregateRoot;
@@ -23,46 +32,46 @@ use Doctrine\ORM\Mapping as ORM;
 class Article extends AggregateRoot
 {
     #[ORM\Id]
-    #[ORM\Column(type: IdType::NAME, length: 255)]
-    private Id $id;
+    #[ORM\Column(type: ArticleIdType::NAME, length: 255)]
+    private ArticleId $id;
 
-    #[ORM\Embedded(columnPrefix: false)]
-    private Title $title;
+    #[ORM\Column(type: ArticleTitleType::NAME, length: 255)]
+    private ArticleTitle $title;
 
-    #[ORM\Embedded(columnPrefix: false)]
-    private Content $content;
+    #[ORM\Column(type: ArticleContentType::NAME, length: 255)]
+    private ArticleContent $content;
 
-    #[ORM\Column(type: CategoryIdType::NAME, length: 255)]
+    #[ORM\Column(type: ArticleCategoryIdType::NAME, length: 255)]
     private CategoryId $categoryId;
 
-    #[ORM\Column(type: SectionIdType::NAME, length: 255, nullable: true)]
+    #[ORM\Column(type: ArticleSectionIdType::NAME, length: 255, nullable: true)]
     private ?SectionId $sectionId;
 
-    #[ORM\Column(type: AuthorIdType::NAME, length: 255)]
-    private AuthorId $authorId;
+    #[ORM\Column(type: ArticleAuthorIdType::NAME, length: 255)]
+    private ArticleAuthorId $authorId;
 
-    #[ORM\Column(type: MainImageIdType::NAME, length: 255)]
-    private MainImageId $mainImageId;
+    #[ORM\Column(type: ArticleMainImageIdType::NAME, length: 255)]
+    private ArticleMainImageId $mainImageId;
 
     /** @var Collection<int, Comment> $comments An ArrayCollection of Comment objects */
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'article', cascade: ['persist'])]
     private Collection $comments;
 
-    #[ORM\Embedded(columnPrefix: false)]
-    private Views $views;
+    #[ORM\Column(type: ArticleViewsType::NAME, length: 255)]
+    private ArticleViews $views;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeInterface $dateTime;
 
     public function __construct(
-        Id $id,
-        Title $title,
-        Content $content,
+        ArticleId $id,
+        ArticleTitle $title,
+        ArticleContent $content,
         CategoryId $categoryId,
         ?SectionId $sectionId,
-        AuthorId $authorId,
-        MainImageId $mainImageId,
-        Views $views,
+        ArticleAuthorId $authorId,
+        ArticleMainImageId $mainImageId,
+        ArticleViews $views,
         \DateTimeInterface $dateTime
     ) {
         $this->id = $id;
@@ -93,8 +102,8 @@ class Article extends AggregateRoot
     {
         $clone = clone $this;
 
-        $clone->id = Id::generate();
-        $clone->views = Views::init();
+        $clone->id = ArticleId::generate();
+        $clone->views = ArticleViews::init();
         $clone->comments = new ArrayCollection();
         $clone->dateTime = new \DateTimeImmutable();
 
@@ -113,7 +122,7 @@ class Article extends AggregateRoot
     }
 
     /** @psalm-suppress UnusedMethod */
-    public function getId(): Id
+    public function getId(): ArticleId
     {
         return $this->id;
     }
@@ -131,25 +140,25 @@ class Article extends AggregateRoot
     }
 
     /** @psalm-suppress UnusedMethod */
-    public function getTitle(): Title
+    public function getTitle(): ArticleTitle
     {
         return $this->title;
     }
 
     /** @psalm-suppress UnusedMethod */
-    public function getContent(): Content
+    public function getContent(): ArticleContent
     {
         return $this->content;
     }
 
     /** @psalm-suppress UnusedMethod */
-    public function getAuthorId(): AuthorId
+    public function getAuthorId(): ArticleAuthorId
     {
         return $this->authorId;
     }
 
     /** @psalm-suppress UnusedMethod */
-    public function getMainImageId(): MainImageId
+    public function getMainImageId(): ArticleMainImageId
     {
         return $this->mainImageId;
     }
@@ -167,7 +176,7 @@ class Article extends AggregateRoot
     }
 
     /** @psalm-suppress UnusedMethod */
-    public function getViews(): Views
+    public function getViews(): ArticleViews
     {
         return $this->views;
     }

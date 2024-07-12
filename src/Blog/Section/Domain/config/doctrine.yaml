@@ -1,0 +1,5 @@
+doctrine:
+  dbal:
+    types:
+      section_id: App\Blog\Section\Domain\Type\SectionIdType
+      section_name: App\Blog\Section\Domain\Type\SectionNameType

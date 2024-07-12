@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Auth\User\Domain\Entity;
 
-use App\Auth\User\Domain\ValueObject\Email;
-use App\Auth\User\Domain\ValueObject\Name;
+use App\Auth\User\Domain\Type\UserEmailType;
+use App\Auth\User\Domain\Type\UserNameType;
+use App\Auth\User\Domain\Type\UserIdType;
+use App\Auth\User\Domain\ValueObject\UserEmail;
+use App\Auth\User\Domain\ValueObject\UserId;
+use App\Auth\User\Domain\ValueObject\UserName;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -13,16 +17,16 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     #[ORM\Id]
-    #[ORM\Column(type: IdType::NAME, length: 255)]
-    private Id $id;
+    #[ORM\Column(type: UserIdType::NAME, length: 255)]
+    private UserId $id;
 
-    #[ORM\Embedded(columnPrefix: false)]
-    private Name $name;
+    #[ORM\Column(type: UserNameType::NAME, length: 255)]
+    private UserName $name;
 
-    #[ORM\Embedded(columnPrefix: false)]
-    private Email $email;
+    #[ORM\Column(type: UserEmailType::NAME, length: 255)]
+    private UserEmail $email;
 
-    public function __construct(Id $id, Name $name, Email $email)
+    public function __construct(UserId $id, UserName $name, UserEmail $email)
     {
         $this->id = $id;
         $this->name = $name;
@@ -30,19 +34,19 @@ class User
     }
 
     /** @psalm-suppress PossiblyUnusedMethod */
-    public function getId(): Id
+    public function getId(): UserId
     {
         return $this->id;
     }
 
     /** @psalm-suppress PossiblyUnusedMethod */
-    public function getName(): Name
+    public function getName(): UserName
     {
         return $this->name;
     }
 
     /** @psalm-suppress PossiblyUnusedMethod */
-    public function getEmail(): Email
+    public function getEmail(): UserEmail
     {
         return $this->email;
     }

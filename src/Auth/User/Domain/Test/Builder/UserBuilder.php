@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace App\Auth\User\Domain\Test\Builder;
 
-use App\Auth\User\Domain\Entity\Id;
 use App\Auth\User\Domain\Entity\User;
-use App\Auth\User\Domain\ValueObject\Email;
-use App\Auth\User\Domain\ValueObject\Name;
+use App\Auth\User\Domain\ValueObject\UserEmail;
+use App\Auth\User\Domain\ValueObject\UserId;
+use App\Auth\User\Domain\ValueObject\UserName;
 
 class UserBuilder
 {
-    private Id $id;
+    private UserId $id;
 
-    private Name $name;
+    private UserName $name;
 
-    private Email $email;
+    private UserEmail $email;
 
     public function __construct()
     {
-        $this->id = Id::generate();
-        $this->name = new Name('Lorem ipsum dolor sit amet');
-        $this->email = new Email('example@email.com');
+        $this->id = UserId::generate();
+        $this->name = new UserName('Lorem ipsum dolor sit amet');
+        $this->email = new UserEmail('example@email.com');
     }
 
     public function build(): User

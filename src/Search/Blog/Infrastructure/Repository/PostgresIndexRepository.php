@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Search\Blog\Infrastructure\Repository;
 
-use App\Search\Blog\Domain\Entity\Index;
+use App\Search\Blog\Domain\Entity\ArticleIndex;
 use App\Search\Blog\Domain\Repository\IndexRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,10 +19,10 @@ class PostgresIndexRepository extends ServiceEntityRepository implements IndexRe
     /** @psalm-suppress PossiblyUnusedParam */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Index::class);
+        parent::__construct($registry, ArticleIndex::class);
     }
 
-    public function add(Index $index): void
+    public function add(ArticleIndex $index): void
     {
         $this->getEntityManager()->persist($index);
     }

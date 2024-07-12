@@ -1,0 +1,5 @@
+doctrine:
+  dbal:
+    types:
+      image_id: App\Image\Domain\Type\ImageIdType
+      image_name: App\Image\Domain\Type\ImageNameType

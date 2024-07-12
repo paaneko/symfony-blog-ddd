@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace App\Image\Domain\Test\Builder;
 
-use App\Image\Domain\Entity\Id;
 use App\Image\Domain\Entity\Image;
-use App\Image\Domain\ValueObject\Name;
+use App\Image\Domain\ValueObject\ImageId;
+use App\Image\Domain\ValueObject\ImageName;
 
 class ImageBuilder
 {
-    private Id $id;
+    private ImageId $id;
 
-    private Name $name;
+    private ImageName $name;
 
     private bool $isUsed;
 
     public function __construct()
     {
-        $this->id = Id::generate();
-        $this->name = new Name('Lorem ipsum dolor sit amet');
+        $this->id = ImageId::generate();
+        $this->name = new ImageName('Lorem ipsum dolor sit amet');
         $this->isUsed = false;
     }
 

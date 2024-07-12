@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Auth\User\Infrastructure\Repository;
 
-use App\Auth\User\Domain\Entity\Id;
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\Repository\UserRepositoryInterface;
+use App\Auth\User\Domain\ValueObject\UserId;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -28,7 +28,7 @@ class PostgresUserRepository extends ServiceEntityRepository implements UserRepo
         $this->getEntityManager()->persist($user);
     }
 
-    public function get(Id $userId): User
+    public function get(UserId $userId): User
     {
         /** @var User|null $entity */
         $entity = $this->find($userId);

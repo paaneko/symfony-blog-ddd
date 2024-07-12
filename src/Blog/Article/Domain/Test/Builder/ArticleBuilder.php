@@ -6,12 +6,12 @@ namespace App\Blog\Article\Domain\Test\Builder;
 
 use App\Blog\Article\Domain\Entity\Article;
 use App\Blog\Article\Domain\Entity\Comment;
-use App\Blog\Article\Domain\Entity\Id;
-use App\Blog\Article\Domain\ValueObject\AuthorId;
-use App\Blog\Article\Domain\ValueObject\Content;
-use App\Blog\Article\Domain\ValueObject\MainImageId;
-use App\Blog\Article\Domain\ValueObject\Title;
-use App\Blog\Article\Domain\ValueObject\Views;
+use App\Blog\Article\Domain\ValueObject\ArticleAuthorId;
+use App\Blog\Article\Domain\ValueObject\ArticleContent;
+use App\Blog\Article\Domain\ValueObject\ArticleId;
+use App\Blog\Article\Domain\ValueObject\ArticleMainImageId;
+use App\Blog\Article\Domain\ValueObject\ArticleTitle;
+use App\Blog\Article\Domain\ValueObject\ArticleViews;
 use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
 use App\Blog\Shared\Domain\Entity\ValueObject\SectionId;
 use App\SharedKernel\Test\FakeUuid;
@@ -20,37 +20,37 @@ use Doctrine\Common\Collections\Collection;
 
 class ArticleBuilder
 {
-    private Id $id;
+    private ArticleId $id;
 
-    private Title $title;
+    private ArticleTitle $title;
 
-    private Content $content;
+    private ArticleContent $content;
 
     private CategoryId $categoryId;
 
     private ?SectionId $sectionId;
 
-    private AuthorId $authorId;
+    private ArticleAuthorId $authorId;
 
-    private MainImageId $mainImageId;
+    private ArticleMainImageId $mainImageId;
 
     /** @var Collection<int, Comment> An ArrayCollection of Comment objects */
     private Collection $comments;
 
-    private Views $views;
+    private ArticleViews $views;
 
     private \DateTimeInterface $dateTime;
 
     public function __construct()
     {
-        $this->id = Id::generate();
-        $this->title = new Title('Lorem ipsum dolor sit amet');
-        $this->content = new Content('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in.');
+        $this->id = ArticleId::generate();
+        $this->title = new ArticleTitle('Lorem ipsum dolor sit amet');
+        $this->content = new ArticleContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in.');
         $this->categoryId = new CategoryId(FakeUuid::generate());
         $this->sectionId = new SectionId(FakeUuid::generate());
-        $this->authorId = new AuthorId(FakeUuid::generate());
-        $this->mainImageId = new MainImageId(FakeUuid::generate());
-        $this->views = Views::init();
+        $this->authorId = new ArticleAuthorId(FakeUuid::generate());
+        $this->mainImageId = new ArticleMainImageId(FakeUuid::generate());
+        $this->views = ArticleViews::init();
         $this->dateTime = new \DateTimeImmutable();
         $this->comments = new ArrayCollection();
     }

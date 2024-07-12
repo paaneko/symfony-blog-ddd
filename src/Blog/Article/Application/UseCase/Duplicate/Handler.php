@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Blog\Article\Application\UseCase\Duplicate;
 
 use App\Blog\Article\Application\Service\ArticleService;
-use App\Blog\Article\Domain\Entity\Id;
+use App\Blog\Article\Domain\ValueObject\ArticleId;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -19,9 +19,9 @@ class Handler
     ) {
     }
 
-    public function handle(Command $command): Id
+    public function handle(Command $command): ArticleId
     {
-        $articleId = new Id($command->articleId);
+        $articleId = new ArticleId($command->articleId);
         $article = $this->articleService->find($articleId);
 
         if (null === $article) {

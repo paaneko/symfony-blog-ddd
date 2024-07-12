@@ -6,7 +6,7 @@ namespace App\Blog\Article\Application\UseCase\Get;
 
 use App\Blog\Article\Application\Service\ArticleService;
 use App\Blog\Article\Domain\Entity\Comment;
-use App\Blog\Article\Domain\Entity\Id;
+use App\Blog\Article\Domain\ValueObject\ArticleId;
 
 class Fetcher
 {
@@ -19,7 +19,7 @@ class Fetcher
     /** @phpstan-ignore-next-line */
     public function fetch(Query $getArticleQuery): array
     {
-        $articleId = new Id($getArticleQuery->articleId);
+        $articleId = new ArticleId($getArticleQuery->articleId);
 
         $article = $this->articleService->find($articleId);
 

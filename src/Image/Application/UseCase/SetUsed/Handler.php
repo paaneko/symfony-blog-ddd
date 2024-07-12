@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Image\Application\UseCase\SetUsed;
 
 use App\Image\Application\Service\ImageService;
-use App\Image\Domain\Entity\Id;
+use App\Image\Domain\ValueObject\ImageId;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -21,7 +21,7 @@ class Handler
 
     public function __invoke(Command $setUsedCommand): void
     {
-        $image = $this->imageService->find(new Id($setUsedCommand->imageId));
+        $image = $this->imageService->find(new ImageId($setUsedCommand->imageId));
 
         if (is_null($image)) {
             throw new \DomainException('Image not found');

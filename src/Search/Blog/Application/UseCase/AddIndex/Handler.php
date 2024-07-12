@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Search\Blog\Application\UseCase\AddIndex;
 
 use App\Search\Blog\Application\Service\IndexService;
-use App\Search\Blog\Domain\Entity\Id;
-use App\Search\Blog\Domain\Entity\Index;
+use App\Search\Blog\Domain\Entity\ArticleIndex;
 use App\Search\Blog\Domain\ValueObject\ArticleIdentifier;
+use App\Search\Blog\Domain\ValueObject\ArticleIndexId;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -23,8 +23,8 @@ class Handler
 
     public function __invoke(Command $addIndexCommand): void
     {
-        $index = new Index(
-            Id::generate(),
+        $index = new ArticleIndex(
+            ArticleIndexId::generate(),
             new ArticleIdentifier($addIndexCommand->articleIdentifier),
             $addIndexCommand->articleTitle
         );

@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Domain\Entity;
 
-use App\Blog\Article\Domain\ValueObject\Email;
-use App\Blog\Article\Domain\ValueObject\Message;
-use App\Blog\Article\Domain\ValueObject\Name;
+use App\Blog\Article\Domain\Type\CommentEmailType;
+use App\Blog\Article\Domain\Type\CommentIdType;
+use App\Blog\Article\Domain\Type\CommentMessageType;
+use App\Blog\Article\Domain\Type\CommentNameType;
+use App\Blog\Article\Domain\ValueObject\CommentId;
+use App\Blog\Article\Domain\ValueObject\CommentEmail;
+use App\Blog\Article\Domain\ValueObject\CommentMessage;
+use App\Blog\Article\Domain\ValueObject\CommentName;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -23,23 +28,23 @@ class Comment
     /** @phpstan-ignore-next-line */
     private Article $article;
 
-    #[ORM\Embedded(columnPrefix: false)]
-    private Name $name;
+    #[ORM\Column(type: CommentNameType::NAME, length: 255)]
+    private CommentName $name;
 
-    #[ORM\Embedded(columnPrefix: false)]
-    private Email $email;
+    #[ORM\Column(type: CommentEmailType::NAME, length: 255)]
+    private CommentEmail $email;
 
-    #[ORM\Embedded(columnPrefix: false)]
-    private Message $message;
+    #[ORM\Column(type: CommentMessageType::NAME, length: 255)]
+    private CommentMessage $message;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
 
     public function __construct(
         CommentId $id,
-        Name $name,
-        Email $email,
-        Message $message,
+        CommentName $name,
+        CommentEmail $email,
+        CommentMessage $message,
         \DateTimeImmutable $createdAt
     ) {
         $this->id = $id;
@@ -59,18 +64,18 @@ class Comment
         return $this->id;
     }
 
-    public function getName(): Name
+    public function getName(): CommentName
     {
         return $this->name;
     }
 
-    public function getEmail(): Email
+    public function getEmail(): CommentEmail
     {
         return $this->email;
     }
 
     /** @psalm-suppress PossiblyUnusedMethod */
-    public function getMessage(): Message
+    public function getMessage(): CommentMessage
     {
         return $this->message;
     }

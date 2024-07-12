@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Search\Blog\Application\Service;
 
-use App\Search\Blog\Domain\Entity\Index;
+use App\Search\Blog\Domain\Entity\ArticleIndex;
 use App\Search\Blog\Domain\Repository\IndexRepositoryInterface;
 
 class IndexService
@@ -14,7 +14,7 @@ class IndexService
     {
     }
 
-    public function add(Index $index): void
+    public function add(ArticleIndex $index): void
     {
         $this->indexRepository->add($index);
     }

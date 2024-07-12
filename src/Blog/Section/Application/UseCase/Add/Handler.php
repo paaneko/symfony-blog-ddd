@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Blog\Section\Application\UseCase\Add;
 
 use App\Blog\Section\Application\Service\SectionService;
-use App\Blog\Section\Domain\Entity\Id;
 use App\Blog\Section\Domain\Entity\Section;
-use App\Blog\Section\Domain\ValueObject\Name;
+use App\Blog\Section\Domain\ValueObject\SectionName;
+use App\Blog\Section\Domain\ValueObject\SectionId;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Handler
@@ -19,11 +19,11 @@ class Handler
     ) {
     }
 
-    public function handle(Command $addSectionCommand): Id
+    public function handle(Command $addSectionCommand): SectionId
     {
         $section = new Section(
-            $sectionId = Id::generate(),
-            new Name($addSectionCommand->name)
+            $sectionId = SectionId::generate(),
+            new SectionName($addSectionCommand->name)
         );
 
         $this->sectionService->add($section);

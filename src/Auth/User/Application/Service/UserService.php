@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Auth\User\Application\Service;
 
-use App\Auth\User\Domain\Entity\Id;
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\Repository\UserRepositoryInterface;
+use App\Auth\User\Domain\ValueObject\UserId;
 
 class UserService
 {
@@ -15,7 +15,7 @@ class UserService
     {
     }
 
-    public function find(Id $id): ?User
+    public function find(UserId $id): ?User
     {
         /* @phpstan-ignore-next-line */
         return $this->userRepository->find($id);
@@ -26,7 +26,7 @@ class UserService
         $this->userRepository->add($user);
     }
 
-    public function get(Id $userId): User
+    public function get(UserId $userId): User
     {
         return $this->userRepository->get($userId);
     }

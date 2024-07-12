@@ -6,11 +6,11 @@ namespace App\Blog\Article\Application\UseCase\AddComment;
 
 use App\Blog\Article\Application\Service\ArticleService;
 use App\Blog\Article\Domain\Entity\Comment;
-use App\Blog\Article\Domain\Entity\CommentId;
-use App\Blog\Article\Domain\Entity\Id;
-use App\Blog\Article\Domain\ValueObject\Email;
-use App\Blog\Article\Domain\ValueObject\Message;
-use App\Blog\Article\Domain\ValueObject\Name;
+use App\Blog\Article\Domain\ValueObject\CommentId;
+use App\Blog\Article\Domain\ValueObject\CommentEmail;
+use App\Blog\Article\Domain\ValueObject\ArticleId;
+use App\Blog\Article\Domain\ValueObject\CommentMessage;
+use App\Blog\Article\Domain\ValueObject\CommentName;
 use Doctrine\ORM\EntityManagerInterface;
 
 /** @psalm-suppress UnusedClass */
@@ -25,7 +25,7 @@ class Handler
 
     public function handle(Command $addCommentCommand): void
     {
-        $article = $this->articleService->find(new Id($addCommentCommand->articleId));
+        $article = $this->articleService->find(new ArticleId($addCommentCommand->articleId));
 
         if (null === $article) {
             throw new \DomainException('Article not found');
@@ -33,9 +33,9 @@ class Handler
 
         $comment = new Comment(
             CommentId::generate(),
-            new Name($addCommentCommand->name),
-            new Email($addCommentCommand->email),
-            new Message($addCommentCommand->message),
+            new CommentName($addCommentCommand->name),
+            new CommentEmail($addCommentCommand->email),
+            new CommentMessage($addCommentCommand->message),
             new \DateTimeImmutable()
         );
 
