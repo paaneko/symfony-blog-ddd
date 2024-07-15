@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Image\Domain\Type;
 
 use App\Image\Domain\ValueObject\ImageName;

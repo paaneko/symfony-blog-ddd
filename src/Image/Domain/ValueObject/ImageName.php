@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Image\Domain\ValueObject;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Embeddable;
 use Webmozart\Assert\Assert;
 
 class ImageName

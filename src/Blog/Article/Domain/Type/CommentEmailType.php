@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Article\Domain\Type;
 
 use App\Blog\Article\Domain\ValueObject\CommentEmail;
-use App\Blog\Shared\Domain\Entity\ValueObject\SectionId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 

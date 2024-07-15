@@ -6,8 +6,8 @@ namespace App\Blog\Article\Domain\Test\Builder;
 
 use App\Blog\Article\Domain\Entity\Article;
 use App\Blog\Article\Domain\Entity\Comment;
-use App\Blog\Article\Domain\ValueObject\CommentId;
 use App\Blog\Article\Domain\ValueObject\CommentEmail;
+use App\Blog\Article\Domain\ValueObject\CommentId;
 use App\Blog\Article\Domain\ValueObject\CommentMessage;
 use App\Blog\Article\Domain\ValueObject\CommentName;
 

@@ -6,9 +6,9 @@ namespace App\Blog\Article\Application\UseCase\AddComment;
 
 use App\Blog\Article\Application\Service\ArticleService;
 use App\Blog\Article\Domain\Entity\Comment;
-use App\Blog\Article\Domain\ValueObject\CommentId;
-use App\Blog\Article\Domain\ValueObject\CommentEmail;
 use App\Blog\Article\Domain\ValueObject\ArticleId;
+use App\Blog\Article\Domain\ValueObject\CommentEmail;
+use App\Blog\Article\Domain\ValueObject\CommentId;
 use App\Blog\Article\Domain\ValueObject\CommentMessage;
 use App\Blog\Article\Domain\ValueObject\CommentName;
 use Doctrine\ORM\EntityManagerInterface;

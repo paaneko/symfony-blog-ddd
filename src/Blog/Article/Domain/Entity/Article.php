@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Blog\Article\Domain\Entity;
 
 use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
-use App\Blog\Article\Domain\Event\ArticleDuplicatedEvent;
 use App\Blog\Article\Domain\Type\ArticleAuthorIdType;
 use App\Blog\Article\Domain\Type\ArticleCategoryIdType;
 use App\Blog\Article\Domain\Type\ArticleContentType;
@@ -96,23 +95,6 @@ class Article extends AggregateRoot
     {
         $comment->setArticle($this);
         $this->comments[] = $comment;
-    }
-
-    public function duplicate(): self
-    {
-        $clone = clone $this;
-
-        $clone->id = ArticleId::generate();
-        $clone->views = ArticleViews::init();
-        $clone->comments = new ArrayCollection();
-        $clone->dateTime = new \DateTimeImmutable();
-
-        $this->recordDomainEvent(new ArticleDuplicatedEvent(
-            $clone->id->getValue(),
-            $clone->title->getValue()
-        ));
-
-        return $clone;
     }
 
     /** @psalm-suppress UnusedMethod */

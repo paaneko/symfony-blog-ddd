@@ -35,8 +35,8 @@ class DuplicateArticleController extends AbstractController
             return $this->json($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $responseData = $handler->handle($duplicateArticleCommand);
+        $handler->handle($duplicateArticleCommand);
 
-        return $this->json($responseData, Response::HTTP_CREATED);
+        return $this->json(null, Response::HTTP_CREATED);
     }
 }

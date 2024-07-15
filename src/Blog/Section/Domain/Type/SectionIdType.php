@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Blog\Section\Domain\Type;
 
-use App\Blog\Category\Domain\ValueObject\CategoryId;
 use App\Blog\Section\Domain\ValueObject\SectionId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;

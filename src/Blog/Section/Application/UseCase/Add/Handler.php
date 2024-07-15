@@ -6,8 +6,8 @@ namespace App\Blog\Section\Application\UseCase\Add;
 
 use App\Blog\Section\Application\Service\SectionService;
 use App\Blog\Section\Domain\Entity\Section;
-use App\Blog\Section\Domain\ValueObject\SectionName;
 use App\Blog\Section\Domain\ValueObject\SectionId;
+use App\Blog\Section\Domain\ValueObject\SectionName;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Handler
