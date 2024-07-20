@@ -1,46 +1,48 @@
+PHP_RUN = docker compose run --rm php
+
 init: build composer-install up migrate
 
 build:
-	docker-compose build
+	docker compose build
 
 composer-install:
-	docker-compose run --rm php composer install
+	${PHP_RUN} composer install
 
 composer-update:
-	docker-compose run --rm php composer update
+	${PHP_RUN} composer update
 
 up:
-	docker-compose up -d
+	docker compose up -d
 
 down:
-	docker-compose down --remove-orphans
+	docker compose down --remove-orphans
 
 migrate:
-	docker-compose run --rm php bin/console doctrine:migrations:migrate
+	${PHP_RUN} bin/console doctrine:migrations:migrate
 
 phpstan-check:
-	docker-compose run --rm php vendor/bin/phpstan analyse -l 9
+	${PHP_RUN} vendor/bin/phpstan analyse -l 9
 
 psalm-check:
-	docker-compose run --rm php vendor/bin/psalm --show-info=true
+	${PHP_RUN} vendor/bin/psalm --show-info=true
 
 psalm-fix:
-	docker-compose run --rm php vendor/bin/psalm --alter --issues=all --dry-run
+	${PHP_RUN} vendor/bin/psalm --alter --issues=all --dry-run
 
 cs-check:
-	docker-compose run --rm php php vendor/bin/php-cs-fixer fix --dry-run --diff
+	${PHP_RUN} php vendor/bin/php-cs-fixer fix --dry-run --diff
 
 cs-fix:
-	docker-compose run --rm php php vendor/bin/php-cs-fixer fix
+	${PHP_RUN} php vendor/bin/php-cs-fixer fix
 
 test-all:
-	docker compose run --rm php composer test
+	${PHP_RUN} composer test
 
 test-unit:
-	docker compose run --rm php composer test -- --testsuite=unit
+	${PHP_RUN} composer test -- --testsuite=unit
 
 test-update:
-	docker compose run --rm php composer test-update -- --testsuite=unit
+	${PHP_RUN} composer test-update -- --testsuite=unit
 
 test-unit-coverage:
-	docker compose run --rm php composer test-coverage -- --testsuite=unit
+	${PHP_RUN} composer test-coverage -- --testsuite=unit
