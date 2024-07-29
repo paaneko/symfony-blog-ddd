@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Article\Domain\Test\Builder;
+namespace App\Tests\Builder;
 
 use App\Blog\Article\Domain\Entity\Article;
 use App\Blog\Article\Domain\Entity\Comment;

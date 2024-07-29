@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Image\Domain\Test\Builder;
+namespace App\Tests\Builder;
 
 use App\Image\Domain\Entity\Image;
 use App\Image\Domain\ValueObject\ImageId;
