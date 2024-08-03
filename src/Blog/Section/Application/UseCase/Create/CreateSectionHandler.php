@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Section\Application\UseCase\Add;
+namespace App\Blog\Section\Application\UseCase\Create;
 
 use App\Blog\Section\Application\Service\SectionService;
 use App\Blog\Section\Domain\Entity\Section;
@@ -10,7 +10,7 @@ use App\Blog\Section\Domain\ValueObject\SectionId;
 use App\Blog\Section\Domain\ValueObject\SectionName;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class Handler
+final class CreateSectionHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(
@@ -19,7 +19,7 @@ final class Handler
     ) {
     }
 
-    public function handle(Command $addSectionCommand): SectionId
+    public function handle(CreateSectionCommand $addSectionCommand): SectionId
     {
         $section = new Section(
             $sectionId = SectionId::generate(),

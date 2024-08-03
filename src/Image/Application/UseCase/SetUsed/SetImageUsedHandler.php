@@ -11,7 +11,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 /** @psalm-suppress UnusedClass */
 #[AsMessageHandler]
-final class Handler
+final class SetImageUsedHandler
 {
     public function __construct(
         private ImageService $imageService,
@@ -19,7 +19,7 @@ final class Handler
     ) {
     }
 
-    public function __invoke(Command $setUsedCommand): void
+    public function __invoke(SetImageUsedCommand $setUsedCommand): void
     {
         $image = $this->imageService->find(new ImageId($setUsedCommand->imageId));
 

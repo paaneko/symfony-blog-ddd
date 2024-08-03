@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Image\Infrastructure\Controller\Api;
 
-use App\Image\Application\UseCase\Upload\Command;
-use App\Image\Application\UseCase\Upload\Handler;
+use App\Image\Application\UseCase\Upload\UploadImageCommand;
+use App\Image\Application\UseCase\Upload\UploadImageHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,12 +17,12 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 final class UploadImageController extends AbstractController
 {
     #[Route('/image', methods: ['POST'])]
-    public function __invoke(Request $request, Handler $addImageHandler, ValidatorInterface $validator): Response
+    public function __invoke(Request $request, UploadImageHandler $addImageHandler, ValidatorInterface $validator): Response
     {
         /** @var UploadedFile $uploadedFile */
         $uploadedFile = $request->files->get('image');
 
-        $addImageCommand = new Command($uploadedFile);
+        $addImageCommand = new UploadImageCommand($uploadedFile);
         $validator->validate($addImageCommand);
 
         $responseData = $addImageHandler->handle($addImageCommand);

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Infrastructure\Controller\Api;
 
-use App\Blog\Article\Application\UseCase\AddComment\Command;
-use App\Blog\Article\Application\UseCase\AddComment\Handler;
+use App\Blog\Article\Application\UseCase\AddComment\AddCommentCommand;
+use App\Blog\Article\Application\UseCase\AddComment\AddCommentHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,11 +20,11 @@ final class AddCommentController extends AbstractController
     }
 
     #[Route('/comment', methods: ['POST'])]
-    public function __invoke(Request $request, Handler $handler): Response
+    public function __invoke(Request $request, AddCommentHandler $handler): Response
     {
         $parameters = json_decode($request->getContent(), true);
 
-        $addCommentCommand = new Command(
+        $addCommentCommand = new AddCommentCommand(
             /* @phpstan-ignore-next-line */
             $parameters['articleId'],
             /* @phpstan-ignore-next-line */

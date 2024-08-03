@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Article\Application\UseCase\Get;
+namespace App\Blog\Article\Application\UseCase\Duplicate;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final readonly class Query
+final class DuplicateArticleCommand
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]

@@ -24,7 +24,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-final class Handler
+final class CreateArticleHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(
@@ -39,7 +39,7 @@ final class Handler
     ) {
     }
 
-    public function __invoke(Command $createArticleCommand): void
+    public function __invoke(CreateArticleCommand $createArticleCommand): void
     {
         /** Ensure that all required aggregates exist */
         $articleAuthorDto = $this->articleAuthorRepository->getById($createArticleCommand->authorId);

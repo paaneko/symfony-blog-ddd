@@ -11,7 +11,7 @@ use App\Image\Domain\ValueObject\ImageId;
 use App\Image\Domain\ValueObject\ImageName;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class Handler
+final class UploadImageHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(
@@ -21,7 +21,7 @@ final class Handler
     ) {
     }
 
-    public function handle(Command $addImageCommand): ImageId
+    public function handle(UploadImageCommand $addImageCommand): ImageId
     {
         $image = new Image(
             $imageId = ImageId::generate(),

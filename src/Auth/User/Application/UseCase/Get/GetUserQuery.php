@@ -6,7 +6,7 @@ namespace App\Auth\User\Application\UseCase\Get;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final readonly class Query
+final readonly class GetUserQuery
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]

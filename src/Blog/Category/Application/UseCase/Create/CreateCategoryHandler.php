@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Category\Application\UseCase\Add;
+namespace App\Blog\Category\Application\UseCase\Create;
 
 use App\Blog\Category\Application\Service\CategoryService;
 use App\Blog\Category\Domain\Entity\Category;
@@ -12,7 +12,7 @@ use App\Blog\Category\Domain\ValueObject\CategorySlug;
 use Doctrine\ORM\EntityManagerInterface;
 
 /** @psalm-suppress UnusedClass */
-final class Handler
+final class CreateCategoryHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(
@@ -21,7 +21,7 @@ final class Handler
     ) {
     }
 
-    public function handle(Command $addCategoryCommand): CategoryId
+    public function handle(CreateCategoryCommand $addCategoryCommand): CategoryId
     {
         $category = new Category(
             $categoryId = CategoryId::generate(),

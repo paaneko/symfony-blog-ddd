@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Category\Application\UseCase\Add;
+namespace App\Blog\Category\Application\UseCase\Create;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final readonly class Command
+final readonly class CreateCategoryCommand
 {
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255)]

@@ -14,7 +14,7 @@ use App\Blog\Article\Domain\ValueObject\CommentName;
 use Doctrine\ORM\EntityManagerInterface;
 
 /** @psalm-suppress UnusedClass */
-final class Handler
+final class AddCommentHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(
@@ -23,7 +23,7 @@ final class Handler
     ) {
     }
 
-    public function handle(Command $addCommentCommand): void
+    public function handle(AddCommentCommand $addCommentCommand): void
     {
         $article = $this->articleService->find(new ArticleId($addCommentCommand->articleId));
 

@@ -8,7 +8,7 @@ use App\Blog\Article\Application\Service\ArticleService;
 use App\Blog\Article\Domain\Entity\Comment;
 use App\Blog\Article\Domain\ValueObject\ArticleId;
 
-final class Fetcher
+final class GetArticleFetcher
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(
@@ -17,7 +17,7 @@ final class Fetcher
     }
 
     /** @phpstan-ignore-next-line */
-    public function fetch(Query $getArticleQuery): array
+    public function fetch(GetArticleQuery $getArticleQuery): array
     {
         $articleId = new ArticleId($getArticleQuery->articleId);
 

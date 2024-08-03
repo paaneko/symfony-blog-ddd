@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Infrastructure\Controller\Api;
 
-use App\Blog\Article\Application\UseCase\Duplicate\Command;
-use App\Blog\Article\Application\UseCase\Duplicate\Handler;
+use App\Blog\Article\Application\UseCase\Duplicate\DuplicateArticleCommand;
+use App\Blog\Article\Application\UseCase\Duplicate\DuplicateArticleHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,11 +20,11 @@ final class DuplicateArticleController extends AbstractController
     }
 
     #[Route('/article/duplicate', methods: ['POST'])]
-    public function __invoke(Request $request, Handler $handler): Response
+    public function __invoke(Request $request, DuplicateArticleHandler $handler): Response
     {
         $parameters = json_decode($request->getContent(), true);
 
-        $duplicateArticleCommand = new Command(
+        $duplicateArticleCommand = new DuplicateArticleCommand(
             /* @phpstan-ignore-next-line */
             $parameters['articleId']
         );

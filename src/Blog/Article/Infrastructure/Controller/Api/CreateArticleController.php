@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Infrastructure\Controller\Api;
 
-use App\Blog\Article\Application\UseCase\Create\Command;
+use App\Blog\Article\Application\UseCase\Create\CreateArticleCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +31,7 @@ final class CreateArticleController extends AbstractController
             JSON_THROW_ON_ERROR
         );
 
-        $createArticleCommand = new Command(
+        $createArticleCommand = new CreateArticleCommand(
             $parameters['title'],
             $parameters['content'],
             $parameters['categoryId'],

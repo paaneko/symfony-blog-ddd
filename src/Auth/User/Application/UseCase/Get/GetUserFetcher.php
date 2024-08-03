@@ -8,14 +8,14 @@ use App\Auth\User\Application\Service\UserService;
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\ValueObject\UserId;
 
-final class Fetcher
+final class GetUserFetcher
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private UserService $userService)
     {
     }
 
-    public function fetch(Query $query): User
+    public function fetch(GetUserQuery $query): User
     {
         $userId = new UserId($query->id);
 

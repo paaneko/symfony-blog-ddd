@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Section\Application\UseCase\Add;
+namespace App\Blog\Section\Application\UseCase\Create;
 
-final readonly class Command
+final readonly class CreateSectionCommand
 {
     public string $name;
 

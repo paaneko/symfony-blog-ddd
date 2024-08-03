@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\User\Application\UseCase\Add;
+namespace App\Auth\User\Application\UseCase\Create;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final readonly class Command
+final readonly class CreateUserCommand
 {
     #[Assert\NotBlank]
     #[Assert\Length(min: 6, max: 225)]

@@ -6,7 +6,7 @@ namespace App\Image\Application\EventSubscriber;
 
 use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
 use App\Image\Application\Service\ImageService;
-use App\Image\Application\UseCase\SetUsed\Command;
+use App\Image\Application\UseCase\SetUsed\SetImageUsedCommand;
 use App\Image\Domain\ValueObject\ImageId;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -35,7 +35,7 @@ final class OnArticleCreatedEventSubscriber implements EventSubscriberInterface
             throw new \DomainException('Image not found');
         }
 
-        $setUsedCommand = new Command(
+        $setUsedCommand = new SetImageUsedCommand(
             $event->getMainImageId()
         );
 

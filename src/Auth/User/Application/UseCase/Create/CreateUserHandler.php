@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\User\Application\UseCase\Add;
+namespace App\Auth\User\Application\UseCase\Create;
 
 use App\Auth\User\Application\Service\UserService;
 use App\Auth\User\Domain\Entity\User;
@@ -11,14 +11,14 @@ use App\Auth\User\Domain\ValueObject\UserId;
 use App\Auth\User\Domain\ValueObject\UserName;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class Handler
+final class CreateUserHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private EntityManagerInterface $entityManager, private UserService $userService)
     {
     }
 
-    public function handle(Command $command): UserId
+    public function handle(CreateUserCommand $command): UserId
     {
         $user = new User(
             $userId = UserId::generate(),

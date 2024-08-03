@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Infrastructure\Controller\Api;
 
-use App\Blog\Article\Application\UseCase\Get\Fetcher;
-use App\Blog\Article\Application\UseCase\Get\Query;
+use App\Blog\Article\Application\UseCase\Get\GetArticleFetcher;
+use App\Blog\Article\Application\UseCase\Get\GetArticleQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -19,9 +19,9 @@ final class GetArticleController extends AbstractController
     }
 
     #[Route('/article/{uuid}', methods: ['GET'])]
-    public function __invoke(string $uuid, Fetcher $fetcher): Response
+    public function __invoke(string $uuid, GetArticleFetcher $fetcher): Response
     {
-        $getArticleQuery = new Query($uuid);
+        $getArticleQuery = new GetArticleQuery($uuid);
 
         $errors = $this->validator->validate($getArticleQuery);
 

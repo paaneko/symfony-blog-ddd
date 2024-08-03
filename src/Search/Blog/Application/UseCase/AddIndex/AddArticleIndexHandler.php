@@ -13,7 +13,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 /** @psalm-suppress UnusedClass */
 #[AsMessageHandler]
-final class Handler
+final class AddArticleIndexHandler
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
@@ -21,7 +21,7 @@ final class Handler
     ) {
     }
 
-    public function __invoke(Command $addIndexCommand): void
+    public function __invoke(AddArticleIndexCommand $addIndexCommand): void
     {
         $index = new ArticleIndex(
             ArticleIndexId::generate(),

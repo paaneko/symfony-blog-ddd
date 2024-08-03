@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Auth\User\Infrastructure\Controller\Api;
 
-use App\Auth\User\Application\UseCase\Get\Fetcher;
-use App\Auth\User\Application\UseCase\Get\Query;
+use App\Auth\User\Application\UseCase\Get\GetUserFetcher;
+use App\Auth\User\Application\UseCase\Get\GetUserQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,9 +15,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 final class GetUserController extends AbstractController
 {
     #[Route('/user/{uuid}', methods: ['GET'])]
-    public function __invoke(string $uuid, Fetcher $fetcher, ValidatorInterface $validator): Response
+    public function __invoke(string $uuid, GetUserFetcher $fetcher, ValidatorInterface $validator): Response
     {
-        $query = new Query($uuid);
+        $query = new GetUserQuery($uuid);
 
         $errors = $validator->validate($query);
 
