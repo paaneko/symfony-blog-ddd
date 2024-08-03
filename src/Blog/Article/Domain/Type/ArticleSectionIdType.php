@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Domain\Type;
 
-use App\Blog\Shared\Domain\Entity\ValueObject\SectionId;
+use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
@@ -14,12 +14,12 @@ class ArticleSectionIdType extends GuidType
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
-        return $value instanceof SectionId ? $value->getValue() : $value;
+        return $value instanceof NullableSectionId ? $value->getValue() : $value;
     }
 
-    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?SectionId
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): NullableSectionId
     {
         /* @phpstan-ignore-next-line */
-        return !empty($value) ? new SectionId((string) $value) : null;
+        return new NullableSectionId($value);
     }
 }

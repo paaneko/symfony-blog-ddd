@@ -8,7 +8,7 @@ use App\Blog\Section\Domain\Type\SectionIdType;
 use App\Blog\Section\Domain\Type\SectionNameType;
 use App\Blog\Section\Domain\ValueObject\SectionId;
 use App\Blog\Section\Domain\ValueObject\SectionName;
-use App\SharedKernel\Aggregate\AggregateRoot;
+use App\SharedKernel\Domain\Aggregate\AggregateRoot;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]

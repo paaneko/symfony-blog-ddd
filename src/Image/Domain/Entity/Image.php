@@ -8,7 +8,7 @@ use App\Image\Domain\Type\ImageIdType;
 use App\Image\Domain\Type\ImageNameType;
 use App\Image\Domain\ValueObject\ImageId;
 use App\Image\Domain\ValueObject\ImageName;
-use App\SharedKernel\Aggregate\AggregateRoot;
+use App\SharedKernel\Domain\Aggregate\AggregateRoot;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]

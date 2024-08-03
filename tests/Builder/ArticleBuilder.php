@@ -13,7 +13,7 @@ use App\Blog\Article\Domain\ValueObject\ArticleMainImageId;
 use App\Blog\Article\Domain\ValueObject\ArticleTitle;
 use App\Blog\Article\Domain\ValueObject\ArticleViews;
 use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
-use App\Blog\Shared\Domain\Entity\ValueObject\SectionId;
+use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
 use App\SharedKernel\Test\FakeUuid;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,7 +28,7 @@ class ArticleBuilder
 
     private CategoryId $categoryId;
 
-    private ?SectionId $sectionId;
+    private ?NullableSectionId $sectionId;
 
     private ArticleAuthorId $authorId;
 
@@ -47,7 +47,7 @@ class ArticleBuilder
         $this->title = new ArticleTitle('Lorem ipsum dolor sit amet');
         $this->content = new ArticleContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in.');
         $this->categoryId = new CategoryId(FakeUuid::generate());
-        $this->sectionId = new SectionId(FakeUuid::generate());
+        $this->sectionId = new NullableSectionId(FakeUuid::generate());
         $this->authorId = new ArticleAuthorId(FakeUuid::generate());
         $this->mainImageId = new ArticleMainImageId(FakeUuid::generate());
         $this->views = ArticleViews::init();

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Application\UseCase\Create;
 
+use App\Blog\Article\Application\Repository\ArticleAuthorRepositoryInterface;
+use App\Blog\Article\Application\Repository\ArticleMainImageRepositoryInterface;
 use App\Blog\Article\Application\Service\ArticleService;
 use App\Blog\Article\Domain\Entity\Article;
 use App\Blog\Article\Domain\ValueObject\ArticleAuthorId;
@@ -13,12 +15,14 @@ use App\Blog\Article\Domain\ValueObject\ArticleMainImageId;
 use App\Blog\Article\Domain\ValueObject\ArticleTitle;
 use App\Blog\Article\Domain\ValueObject\ArticleViews;
 use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
-use App\Blog\Shared\Domain\Entity\ValueObject\SectionId;
+use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
+use App\Blog\Shared\Domain\Providers\Interfaces\CategoryProviderInterface;
+use App\Blog\Shared\Domain\Providers\Interfaces\SectionProviderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-/** @psalm-suppress UnusedClass */
 #[AsMessageHandler]
 class Handler
 {
@@ -27,21 +31,32 @@ class Handler
         private EventDispatcherInterface $eventDispatcher,
         private EntityManagerInterface $entityManager,
         private ArticleService $articleService,
+        private ArticleAuthorRepositoryInterface $articleAuthorRepository,
+        private ArticleMainImageRepositoryInterface $articleMainImageRepository,
+        private CategoryProviderInterface $categoryProvider,
+        private SectionProviderInterface $sectionProvider,
+        private LoggerInterface $logger
     ) {
     }
 
     public function __invoke(Command $createArticleCommand): void
     {
-        $sectionId = $createArticleCommand->sectionId;
+        $this->logger->debug('debug');
+        /** Ensure that all required aggregates exist */
+        $articleAuthorDto = $this->articleAuthorRepository->getById($createArticleCommand->authorId);
+        $articleMainImageDto = $this->articleMainImageRepository->getById($createArticleCommand->imageId);
+        $categoryDto = $this->categoryProvider->getById($createArticleCommand->categoryId);
+        $sectionDto = ($createArticleCommand->sectionId === null)
+            ? null : $this->sectionProvider->getById($createArticleCommand->sectionId);
 
         $article = new Article(
             ArticleId::generate(),
             new ArticleTitle($createArticleCommand->title),
             new ArticleContent($createArticleCommand->content),
-            new CategoryId($createArticleCommand->categoryId),
-            ($sectionId) ? new SectionId($sectionId) : null,
-            new ArticleAuthorId($createArticleCommand->authorId),
-            new ArticleMainImageId($createArticleCommand->imageId),
+            new CategoryId($categoryDto->id),
+            new NullableSectionId($sectionDto?->id),
+            new ArticleAuthorId($articleAuthorDto->id),
+            new ArticleMainImageId($articleMainImageDto->id),
             ArticleViews::init(),
             new \DateTimeImmutable()
         );
@@ -53,7 +68,7 @@ class Handler
             $this->entityManager->commit();
         } catch (\Exception $exception) {
             $this->entityManager->rollback();
-            // TODO add log
+            $this->logger->critical('Create article transaction rollback');
             throw $exception;
         }
 

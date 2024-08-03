@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Blog\Article\Application\Transformer;
+
+use App\Blog\Article\Application\Dto\ArticleMainImageDto;
+use App\Image\Domain\Entity\Image;
+
+class ArticleMainImageTransformer
+{
+    public function fromImage(Image $image): ArticleMainImageDto
+    {
+        return new ArticleMainImageDto(
+            id: $image->getId()->getValue(),
+            name: $image->getName()->getValue()
+        );
+    }
+}

@@ -8,7 +8,7 @@ use App\Search\Blog\Domain\Type\ArticleIdentifierType;
 use App\Search\Blog\Domain\Type\ArticleIndexIdType;
 use App\Search\Blog\Domain\ValueObject\ArticleIdentifier;
 use App\Search\Blog\Domain\ValueObject\ArticleIndexId;
-use App\SharedKernel\Aggregate\AggregateRoot;
+use App\SharedKernel\Domain\Aggregate\AggregateRoot;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]

@@ -4,18 +4,31 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Application\UseCase\Create;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 readonly class Command
 {
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 15, max: 255, )]
     public string $title;
 
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 250, max: 5000, )]
     public string $content;
 
+    #[Assert\NotBlank]
+    #[Assert\Uuid]
     public string $categoryId;
 
+    #[Assert\Uuid]
     public ?string $sectionId;
 
+    #[Assert\NotBlank]
+    #[Assert\Uuid]
     public string $authorId;
 
+    #[Assert\NotBlank]
+    #[Assert\Uuid]
     public string $imageId;
 
     public function __construct(

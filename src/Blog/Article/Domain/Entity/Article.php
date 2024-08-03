@@ -20,8 +20,8 @@ use App\Blog\Article\Domain\ValueObject\ArticleMainImageId;
 use App\Blog\Article\Domain\ValueObject\ArticleTitle;
 use App\Blog\Article\Domain\ValueObject\ArticleViews;
 use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
-use App\Blog\Shared\Domain\Entity\ValueObject\SectionId;
-use App\SharedKernel\Aggregate\AggregateRoot;
+use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
+use App\SharedKernel\Domain\Aggregate\AggregateRoot;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -44,7 +44,7 @@ class Article extends AggregateRoot
     private CategoryId $categoryId;
 
     #[ORM\Column(type: ArticleSectionIdType::NAME, length: 255, nullable: true)]
-    private ?SectionId $sectionId;
+    private NullableSectionId $sectionId;
 
     #[ORM\Column(type: ArticleAuthorIdType::NAME, length: 255)]
     private ArticleAuthorId $authorId;
@@ -67,7 +67,7 @@ class Article extends AggregateRoot
         ArticleTitle $title,
         ArticleContent $content,
         CategoryId $categoryId,
-        ?SectionId $sectionId,
+        NullableSectionId $sectionId,
         ArticleAuthorId $authorId,
         ArticleMainImageId $mainImageId,
         ArticleViews $views,
@@ -116,7 +116,7 @@ class Article extends AggregateRoot
     }
 
     /** @psalm-suppress UnusedMethod */
-    public function getSectionId(): ?SectionId
+    public function getSectionId(): ?NullableSectionId
     {
         return $this->sectionId;
     }

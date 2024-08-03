@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Image\Domain\ValueObject;
 
-use App\SharedKernel\Aggregate\AggregateRoot;
+use App\SharedKernel\Domain\Aggregate\AggregateRoot;
 use Symfony\Component\Uid\Uuid;
 use Webmozart\Assert\Assert;
 

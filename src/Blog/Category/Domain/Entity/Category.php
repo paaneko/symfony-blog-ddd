@@ -10,7 +10,7 @@ use App\Blog\Category\Domain\Type\CategorySlugType;
 use App\Blog\Category\Domain\ValueObject\CategoryId;
 use App\Blog\Category\Domain\ValueObject\CategoryName;
 use App\Blog\Category\Domain\ValueObject\CategorySlug;
-use App\SharedKernel\Aggregate\AggregateRoot;
+use App\SharedKernel\Domain\Aggregate\AggregateRoot;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
