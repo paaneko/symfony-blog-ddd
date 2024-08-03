@@ -8,7 +8,7 @@ use App\Blog\Article\Domain\ValueObject\CommentId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-class CommentIdType extends GuidType
+final class CommentIdType extends GuidType
 {
     public const string NAME = 'comment_id';
 

@@ -7,7 +7,7 @@ namespace App\Search\Blog\Application\Service;
 use App\Search\Blog\Domain\Entity\ArticleIndex;
 use App\Search\Blog\Domain\Repository\IndexRepositoryInterface;
 
-class IndexService
+final class IndexService
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private IndexRepositoryInterface $indexRepository)

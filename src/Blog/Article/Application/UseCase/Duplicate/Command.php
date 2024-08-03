@@ -6,7 +6,7 @@ namespace App\Blog\Article\Application\UseCase\Duplicate;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Command
+final class Command
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]

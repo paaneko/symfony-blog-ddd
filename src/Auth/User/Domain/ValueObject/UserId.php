@@ -7,7 +7,7 @@ namespace App\Auth\User\Domain\ValueObject;
 use Symfony\Component\Uid\Uuid;
 use Webmozart\Assert\Assert;
 
-class UserId
+final class UserId
 {
     private string $value;
 

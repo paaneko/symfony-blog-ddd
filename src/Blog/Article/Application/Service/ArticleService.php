@@ -8,7 +8,7 @@ use App\Blog\Article\Domain\Entity\Article;
 use App\Blog\Article\Domain\Repository\ArticleRepositoryInterface;
 use App\Blog\Article\Domain\ValueObject\ArticleId;
 
-class ArticleService
+final class ArticleService
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private ArticleRepositoryInterface $articleRepository)

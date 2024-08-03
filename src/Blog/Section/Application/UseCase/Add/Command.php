@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Section\Application\UseCase\Add;
 
-readonly class Command
+final readonly class Command
 {
     public string $name;
 

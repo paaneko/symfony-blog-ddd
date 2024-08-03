@@ -8,7 +8,7 @@ use App\Blog\Section\Domain\ValueObject\SectionId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-class SectionIdType extends GuidType
+final class SectionIdType extends GuidType
 {
     public const string NAME = 'section_id';
 

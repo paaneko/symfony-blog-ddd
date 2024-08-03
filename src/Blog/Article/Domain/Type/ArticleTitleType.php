@@ -8,7 +8,7 @@ use App\Blog\Article\Domain\ValueObject\ArticleTitle;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
-class ArticleTitleType extends StringType
+final class ArticleTitleType extends StringType
 {
     public const string NAME = 'article_title';
 

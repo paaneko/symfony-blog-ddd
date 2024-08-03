@@ -12,7 +12,7 @@ use App\Blog\Category\Domain\ValueObject\CategorySlug;
 use Doctrine\ORM\EntityManagerInterface;
 
 /** @psalm-suppress UnusedClass */
-class Handler
+final class Handler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(

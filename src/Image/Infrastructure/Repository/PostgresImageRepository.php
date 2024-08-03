@@ -10,7 +10,7 @@ use App\Image\Domain\ValueObject\ImageId;
 use Doctrine\ORM\EntityManagerInterface;
 
 /** @psalm-suppress UnusedClass */
-class PostgresImageRepository implements ImageRepositoryInterface
+final class PostgresImageRepository implements ImageRepositoryInterface
 {
     public function __construct(private EntityManagerInterface $entityManager)
     {

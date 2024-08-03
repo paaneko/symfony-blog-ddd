@@ -8,7 +8,7 @@ use App\Blog\Article\Application\Service\ArticleService;
 use App\Blog\Article\Domain\Entity\Comment;
 use App\Blog\Article\Domain\ValueObject\ArticleId;
 
-class Fetcher
+final class Fetcher
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(

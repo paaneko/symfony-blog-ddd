@@ -7,7 +7,7 @@ namespace App\Tests\Builder;
 use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
 use App\SharedKernel\Test\FakeUuid;
 
-class ArticleCreatedEventBuilder
+final class ArticleCreatedEventBuilder
 {
     private string $id;
 

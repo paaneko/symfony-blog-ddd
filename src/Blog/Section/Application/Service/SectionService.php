@@ -7,7 +7,7 @@ namespace App\Blog\Section\Application\Service;
 use App\Blog\Section\Domain\Entity\Section;
 use App\Blog\Section\Domain\Repository\SectionRepositoryInterface;
 
-class SectionService
+final class SectionService
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private SectionRepositoryInterface $sectionRepository)

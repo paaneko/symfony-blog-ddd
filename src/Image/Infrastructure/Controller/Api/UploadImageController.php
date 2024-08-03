@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @psalm-suppress UnusedClass */
-class UploadImageController extends AbstractController
+final class UploadImageController extends AbstractController
 {
     #[Route('/image', methods: ['POST'])]
     public function __invoke(Request $request, Handler $addImageHandler, ValidatorInterface $validator): Response

@@ -8,7 +8,7 @@ use App\Blog\Article\Domain\ValueObject\CommentEmail;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
-class CommentEmailType extends StringType
+final class CommentEmailType extends StringType
 {
     public const string NAME = 'comment_email';
 

@@ -7,7 +7,7 @@ namespace App\Search\Blog\Domain\ValueObject;
 use Symfony\Component\Uid\Uuid;
 use Webmozart\Assert\Assert;
 
-class ArticleIndexId
+final class ArticleIndexId
 {
     private string $value;
 

@@ -17,7 +17,8 @@ return (new PhpCsFixer\Config())
         'declare_strict_types' => true,
         'explicit_string_variable' => true,
         'align_multiline_comment' => true,
-        'no_unused_imports' => true
+        'no_unused_imports' => true,
+        'final_class' => true
     ])
     ->setFinder($finder)
 ;

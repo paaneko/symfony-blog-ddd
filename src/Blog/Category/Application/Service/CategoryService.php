@@ -8,7 +8,7 @@ use App\Blog\Category\Domain\Entity\Category;
 use App\Blog\Category\Domain\Repository\CategoryRepositoryInterface;
 
 /** @psalm-suppress UnusedClass */
-class CategoryService
+final class CategoryService
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private CategoryRepositoryInterface $categoryRepository)

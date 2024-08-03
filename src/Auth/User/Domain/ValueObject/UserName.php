@@ -6,7 +6,7 @@ namespace App\Auth\User\Domain\ValueObject;
 
 use Webmozart\Assert\Assert;
 
-class UserName
+final class UserName
 {
     private string $value;
 

@@ -11,7 +11,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 /** @psalm-suppress UnusedClass */
 #[AsMessageHandler]
-class Handler
+final class Handler
 {
     public function __construct(
         private ImageService $imageService,

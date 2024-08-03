@@ -9,7 +9,7 @@ use App\Blog\Article\Application\UseCase\Create\Command as CreateArticleCommand;
 use App\Blog\Article\Domain\ValueObject\ArticleId;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class Handler
+final class Handler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(

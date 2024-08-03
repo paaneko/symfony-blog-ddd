@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @psalm-suppress UnusedClass */
-class GetArticleController extends AbstractController
+final class GetArticleController extends AbstractController
 {
     public function __construct(private ValidatorInterface $validator)
     {

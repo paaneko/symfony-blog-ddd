@@ -8,7 +8,7 @@ use App\Blog\Article\Domain\ValueObject\CommentMessage;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\TextType;
 
-class CommentMessageType extends TextType
+final class CommentMessageType extends TextType
 {
     public const string NAME = 'comment_message';
 

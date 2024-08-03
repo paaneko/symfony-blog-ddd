@@ -6,6 +6,6 @@ namespace App\Blog\Shared\Domain\Entity\ValueObject;
 
 use App\SharedKernel\Domain\ValueObject\NullableAggregateRootId;
 
-class NullableSectionId extends NullableAggregateRootId
+final class NullableSectionId extends NullableAggregateRootId
 {
 }

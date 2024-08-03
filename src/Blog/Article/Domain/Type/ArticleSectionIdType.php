@@ -8,7 +8,7 @@ use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-class ArticleSectionIdType extends GuidType
+final class ArticleSectionIdType extends GuidType
 {
     public const string NAME = 'article_section_id';
 

@@ -8,7 +8,7 @@ use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-class ArticleCategoryIdType extends GuidType
+final class ArticleCategoryIdType extends GuidType
 {
     public const string NAME = 'article_category_id';
 

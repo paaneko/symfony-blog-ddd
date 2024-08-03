@@ -9,7 +9,7 @@ use App\Auth\User\Domain\ValueObject\UserEmail;
 use App\Auth\User\Domain\ValueObject\UserId;
 use App\Auth\User\Domain\ValueObject\UserName;
 
-class UserBuilder
+final class UserBuilder
 {
     private UserId $id;
 

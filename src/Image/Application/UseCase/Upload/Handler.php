@@ -11,7 +11,7 @@ use App\Image\Domain\ValueObject\ImageId;
 use App\Image\Domain\ValueObject\ImageName;
 use Doctrine\ORM\EntityManagerInterface;
 
-class Handler
+final class Handler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(

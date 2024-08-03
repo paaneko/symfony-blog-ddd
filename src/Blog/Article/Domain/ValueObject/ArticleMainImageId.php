@@ -6,6 +6,6 @@ namespace App\Blog\Article\Domain\ValueObject;
 
 use App\SharedKernel\Domain\ValueObject\ImageValueObject;
 
-class ArticleMainImageId extends ImageValueObject
+final class ArticleMainImageId extends ImageValueObject
 {
 }

@@ -6,7 +6,7 @@ namespace App\Blog\Article\Application\UseCase\AddComment;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-readonly class Command
+final readonly class Command
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]

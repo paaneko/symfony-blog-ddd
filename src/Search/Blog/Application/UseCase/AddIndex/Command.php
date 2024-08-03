@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Search\Blog\Application\UseCase\AddIndex;
 
-class Command
+final class Command
 {
     public string $articleIdentifier;
 

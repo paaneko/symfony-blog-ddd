@@ -8,7 +8,7 @@ use App\Image\Domain\Entity\Image;
 use App\Image\Domain\Repository\ImageRepositoryInterface;
 use App\Image\Domain\ValueObject\ImageId;
 
-class ImageService
+final class ImageService
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private ImageRepositoryInterface $imageRepository)

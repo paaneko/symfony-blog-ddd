@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Article\Domain\Exception;
 
 use App\SharedKernel\Domain\Exception\DomainException;
 
-class ArticleAuthorNotFoundException extends DomainException
+final class ArticleAuthorNotFoundException extends DomainException
 {
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct('Article author not found');
     }
 

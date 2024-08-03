@@ -9,7 +9,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
 /** @psalm-suppress UnusedClass */
-class ImageIdType extends GuidType
+final class ImageIdType extends GuidType
 {
     public const string NAME = 'image_id';
 

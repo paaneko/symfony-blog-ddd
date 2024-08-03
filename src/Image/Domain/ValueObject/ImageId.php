@@ -8,7 +8,7 @@ use App\SharedKernel\Domain\Aggregate\AggregateRoot;
 use Symfony\Component\Uid\Uuid;
 use Webmozart\Assert\Assert;
 
-class ImageId extends AggregateRoot
+final class ImageId extends AggregateRoot
 {
     private string $value;
 

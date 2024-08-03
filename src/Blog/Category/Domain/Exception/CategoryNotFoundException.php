@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Category\Domain\Exception;
 
 use App\SharedKernel\Domain\Exception\DomainException;
 
-class CategoryNotFoundException extends DomainException
+final class CategoryNotFoundException extends DomainException
 {
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct('Category not found');
     }
 

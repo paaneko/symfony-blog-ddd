@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @psalm-suppress UnusedClass */
-class AddUserController extends AbstractController
+final class AddUserController extends AbstractController
 {
     #[Route('user', methods: ['POST'])]
     public function __invoke(Request $request, Handler $handler, ValidatorInterface $validator): Response

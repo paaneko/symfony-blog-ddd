@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Article\Application\Transformer;
 
 use App\Blog\Article\Application\Dto\ArticleMainImageDto;
 use App\Image\Domain\Entity\Image;
 
-class ArticleMainImageTransformer
+final class ArticleMainImageTransformer
 {
     public function fromImage(Image $image): ArticleMainImageDto
     {

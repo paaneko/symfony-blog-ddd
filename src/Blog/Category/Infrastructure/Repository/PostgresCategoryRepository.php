@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @phpstan-ignore-next-line
  */
-class PostgresCategoryRepository extends ServiceEntityRepository implements CategoryRepositoryInterface
+final class PostgresCategoryRepository extends ServiceEntityRepository implements CategoryRepositoryInterface
 {
     /** @psalm-suppress PossiblyUnusedParam */
     public function __construct(ManagerRegistry $registry)

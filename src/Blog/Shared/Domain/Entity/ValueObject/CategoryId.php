@@ -6,6 +6,6 @@ namespace App\Blog\Shared\Domain\Entity\ValueObject;
 
 use App\SharedKernel\Domain\ValueObject\AggregateRootId;
 
-class CategoryId extends AggregateRootId
+final class CategoryId extends AggregateRootId
 {
 }

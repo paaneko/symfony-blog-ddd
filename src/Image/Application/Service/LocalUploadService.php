@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /** @psalm-suppress UnusedClass */
-class LocalUploadService implements UploadServiceInterface
+final class LocalUploadService implements UploadServiceInterface
 {
     public function __construct(private ParameterBagInterface $parameterBag)
     {

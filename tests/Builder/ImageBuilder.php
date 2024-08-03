@@ -8,7 +8,7 @@ use App\Image\Domain\Entity\Image;
 use App\Image\Domain\ValueObject\ImageId;
 use App\Image\Domain\ValueObject\ImageName;
 
-class ImageBuilder
+final class ImageBuilder
 {
     private ImageId $id;
 

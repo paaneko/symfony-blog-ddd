@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Embeddable;
 
 #[Embeddable]
-class ArticleViews
+final class ArticleViews
 {
     #[ORM\Column(type: 'integer')]
     private int $value;

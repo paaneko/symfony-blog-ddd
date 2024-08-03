@@ -6,7 +6,7 @@ namespace App\Blog\Category\Application\UseCase\Add;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-readonly class Command
+final readonly class Command
 {
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255)]

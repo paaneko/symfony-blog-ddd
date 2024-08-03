@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @psalm-suppress UnusedClass */
-class AddSectionController extends AbstractController
+final class AddSectionController extends AbstractController
 {
     public function __construct(private ValidatorInterface $validator)
     {

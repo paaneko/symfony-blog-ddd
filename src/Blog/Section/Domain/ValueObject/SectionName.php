@@ -6,7 +6,7 @@ namespace App\Blog\Section\Domain\ValueObject;
 
 use Webmozart\Assert\Assert;
 
-class SectionName
+final class SectionName
 {
     private string $value;
 

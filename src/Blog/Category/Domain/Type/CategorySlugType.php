@@ -8,7 +8,7 @@ use App\Blog\Category\Domain\ValueObject\CategorySlug;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
-class CategorySlugType extends StringType
+final class CategorySlugType extends StringType
 {
     public const string NAME = 'category_slug';
 

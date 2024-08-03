@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @phpstan-ignore-next-line
  */
-class PostgresIndexRepository extends ServiceEntityRepository implements IndexRepositoryInterface
+final class PostgresIndexRepository extends ServiceEntityRepository implements IndexRepositoryInterface
 {
     /** @psalm-suppress PossiblyUnusedParam */
     public function __construct(ManagerRegistry $registry)

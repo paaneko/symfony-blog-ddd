@@ -24,7 +24,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class Handler
+final class Handler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(
@@ -41,12 +41,11 @@ class Handler
 
     public function __invoke(Command $createArticleCommand): void
     {
-        $this->logger->debug('debug');
         /** Ensure that all required aggregates exist */
         $articleAuthorDto = $this->articleAuthorRepository->getById($createArticleCommand->authorId);
         $articleMainImageDto = $this->articleMainImageRepository->getById($createArticleCommand->imageId);
         $categoryDto = $this->categoryProvider->getById($createArticleCommand->categoryId);
-        $sectionDto = ($createArticleCommand->sectionId === null)
+        $sectionDto = (null === $createArticleCommand->sectionId)
             ? null : $this->sectionProvider->getById($createArticleCommand->sectionId);
 
         $article = new Article(
@@ -68,7 +67,7 @@ class Handler
             $this->entityManager->commit();
         } catch (\Exception $exception) {
             $this->entityManager->rollback();
-            $this->logger->critical('Create article transaction rollback');
+            // Add logger
             throw $exception;
         }
 

@@ -8,7 +8,7 @@ use App\Blog\Article\Domain\ValueObject\ArticleMainImageId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-class ArticleMainImageIdType extends GuidType
+final class ArticleMainImageIdType extends GuidType
 {
     public const string NAME = 'article_main_image_id';
 

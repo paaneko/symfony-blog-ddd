@@ -10,7 +10,7 @@ use App\Blog\Section\Domain\ValueObject\SectionId;
 use App\Blog\Section\Domain\ValueObject\SectionName;
 use Doctrine\ORM\EntityManagerInterface;
 
-class Handler
+final class Handler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(

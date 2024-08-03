@@ -6,6 +6,6 @@ namespace App\Blog\Article\Domain\ValueObject;
 
 use App\SharedKernel\Domain\ValueObject\UserValueObject;
 
-class ArticleAuthorId extends UserValueObject
+final class ArticleAuthorId extends UserValueObject
 {
 }

@@ -8,7 +8,7 @@ use App\Auth\User\Domain\ValueObject\UserId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-class UserIdType extends GuidType
+final class UserIdType extends GuidType
 {
     public const string NAME = 'user_id';
 

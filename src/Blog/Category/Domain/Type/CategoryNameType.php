@@ -8,7 +8,7 @@ use App\Blog\Category\Domain\ValueObject\CategoryName;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
-class CategoryNameType extends StringType
+final class CategoryNameType extends StringType
 {
     public const string NAME = 'category_name';
 

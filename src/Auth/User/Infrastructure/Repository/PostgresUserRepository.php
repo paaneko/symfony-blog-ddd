@@ -15,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @psalm-suppress UnusedClass
  */
-class PostgresUserRepository extends ServiceEntityRepository implements UserRepositoryInterface
+final class PostgresUserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
     /** @psalm-suppress UnusedMethod, PossiblyUnusedParam */
     public function __construct(ManagerRegistry $registry)

@@ -8,7 +8,7 @@ use App\Blog\Article\Domain\ValueObject\ArticleContent;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\TextType;
 
-class ArticleContentType extends TextType
+final class ArticleContentType extends TextType
 {
     public const string NAME = 'article_content_id';
 

@@ -8,23 +8,21 @@ use App\Blog\Category\Domain\Exception\CategoryNotFoundException;
 use App\Blog\Category\Domain\Repository\CategoryRepositoryInterface;
 use App\Blog\Shared\Application\Dto\CategoryDto;
 use App\Blog\Shared\Application\Transformer\CategoryTransformer;
-use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
 use App\Blog\Shared\Domain\Providers\Interfaces\CategoryProviderInterface;
 
-class CategoryProvider implements CategoryProviderInterface
+final class CategoryProvider implements CategoryProviderInterface
 {
     public function __construct(
         private CategoryRepositoryInterface $categoryRepository,
         private CategoryTransformer $categoryTransformer
-    )
-    {
+    ) {
     }
 
     public function getById(string $id): CategoryDto
     {
         $category = $this->categoryRepository->find($id);
 
-        if ($category === null) {
+        if (null === $category) {
             throw new CategoryNotFoundException();
         }
 

@@ -8,7 +8,7 @@ use App\Auth\User\Application\Service\UserService;
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\ValueObject\UserId;
 
-class Fetcher
+final class Fetcher
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private UserService $userService)

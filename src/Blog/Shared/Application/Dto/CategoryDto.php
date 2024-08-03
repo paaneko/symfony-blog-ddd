@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Shared\Application\Dto;
 
-readonly class CategoryDto
+final readonly class CategoryDto
 {
     public function __construct(
         public string $id,

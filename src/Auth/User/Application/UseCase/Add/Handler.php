@@ -11,7 +11,7 @@ use App\Auth\User\Domain\ValueObject\UserId;
 use App\Auth\User\Domain\ValueObject\UserName;
 use Doctrine\ORM\EntityManagerInterface;
 
-class Handler
+final class Handler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private EntityManagerInterface $entityManager, private UserService $userService)

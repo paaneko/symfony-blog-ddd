@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\Embeddable;
 use Webmozart\Assert\Assert;
 
 #[Embeddable]
-class ArticleContent
+final class ArticleContent
 {
     #[ORM\Column(name: 'content', type: 'text', length: 5000)]
     private string $value;

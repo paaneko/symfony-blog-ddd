@@ -8,7 +8,7 @@ use App\Search\Blog\Domain\ValueObject\ArticleIndexId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-class ArticleIndexIdType extends GuidType
+final class ArticleIndexIdType extends GuidType
 {
     public const string NAME = 'search_article_index_id';
 

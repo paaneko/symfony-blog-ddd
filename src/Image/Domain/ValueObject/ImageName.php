@@ -6,7 +6,7 @@ namespace App\Image\Domain\ValueObject;
 
 use Webmozart\Assert\Assert;
 
-class ImageName
+final class ImageName
 {
     private string $value;
 

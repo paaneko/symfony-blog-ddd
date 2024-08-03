@@ -6,6 +6,6 @@ namespace App\Search\Blog\Domain\ValueObject;
 
 use App\SharedKernel\Domain\ValueObject\ArticleValueObject;
 
-class ArticleIdentifier extends ArticleValueObject
+final class ArticleIdentifier extends ArticleValueObject
 {
 }

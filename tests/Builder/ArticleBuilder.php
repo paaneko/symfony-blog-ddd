@@ -18,7 +18,7 @@ use App\SharedKernel\Test\FakeUuid;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class ArticleBuilder
+final class ArticleBuilder
 {
     private ArticleId $id;
 

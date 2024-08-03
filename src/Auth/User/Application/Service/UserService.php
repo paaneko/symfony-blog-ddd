@@ -8,7 +8,7 @@ use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\Repository\UserRepositoryInterface;
 use App\Auth\User\Domain\ValueObject\UserId;
 
-class UserService
+final class UserService
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private UserRepositoryInterface $userRepository)

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\SharedKernel\Domain\ValueObject;
 
 use Webmozart\Assert\Assert;
@@ -10,7 +12,7 @@ abstract class NullableAggregateRootId
 
     public function __construct(?string $uuid)
     {
-        if ($uuid !== null) {
+        if (null !== $uuid) {
             Assert::uuid($uuid);
         }
 

@@ -7,7 +7,7 @@ namespace App\Blog\Section\Domain\ValueObject;
 use Symfony\Component\Uid\Uuid;
 use Webmozart\Assert\Assert;
 
-class SectionId
+final class SectionId
 {
     private string $value;
 

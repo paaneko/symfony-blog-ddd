@@ -14,7 +14,7 @@ use App\Blog\Article\Domain\ValueObject\CommentName;
 use Doctrine\ORM\EntityManagerInterface;
 
 /** @psalm-suppress UnusedClass */
-class Handler
+final class Handler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(

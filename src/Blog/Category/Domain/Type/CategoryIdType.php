@@ -9,7 +9,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
 /** @psalm-suppress UnusedClass */
-class CategoryIdType extends GuidType
+final class CategoryIdType extends GuidType
 {
     public const string NAME = 'category_id';
 

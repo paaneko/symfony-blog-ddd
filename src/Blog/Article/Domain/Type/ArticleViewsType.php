@@ -8,7 +8,7 @@ use App\Blog\Article\Domain\ValueObject\ArticleViews;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\IntegerType;
 
-class ArticleViewsType extends IntegerType
+final class ArticleViewsType extends IntegerType
 {
     public const string NAME = 'article_views';
 

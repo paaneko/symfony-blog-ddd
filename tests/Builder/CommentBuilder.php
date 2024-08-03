@@ -11,7 +11,7 @@ use App\Blog\Article\Domain\ValueObject\CommentId;
 use App\Blog\Article\Domain\ValueObject\CommentMessage;
 use App\Blog\Article\Domain\ValueObject\CommentName;
 
-class CommentBuilder
+final class CommentBuilder
 {
     private CommentId $id;
 

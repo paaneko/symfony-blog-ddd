@@ -6,7 +6,7 @@ namespace App\Auth\User\Domain\ValueObject;
 
 use Webmozart\Assert\Assert;
 
-class UserEmail
+final class UserEmail
 {
     protected string $value;
 

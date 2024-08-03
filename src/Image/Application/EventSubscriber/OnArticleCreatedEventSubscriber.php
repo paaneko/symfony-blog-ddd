@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /** @psalm-suppress UnusedClass */
-class OnArticleCreatedEventSubscriber implements EventSubscriberInterface
+final class OnArticleCreatedEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private MessageBusInterface $messageBus,

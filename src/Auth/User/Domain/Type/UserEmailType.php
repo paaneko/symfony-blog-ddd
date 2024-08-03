@@ -8,7 +8,7 @@ use App\Auth\User\Domain\ValueObject\UserEmail;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
-class UserEmailType extends StringType
+final class UserEmailType extends StringType
 {
     public const string NAME = 'user_email';
 

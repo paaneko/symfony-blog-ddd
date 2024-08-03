@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @psalm-suppress UnusedClass */
-class GetUserController extends AbstractController
+final class GetUserController extends AbstractController
 {
     #[Route('/user/{uuid}', methods: ['GET'])]
     public function __invoke(string $uuid, Fetcher $fetcher, ValidatorInterface $validator): Response

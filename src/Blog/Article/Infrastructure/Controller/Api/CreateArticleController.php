@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @psalm-suppress UnusedClass */
-class CreateArticleController extends AbstractController
+final class CreateArticleController extends AbstractController
 {
     public function __construct(
         private MessageBusInterface $messageBus,
@@ -48,6 +48,6 @@ class CreateArticleController extends AbstractController
 
         $this->messageBus->dispatch($createArticleCommand);
 
-        return $this->json("", Response::HTTP_CREATED);
+        return $this->json('', Response::HTTP_CREATED);
     }
 }

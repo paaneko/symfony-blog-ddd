@@ -8,7 +8,7 @@ use App\Blog\Section\Domain\ValueObject\SectionName;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
-class SectionNameType extends StringType
+final class SectionNameType extends StringType
 {
     public const string NAME = 'section_name';
 

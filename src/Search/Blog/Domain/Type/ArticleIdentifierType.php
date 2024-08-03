@@ -8,7 +8,7 @@ use App\Search\Blog\Domain\ValueObject\ArticleIdentifier;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-class ArticleIdentifierType extends GuidType
+final class ArticleIdentifierType extends GuidType
 {
     public const string NAME = 'search_article_identifier';
 

@@ -7,7 +7,7 @@ namespace App\Image\Application\UseCase\Upload;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
-readonly class Command
+final readonly class Command
 {
     #[Assert\NotBlank]
     #[Assert\File(
