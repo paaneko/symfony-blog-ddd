@@ -9,34 +9,33 @@ use App\Blog\Article\Application\UseCase\Duplicate\DuplicateArticleHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @psalm-suppress UnusedClass */
 final class DuplicateArticleController extends AbstractController
 {
-    public function __construct(private ValidatorInterface $validator)
+    public function __construct(private MessageBusInterface $commandBus)
     {
     }
 
     #[Route('/article/duplicate', methods: ['POST'])]
-    public function __invoke(Request $request, DuplicateArticleHandler $handler): Response
+    public function __invoke(Request $request): Response
     {
-        $parameters = json_decode($request->getContent(), true);
+        $parameters = json_decode(
+            $request->getContent(),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
 
         $duplicateArticleCommand = new DuplicateArticleCommand(
-            /* @phpstan-ignore-next-line */
             $parameters['articleId']
         );
 
-        $errors = $this->validator->validate($duplicateArticleCommand);
+        $this->commandBus->dispatch($duplicateArticleCommand);
 
-        if (count($errors) > 0) {
-            return $this->json($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        $handler->handle($duplicateArticleCommand);
-
-        return $this->json(null, Response::HTTP_CREATED);
+        return $this->json('', Response::HTTP_CREATED);
     }
 }

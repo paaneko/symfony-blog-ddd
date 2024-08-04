@@ -9,24 +9,31 @@ use App\Auth\User\Application\UseCase\Create\CreateUserHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @psalm-suppress UnusedClass */
 final class AddUserController extends AbstractController
 {
-    #[Route('user', methods: ['POST'])]
-    public function __invoke(Request $request, CreateUserHandler $handler, ValidatorInterface $validator): Response
+    public function __construct(private MessageBusInterface $commandBus)
     {
-        $parameters = json_decode($request->getContent(), true);
+    }
 
-        /** @phpstan-ignore-next-line */
+    #[Route('user', methods: ['POST'])]
+    public function __invoke(Request $request): Response
+    {
+        $parameters = json_decode(
+            $request->getContent(),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+
         $command = new CreateUserCommand($parameters['name'], $parameters['email']);
 
-        $validator->validate($command);
+        $this->commandBus->dispatch($command);
 
-        $responseData = $handler->handle($command);
-
-        return $this->json($responseData, Response::HTTP_CREATED);
+        return $this->json('', Response::HTTP_CREATED);
     }
 }

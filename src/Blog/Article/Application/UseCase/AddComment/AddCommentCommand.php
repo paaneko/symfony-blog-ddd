@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Application\UseCase\AddComment;
 
+use App\SharedKernel\Domain\Bus\CommandInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final readonly class AddCommentCommand
+final readonly class AddCommentCommand implements CommandInterface
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]

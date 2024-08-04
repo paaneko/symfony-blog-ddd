@@ -6,10 +6,10 @@ namespace App\Image\Application\UseCase\SetUsed;
 
 use App\Image\Application\Service\ImageService;
 use App\Image\Domain\ValueObject\ImageId;
+use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-/** @psalm-suppress UnusedClass */
 #[AsMessageHandler]
 final class SetImageUsedHandler
 {

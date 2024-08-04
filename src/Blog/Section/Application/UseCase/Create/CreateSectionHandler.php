@@ -9,7 +9,9 @@ use App\Blog\Section\Domain\Entity\Section;
 use App\Blog\Section\Domain\ValueObject\SectionId;
 use App\Blog\Section\Domain\ValueObject\SectionName;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 final class CreateSectionHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
@@ -19,7 +21,7 @@ final class CreateSectionHandler
     ) {
     }
 
-    public function handle(CreateSectionCommand $addSectionCommand): SectionId
+    public function __invoke(CreateSectionCommand $addSectionCommand): SectionId
     {
         $section = new Section(
             $sectionId = SectionId::generate(),

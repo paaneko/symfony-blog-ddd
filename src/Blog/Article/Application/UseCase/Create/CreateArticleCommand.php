@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Blog\Article\Application\UseCase\Create;
 
+use App\SharedKernel\Domain\Bus\CommandInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final readonly class CreateArticleCommand
+final readonly class CreateArticleCommand implements CommandInterface
 {
     #[Assert\NotBlank]
     #[Assert\Length(min: 15, max: 255, )]

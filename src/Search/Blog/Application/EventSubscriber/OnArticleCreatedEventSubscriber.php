@@ -7,25 +7,19 @@ namespace App\Search\Blog\Application\EventSubscriber;
 use App\Blog\Article\Domain\Event\ArticleCreatedEvent;
 use App\Search\Blog\Application\UseCase\AddIndex\AddArticleIndexCommand;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-/** @psalm-suppress UnusedClass */
-final class OnArticleCreatedEventSubscriber implements EventSubscriberInterface
+#[AsMessageHandler]
+final class OnArticleCreatedEventSubscriber
 {
-    public function __construct(private MessageBusInterface $messageBus)
+    public function __construct(private MessageBusInterface $commandBus)
     {
     }
 
-    public static function getSubscribedEvents(): array
+    public function __invoke(ArticleCreatedEvent $event): void
     {
-        return [
-            ArticleCreatedEvent::class => 'addIndex',
-        ];
-    }
-
-    public function addIndex(ArticleCreatedEvent $event): void
-    {
-        $this->messageBus->dispatch(
+        $this->commandBus->dispatch(
             new AddArticleIndexCommand(
                 $event->getId(),
                 $event->getTitle()

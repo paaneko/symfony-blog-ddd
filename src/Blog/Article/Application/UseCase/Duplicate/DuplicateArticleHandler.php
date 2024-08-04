@@ -7,8 +7,11 @@ namespace App\Blog\Article\Application\UseCase\Duplicate;
 use App\Blog\Article\Application\Service\ArticleService;
 use App\Blog\Article\Application\UseCase\Create\CreateArticleCommand as CreateArticleCommand;
 use App\Blog\Article\Domain\ValueObject\ArticleId;
+use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+#[AsMessageHandler]
 final class DuplicateArticleHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
@@ -18,7 +21,7 @@ final class DuplicateArticleHandler
     ) {
     }
 
-    public function handle(DuplicateArticleCommand $command): void
+    public function __invoke(DuplicateArticleCommand $command): void
     {
         $articleId = new ArticleId($command->articleId);
         $article = $this->articleService->find($articleId);

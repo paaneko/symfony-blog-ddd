@@ -8,10 +8,10 @@ use App\Search\Blog\Application\Service\IndexService;
 use App\Search\Blog\Domain\Entity\ArticleIndex;
 use App\Search\Blog\Domain\ValueObject\ArticleIdentifier;
 use App\Search\Blog\Domain\ValueObject\ArticleIndexId;
+use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-/** @psalm-suppress UnusedClass */
 #[AsMessageHandler]
 final class AddArticleIndexHandler
 {

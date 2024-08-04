@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Search\Blog\Application\UseCase\AddIndex;
 
-final class AddArticleIndexCommand
+use App\SharedKernel\Domain\Bus\CommandInterface;
+
+final class AddArticleIndexCommand implements CommandInterface
 {
     public string $articleIdentifier;
 

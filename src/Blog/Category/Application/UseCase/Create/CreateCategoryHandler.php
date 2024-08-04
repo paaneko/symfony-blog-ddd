@@ -9,9 +9,11 @@ use App\Blog\Category\Domain\Entity\Category;
 use App\Blog\Category\Domain\ValueObject\CategoryId;
 use App\Blog\Category\Domain\ValueObject\CategoryName;
 use App\Blog\Category\Domain\ValueObject\CategorySlug;
+use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-/** @psalm-suppress UnusedClass */
+#[AsMessageHandler]
 final class CreateCategoryHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
@@ -21,7 +23,7 @@ final class CreateCategoryHandler
     ) {
     }
 
-    public function handle(CreateCategoryCommand $addCategoryCommand): CategoryId
+    public function __invoke(CreateCategoryCommand $addCategoryCommand): CategoryId
     {
         $category = new Category(
             $categoryId = CategoryId::generate(),

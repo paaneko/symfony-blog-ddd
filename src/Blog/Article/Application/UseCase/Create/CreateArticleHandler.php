@@ -18,24 +18,25 @@ use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
 use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
 use App\Blog\Shared\Domain\Providers\Interfaces\CategoryProviderInterface;
 use App\Blog\Shared\Domain\Providers\Interfaces\SectionProviderInterface;
+use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
+use App\SharedKernel\Domain\Bus\CommandInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsMessageHandler]
 final class CreateArticleHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
+        private MessageBusInterface $eventBus,
         private EntityManagerInterface $entityManager,
         private ArticleService $articleService,
         private ArticleAuthorRepositoryInterface $articleAuthorRepository,
         private ArticleMainImageRepositoryInterface $articleMainImageRepository,
         private CategoryProviderInterface $categoryProvider,
-        private SectionProviderInterface $sectionProvider,
-        private LoggerInterface $logger
+        private SectionProviderInterface $sectionProvider
     ) {
     }
 
@@ -72,7 +73,7 @@ final class CreateArticleHandler
         }
 
         foreach ($article->pullDomainEvents() as $domainEvent) {
-            $this->eventDispatcher->dispatch($domainEvent);
+            $this->eventBus->dispatch($domainEvent);
         }
     }
 }

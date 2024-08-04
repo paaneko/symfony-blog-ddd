@@ -4,41 +4,39 @@ declare(strict_types=1);
 
 namespace App\Blog\Category\Infrastructure\Controller\Api;
 
-use App\Blog\Category\Application\UseCase\Add\Command;
-use App\Blog\Category\Application\UseCase\Add\Handler;
+use App\Blog\Category\Application\UseCase\Create\CreateCategoryCommand;
+use App\Blog\Category\Application\UseCase\Create\CreateCategoryHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @psalm-suppress UnusedClass */
 final class AddCategoryController extends AbstractController
 {
-    public function __construct(private ValidatorInterface $validator)
+    public function __construct(private MessageBusInterface $commandBus)
     {
     }
 
     #[Route('/category', methods: ['POST'])]
-    public function __invoke(Request $request, Handler $handler): Response
+    public function __invoke(Request $request): Response
     {
-        $parameters = json_decode($request->getContent(), true);
+        $parameters = json_decode(
+            $request->getContent(),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
 
-        $addCategoryCommand = new Command(
-            /* @phpstan-ignore-next-line */
+        $addCategoryCommand = new CreateCategoryCommand(
             $parameters['name'],
-            /* @phpstan-ignore-next-line */
             $parameters['slug']
         );
 
-        $errors = $this->validator->validate($addCategoryCommand);
+        $this->commandBus->dispatch($addCategoryCommand);
 
-        if (count($errors) > 0) {
-            return $this->json($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        $responseData = $handler->handle($addCategoryCommand);
-
-        return $this->json($responseData, Response::HTTP_CREATED);
+        return $this->json('', Response::HTTP_CREATED);
     }
 }

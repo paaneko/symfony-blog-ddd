@@ -9,8 +9,11 @@ use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\ValueObject\UserEmail;
 use App\Auth\User\Domain\ValueObject\UserId;
 use App\Auth\User\Domain\ValueObject\UserName;
+use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 final class CreateUserHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
@@ -18,10 +21,10 @@ final class CreateUserHandler
     {
     }
 
-    public function handle(CreateUserCommand $command): UserId
+    public function __invoke(CreateUserCommand $command): void
     {
         $user = new User(
-            $userId = UserId::generate(),
+            UserId::generate(),
             new UserName($command->name),
             new UserEmail($command->email)
         );
@@ -29,7 +32,5 @@ final class CreateUserHandler
         $this->userService->add($user);
 
         $this->entityManager->flush();
-
-        return $userId;
     }
 }

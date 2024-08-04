@@ -9,8 +9,11 @@ use App\Image\Domain\Entity\Image;
 use App\Image\Domain\Service\UploadServiceInterface;
 use App\Image\Domain\ValueObject\ImageId;
 use App\Image\Domain\ValueObject\ImageName;
+use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 final class UploadImageHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
@@ -21,7 +24,7 @@ final class UploadImageHandler
     ) {
     }
 
-    public function handle(UploadImageCommand $addImageCommand): ImageId
+    public function __invoke(UploadImageCommand $addImageCommand): ImageId
     {
         $image = new Image(
             $imageId = ImageId::generate(),

@@ -7,7 +7,10 @@ namespace App\Blog\Article\Application\UseCase\Get;
 use App\Blog\Article\Application\Service\ArticleService;
 use App\Blog\Article\Domain\Entity\Comment;
 use App\Blog\Article\Domain\ValueObject\ArticleId;
+use App\SharedKernel\Domain\Bus\FetcherInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 final class GetArticleFetcher
 {
     /** @psalm-suppress PossiblyUnusedMethod */
@@ -17,7 +20,7 @@ final class GetArticleFetcher
     }
 
     /** @phpstan-ignore-next-line */
-    public function fetch(GetArticleQuery $getArticleQuery): array
+    public function __invoke(GetArticleQuery $getArticleQuery): array
     {
         $articleId = new ArticleId($getArticleQuery->articleId);
 

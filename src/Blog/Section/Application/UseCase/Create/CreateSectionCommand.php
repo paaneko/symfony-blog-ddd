@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Blog\Section\Application\UseCase\Create;
 
-final readonly class CreateSectionCommand
+use App\SharedKernel\Domain\Bus\CommandInterface;
+
+final readonly class CreateSectionCommand implements CommandInterface
 {
     public string $name;
 

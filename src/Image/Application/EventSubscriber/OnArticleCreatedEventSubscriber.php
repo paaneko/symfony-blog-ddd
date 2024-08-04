@@ -9,25 +9,19 @@ use App\Image\Application\Service\ImageService;
 use App\Image\Application\UseCase\SetUsed\SetImageUsedCommand;
 use App\Image\Domain\ValueObject\ImageId;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-/** @psalm-suppress UnusedClass */
-final class OnArticleCreatedEventSubscriber implements EventSubscriberInterface
+#[AsMessageHandler]
+final class OnArticleCreatedEventSubscriber
 {
     public function __construct(
-        private MessageBusInterface $messageBus,
+        private MessageBusInterface $commandBus,
         private ImageService $imageService
     ) {
     }
 
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            ArticleCreatedEvent::class => 'setImageUsed',
-        ];
-    }
-
-    public function setImageUsed(ArticleCreatedEvent $event): void
+    public function __invoke(ArticleCreatedEvent $event): void
     {
         $image = $this->imageService->find(new ImageId($event->getMainImageId()));
 
@@ -39,6 +33,6 @@ final class OnArticleCreatedEventSubscriber implements EventSubscriberInterface
             $event->getMainImageId()
         );
 
-        $this->messageBus->dispatch($setUsedCommand);
+        $this->commandBus->dispatch($setUsedCommand);
     }
 }

@@ -16,8 +16,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 final class CreateArticleController extends AbstractController
 {
     public function __construct(
-        private MessageBusInterface $messageBus,
-        private ValidatorInterface $validator
+        private MessageBusInterface $commandBus,
     ) {
     }
 
@@ -40,13 +39,7 @@ final class CreateArticleController extends AbstractController
             $parameters['imageId'],
         );
 
-        $errors = $this->validator->validate($createArticleCommand);
-
-        if (count($errors) > 0) {
-            return $this->json($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        $this->messageBus->dispatch($createArticleCommand);
+        $this->commandBus->dispatch($createArticleCommand);
 
         return $this->json('', Response::HTTP_CREATED);
     }
