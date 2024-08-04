@@ -2,43 +2,39 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Article\Infrastructure\Controller\Api;
+namespace App\Blog\Section\Infrastructure\Controller\Api;
 
-use App\Blog\Article\Application\UseCase\AddComment\AddCommentCommand;
-use App\Blog\Article\Application\UseCase\AddComment\AddCommentHandler;
+use App\Blog\Section\Application\UseCase\Create\CreateSectionCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use OpenApi\Attributes as OA;
 
 /** @psalm-suppress UnusedClass */
-final class AddCommentController extends AbstractController
+final class CreateSectionController extends AbstractController
 {
     public function __construct(private MessageBusInterface $commandBus)
     {
     }
 
-    #[Route('/article/comment', name: "add_article_comment", methods: ['POST'])]
+    #[Route('/section', name: 'create_section', methods: ['POST'])]
     #[OA\Post(
-        path: "/article/comment",
-        operationId: "addArticleComment",
-        summary: "Add comment to article",
+        path: "/section",
+        operationId: "createSection",
+        summary: "Create section",
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
+                required: ['name'],
                 properties: [
-                    new OA\Property(property: "articleId", type: "string"),
                     new OA\Property(property: "name", type: "string"),
-                    new OA\Property(property: "email", type: "string"),
-                    new OA\Property(property: "message", type: "string"),
                 ],
                 type: "object"
             )
         ),
-        tags: ["Article"],
+        tags: ["Article - Section"],
         responses: [
             new OA\Response(
                 response: Response::HTTP_CREATED,
@@ -55,16 +51,7 @@ final class AddCommentController extends AbstractController
             JSON_THROW_ON_ERROR
         );
 
-        $command = new AddCommentCommand(
-            /* @phpstan-ignore-next-line */
-            $parameters['articleId'],
-            /* @phpstan-ignore-next-line */
-            $parameters['name'],
-            /* @phpstan-ignore-next-line */
-            $parameters['email'],
-            /* @phpstan-ignore-next-line */
-            $parameters['message']
-        );
+        $command = new CreateSectionCommand($parameters['name']);
 
         $this->commandBus->dispatch($command);
 

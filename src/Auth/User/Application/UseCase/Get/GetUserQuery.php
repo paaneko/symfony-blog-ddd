@@ -11,10 +11,10 @@ final readonly class GetUserQuery implements QueryInterface
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]
-    public string $id;
+    public string $userId;
 
-    public function __construct(string $id)
+    public function __construct(string $userId)
     {
-        $this->id = $id;
+        $this->userId = $userId;
     }
 }

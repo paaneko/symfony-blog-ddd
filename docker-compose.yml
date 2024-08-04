@@ -2,7 +2,7 @@ services:
   nginx:
     image: "nginx:alpine"
     ports:
-      - "8080:80"
+      - "8000:80"
     volumes:
       - ./dockerfiles/nginx/conf.d:/etc/nginx/conf.d
       - ./:/var/www/html
@@ -32,6 +32,16 @@ services:
     ports:
       - "5432:5432"
     restart: always
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./docs:/schema
+    environment:
+      - SWAGGER_JSON=/schema/swagger.json
+      - BASE_URL=/swagger
 
 volumes:
   database_data:

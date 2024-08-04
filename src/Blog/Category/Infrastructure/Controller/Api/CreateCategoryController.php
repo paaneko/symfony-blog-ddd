@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Article\Infrastructure\Controller\Api;
+namespace App\Blog\Category\Infrastructure\Controller\Api;
 
-use App\Blog\Article\Application\UseCase\AddComment\AddCommentCommand;
-use App\Blog\Article\Application\UseCase\AddComment\AddCommentHandler;
+use App\Blog\Category\Application\UseCase\Create\CreateCategoryCommand;
+use App\Blog\Category\Application\UseCase\Create\CreateCategoryHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,30 +15,29 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use OpenApi\Attributes as OA;
 
 /** @psalm-suppress UnusedClass */
-final class AddCommentController extends AbstractController
+final class CreateCategoryController extends AbstractController
 {
     public function __construct(private MessageBusInterface $commandBus)
     {
     }
 
-    #[Route('/article/comment', name: "add_article_comment", methods: ['POST'])]
+    #[Route('/category', name: "create_category", methods: ['POST'])]
     #[OA\Post(
-        path: "/article/comment",
-        operationId: "addArticleComment",
-        summary: "Add comment to article",
+        path: "/category",
+        operationId: "createCategory",
+        summary: "Create category",
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
+                required: ['name', 'slug'],
                 properties: [
-                    new OA\Property(property: "articleId", type: "string"),
                     new OA\Property(property: "name", type: "string"),
-                    new OA\Property(property: "email", type: "string"),
-                    new OA\Property(property: "message", type: "string"),
+                    new OA\Property(property: "slug", type: "string"),
                 ],
                 type: "object"
             )
         ),
-        tags: ["Article"],
+        tags: ["Article - Category"],
         responses: [
             new OA\Response(
                 response: Response::HTTP_CREATED,
@@ -55,15 +54,9 @@ final class AddCommentController extends AbstractController
             JSON_THROW_ON_ERROR
         );
 
-        $command = new AddCommentCommand(
-            /* @phpstan-ignore-next-line */
-            $parameters['articleId'],
-            /* @phpstan-ignore-next-line */
+        $command = new CreateCategoryCommand(
             $parameters['name'],
-            /* @phpstan-ignore-next-line */
-            $parameters['email'],
-            /* @phpstan-ignore-next-line */
-            $parameters['message']
+            $parameters['slug']
         );
 
         $this->commandBus->dispatch($command);

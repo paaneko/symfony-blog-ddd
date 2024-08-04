@@ -24,10 +24,10 @@ final class UploadImageHandler
     ) {
     }
 
-    public function __invoke(UploadImageCommand $addImageCommand): ImageId
+    public function __invoke(UploadImageCommand $addImageCommand): void
     {
         $image = new Image(
-            $imageId = ImageId::generate(),
+            new ImageId($addImageCommand->preparedId),
             new ImageName($addImageCommand->uploadedFile->getClientOriginalName()),
             false
         );
@@ -36,7 +36,5 @@ final class UploadImageHandler
 
         $this->imageService->add($image);
         $this->entityManager->flush();
-
-        return $imageId;
     }
 }

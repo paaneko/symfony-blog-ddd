@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use OpenApi\Attributes as OA;
 
 /** @psalm-suppress UnusedClass */
 final class DuplicateArticleController extends AbstractController
@@ -20,7 +21,28 @@ final class DuplicateArticleController extends AbstractController
     {
     }
 
-    #[Route('/article/duplicate', methods: ['POST'])]
+    #[Route('/article/duplicate', name: "article_duplicate", methods: ['POST'])]
+    #[OA\Post(
+        path: '/article/duplicate',
+        operationId: "articleDuplicate",
+        summary: 'Duplicate article',
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ['articleId'],
+                properties: [
+                    new OA\Property(property: 'articleId', type: 'string'),
+                ]
+            )
+        ),
+        tags: ["Article"],
+        responses: [
+            new OA\Response(
+                response: Response::HTTP_CREATED,
+                description: 'Successful response'
+            )
+        ]
+    )]
     public function __invoke(Request $request): Response
     {
         $parameters = json_decode(
@@ -30,12 +52,12 @@ final class DuplicateArticleController extends AbstractController
             JSON_THROW_ON_ERROR
         );
 
-        $duplicateArticleCommand = new DuplicateArticleCommand(
+        $command = new DuplicateArticleCommand(
             $parameters['articleId']
         );
 
-        $this->commandBus->dispatch($duplicateArticleCommand);
+        $this->commandBus->dispatch($command);
 
-        return $this->json('', Response::HTTP_CREATED);
+        return new Response(status: Response::HTTP_CREATED);
     }
 }

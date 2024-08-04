@@ -11,6 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 final readonly class UploadImageCommand implements CommandInterface
 {
     #[Assert\NotBlank]
+    #[Assert\Uuid]
+    public string $preparedId;
+
+    #[Assert\NotBlank]
     #[Assert\File(
         maxSize: '5M',
         mimeTypes: 'image/jpeg',
@@ -18,8 +22,12 @@ final readonly class UploadImageCommand implements CommandInterface
     )]
     public UploadedFile $uploadedFile;
 
-    public function __construct(UploadedFile $uploadedFile)
+    public function __construct(
+        string $preparedId,
+        UploadedFile $uploadedFile
+    )
     {
+        $this->preparedId = $preparedId;
         $this->uploadedFile = $uploadedFile;
     }
 }

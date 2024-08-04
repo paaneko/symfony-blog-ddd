@@ -84,6 +84,7 @@
         "phpstan/phpstan": "^1.11",
         "phpunit/phpunit": "^10.5",
         "symfony/maker-bundle": "^1.60",
-        "vimeo/psalm": "^5.25"
+        "vimeo/psalm": "^5.25",
+        "zircote/swagger-php": "^4.10"
     }
 }

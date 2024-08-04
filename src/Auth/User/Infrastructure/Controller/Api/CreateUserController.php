@@ -12,15 +12,38 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use OpenApi\Attributes as OA;
 
 /** @psalm-suppress UnusedClass */
-final class AddUserController extends AbstractController
+final class CreateUserController extends AbstractController
 {
     public function __construct(private MessageBusInterface $commandBus)
     {
     }
 
-    #[Route('user', methods: ['POST'])]
+    #[Route('user', name: "create_user", methods: ['POST'])]
+    #[OA\Post(
+        path: "/user",
+        operationId: "createUser",
+        summary: "Create user",
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                properties: [
+                    new OA\Property(property: "name", type: "string"),
+                    new OA\Property(property: "email", type: "string"),
+                ],
+                type: "object"
+            )
+        ),
+        tags: ["User"],
+        responses: [
+            new OA\Response(
+                response: Response::HTTP_CREATED,
+                description: "Successful response",
+            )
+        ]
+    )]
     public function __invoke(Request $request): Response
     {
         $parameters = json_decode(
@@ -34,6 +57,6 @@ final class AddUserController extends AbstractController
 
         $this->commandBus->dispatch($command);
 
-        return $this->json('', Response::HTTP_CREATED);
+        return new Response(status: Response::HTTP_CREATED);
     }
 }

@@ -18,10 +18,16 @@ final class GetUserFetcher
     {
     }
 
-    public function __invoke(GetUserQuery $query): User
+    public function __invoke(GetUserQuery $query): array
     {
-        $userId = new UserId($query->id);
+        $userId = new UserId($query->userId);
 
-        return $this->userService->get($userId);
+        $user = $this->userService->get($userId);
+
+        return [
+            "userId" => $user->getId()->getValue(),
+            "name" => $user->getName()->getValue(),
+            "email" => $user->getEmail()->getValue()
+        ];
     }
 }

@@ -1,6 +1,6 @@
 PHP_RUN = docker compose run --rm php
 
-init: build composer-install up migrate
+init: build composer-install up migrate swagger-generate
 
 build:
 	docker compose build
@@ -46,3 +46,6 @@ test-update:
 
 test-unit-coverage:
 	${PHP_RUN} composer test-coverage -- --testsuite=unit
+
+swagger-generate:
+	${PHP_RUN} ./vendor/bin/openapi -o docs/swagger.json src
