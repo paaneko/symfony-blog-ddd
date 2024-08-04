@@ -20,10 +20,10 @@ final class CreateArticleController extends AbstractController
     ) {
     }
 
-    #[Route('/article', name: "create_article", methods: ['POST'])]
+    #[Route('/article', name: 'create_article', methods: ['POST'])]
     #[OA\Post(
         path: '/article',
-        operationId: "createArticle",
+        operationId: 'createArticle',
         summary: 'Create a new article',
         requestBody: new OA\RequestBody(
             required: true,
@@ -43,12 +43,12 @@ final class CreateArticleController extends AbstractController
                 ]
             )
         ),
-        tags: ["Article"],
+        tags: ['Article'],
         responses: [
             new OA\Response(
                 response: Response::HTTP_CREATED,
                 description: 'Successful response'
-            )
+            ),
         ]
     )]
     public function __invoke(Request $request): Response

@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Auth\User\Infrastructure\Controller\Api;
 
 use App\Auth\User\Application\UseCase\Create\CreateUserCommand;
-use App\Auth\User\Application\UseCase\Create\CreateUserHandler;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use OpenApi\Attributes as OA;
 
 /** @psalm-suppress UnusedClass */
 final class CreateUserController extends AbstractController
@@ -21,27 +19,27 @@ final class CreateUserController extends AbstractController
     {
     }
 
-    #[Route('user', name: "create_user", methods: ['POST'])]
+    #[Route('user', name: 'create_user', methods: ['POST'])]
     #[OA\Post(
-        path: "/user",
-        operationId: "createUser",
-        summary: "Create user",
+        path: '/user',
+        operationId: 'createUser',
+        summary: 'Create user',
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
                 properties: [
-                    new OA\Property(property: "name", type: "string"),
-                    new OA\Property(property: "email", type: "string"),
+                    new OA\Property(property: 'name', type: 'string'),
+                    new OA\Property(property: 'email', type: 'string'),
                 ],
-                type: "object"
+                type: 'object'
             )
         ),
-        tags: ["User"],
+        tags: ['User'],
         responses: [
             new OA\Response(
                 response: Response::HTTP_CREATED,
-                description: "Successful response",
-            )
+                description: 'Successful response',
+            ),
         ]
     )]
     public function __invoke(Request $request): Response

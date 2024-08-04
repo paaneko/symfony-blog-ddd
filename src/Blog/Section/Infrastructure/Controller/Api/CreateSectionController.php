@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Blog\Section\Infrastructure\Controller\Api;
 
 use App\Blog\Section\Application\UseCase\Create\CreateSectionCommand;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use OpenApi\Attributes as OA;
 
 /** @psalm-suppress UnusedClass */
 final class CreateSectionController extends AbstractController
@@ -21,25 +21,25 @@ final class CreateSectionController extends AbstractController
 
     #[Route('/section', name: 'create_section', methods: ['POST'])]
     #[OA\Post(
-        path: "/section",
-        operationId: "createSection",
-        summary: "Create section",
+        path: '/section',
+        operationId: 'createSection',
+        summary: 'Create section',
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
                 required: ['name'],
                 properties: [
-                    new OA\Property(property: "name", type: "string"),
+                    new OA\Property(property: 'name', type: 'string'),
                 ],
-                type: "object"
+                type: 'object'
             )
         ),
-        tags: ["Article - Section"],
+        tags: ['Article - Section'],
         responses: [
             new OA\Response(
                 response: Response::HTTP_CREATED,
-                description: "Successful response",
-            )
+                description: 'Successful response',
+            ),
         ]
     )]
     public function __invoke(Request $request): Response

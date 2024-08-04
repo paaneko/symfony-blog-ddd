@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Auth\User\Application\UseCase\Get;
 
 use App\Auth\User\Application\Service\UserService;
-use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\ValueObject\UserId;
-use App\SharedKernel\Domain\Bus\FetcherInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
@@ -25,9 +23,9 @@ final class GetUserFetcher
         $user = $this->userService->get($userId);
 
         return [
-            "userId" => $user->getId()->getValue(),
-            "name" => $user->getName()->getValue(),
-            "email" => $user->getEmail()->getValue()
+            'userId' => $user->getId()->getValue(),
+            'name' => $user->getName()->getValue(),
+            'email' => $user->getEmail()->getValue(),
         ];
     }
 }

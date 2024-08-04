@@ -9,7 +9,6 @@ use App\Image\Domain\Entity\Image;
 use App\Image\Domain\Service\UploadServiceInterface;
 use App\Image\Domain\ValueObject\ImageId;
 use App\Image\Domain\ValueObject\ImageName;
-use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

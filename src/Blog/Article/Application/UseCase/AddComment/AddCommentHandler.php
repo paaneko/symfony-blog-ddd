@@ -11,7 +11,6 @@ use App\Blog\Article\Domain\ValueObject\CommentEmail;
 use App\Blog\Article\Domain\ValueObject\CommentId;
 use App\Blog\Article\Domain\ValueObject\CommentMessage;
 use App\Blog\Article\Domain\ValueObject\CommentName;
-use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

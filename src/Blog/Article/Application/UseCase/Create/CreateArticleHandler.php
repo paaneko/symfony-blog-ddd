@@ -18,10 +18,7 @@ use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
 use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
 use App\Blog\Shared\Domain\Providers\Interfaces\CategoryProviderInterface;
 use App\Blog\Shared\Domain\Providers\Interfaces\SectionProviderInterface;
-use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
-use App\SharedKernel\Domain\Bus\CommandInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 

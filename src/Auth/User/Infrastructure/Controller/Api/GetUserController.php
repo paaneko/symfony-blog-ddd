@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\Auth\User\Infrastructure\Controller\Api;
 
-use App\Auth\User\Application\UseCase\Get\GetUserFetcher;
 use App\Auth\User\Application\UseCase\Get\GetUserQuery;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use OpenApi\Attributes as OA;
 
 /** @psalm-suppress UnusedClass */
 final class GetUserController extends AbstractController
@@ -24,16 +22,16 @@ final class GetUserController extends AbstractController
     #[Route('/user/{uuid}', name: 'get_user', methods: ['GET'])]
     #[OA\Get(
         path: '/user/{uuid}',
-        operationId: "getUser",
+        operationId: 'getUser',
         summary: 'Get an article by UUID',
-        tags: ["User"],
+        tags: ['User'],
         parameters: [
             new OA\Parameter(
-                name: "uuid",
-                description: "User UUID",
-                in: "path",
+                name: 'uuid',
+                description: 'User UUID',
+                in: 'path',
                 required: true,
-                schema: new OA\Schema(type: "string", default: '123e4567-e89b-12d3-a456-426614174000')
+                schema: new OA\Schema(type: 'string', default: '123e4567-e89b-12d3-a456-426614174000')
             ),
         ],
         responses: [
@@ -41,32 +39,32 @@ final class GetUserController extends AbstractController
                 response: Response::HTTP_OK,
                 description: 'Successful response',
                 content: new OA\MediaType(
-                    mediaType: "application/json",
+                    mediaType: 'application/json',
                     schema: new OA\Schema(
                         properties: [
                             new OA\Property(
-                                property: "userId",
-                                description: "Article UUID",
-                                type: "string",
-                                example: "123e4567-e89b-12d3-a456-426614174000"
+                                property: 'userId',
+                                description: 'Article UUID',
+                                type: 'string',
+                                example: '123e4567-e89b-12d3-a456-426614174000'
                             ),
                             new OA\Property(
-                                property: "name",
-                                description: "User name",
-                                type: "string",
-                                example: "Lorem Ipsum"
+                                property: 'name',
+                                description: 'User name',
+                                type: 'string',
+                                example: 'Lorem Ipsum'
                             ),
                             new OA\Property(
-                                property: "email",
-                                description: "Article comments",
-                                type: "string",
-                                example: "example@email.com"
+                                property: 'email',
+                                description: 'Article comments',
+                                type: 'string',
+                                example: 'example@email.com'
                             ),
                         ],
-                        type: "object"
+                        type: 'object'
                     )
                 )
-            )
+            ),
         ]
     )]
     public function __invoke(string $uuid): Response

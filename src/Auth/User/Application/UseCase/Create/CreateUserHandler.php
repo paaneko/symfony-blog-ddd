@@ -9,7 +9,6 @@ use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\ValueObject\UserEmail;
 use App\Auth\User\Domain\ValueObject\UserId;
 use App\Auth\User\Domain\ValueObject\UserName;
-use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

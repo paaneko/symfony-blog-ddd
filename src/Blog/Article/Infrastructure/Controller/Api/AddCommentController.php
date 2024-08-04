@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Blog\Article\Infrastructure\Controller\Api;
 
 use App\Blog\Article\Application\UseCase\AddComment\AddCommentCommand;
-use App\Blog\Article\Application\UseCase\AddComment\AddCommentHandler;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use OpenApi\Attributes as OA;
 
 /** @psalm-suppress UnusedClass */
 final class AddCommentController extends AbstractController
@@ -21,29 +19,29 @@ final class AddCommentController extends AbstractController
     {
     }
 
-    #[Route('/article/comment', name: "add_article_comment", methods: ['POST'])]
+    #[Route('/article/comment', name: 'add_article_comment', methods: ['POST'])]
     #[OA\Post(
-        path: "/article/comment",
-        operationId: "addArticleComment",
-        summary: "Add comment to article",
+        path: '/article/comment',
+        operationId: 'addArticleComment',
+        summary: 'Add comment to article',
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
                 properties: [
-                    new OA\Property(property: "articleId", type: "string"),
-                    new OA\Property(property: "name", type: "string"),
-                    new OA\Property(property: "email", type: "string"),
-                    new OA\Property(property: "message", type: "string"),
+                    new OA\Property(property: 'articleId', type: 'string'),
+                    new OA\Property(property: 'name', type: 'string'),
+                    new OA\Property(property: 'email', type: 'string'),
+                    new OA\Property(property: 'message', type: 'string'),
                 ],
-                type: "object"
+                type: 'object'
             )
         ),
-        tags: ["Article"],
+        tags: ['Article'],
         responses: [
             new OA\Response(
                 response: Response::HTTP_CREATED,
-                description: "Successful response",
-            )
+                description: 'Successful response',
+            ),
         ]
     )]
     public function __invoke(Request $request): Response

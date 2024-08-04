@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Blog\Article\Application\UseCase\Duplicate;
 
 use App\Blog\Article\Application\Service\ArticleService;
-use App\Blog\Article\Application\UseCase\Create\CreateArticleCommand as CreateArticleCommand;
+use App\Blog\Article\Application\UseCase\Create\CreateArticleCommand;
 use App\Blog\Article\Domain\ValueObject\ArticleId;
-use App\SharedKernel\Domain\Bus\CommandHandlerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 

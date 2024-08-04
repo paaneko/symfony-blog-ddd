@@ -25,8 +25,7 @@ final readonly class UploadImageCommand implements CommandInterface
     public function __construct(
         string $preparedId,
         UploadedFile $uploadedFile
-    )
-    {
+    ) {
         $this->preparedId = $preparedId;
         $this->uploadedFile = $uploadedFile;
     }

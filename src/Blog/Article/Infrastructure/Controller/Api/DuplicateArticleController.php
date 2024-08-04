@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Blog\Article\Infrastructure\Controller\Api;
 
 use App\Blog\Article\Application\UseCase\Duplicate\DuplicateArticleCommand;
-use App\Blog\Article\Application\UseCase\Duplicate\DuplicateArticleHandler;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use OpenApi\Attributes as OA;
 
 /** @psalm-suppress UnusedClass */
 final class DuplicateArticleController extends AbstractController
@@ -21,10 +19,10 @@ final class DuplicateArticleController extends AbstractController
     {
     }
 
-    #[Route('/article/duplicate', name: "article_duplicate", methods: ['POST'])]
+    #[Route('/article/duplicate', name: 'article_duplicate', methods: ['POST'])]
     #[OA\Post(
         path: '/article/duplicate',
-        operationId: "articleDuplicate",
+        operationId: 'articleDuplicate',
         summary: 'Duplicate article',
         requestBody: new OA\RequestBody(
             required: true,
@@ -35,12 +33,12 @@ final class DuplicateArticleController extends AbstractController
                 ]
             )
         ),
-        tags: ["Article"],
+        tags: ['Article'],
         responses: [
             new OA\Response(
                 response: Response::HTTP_CREATED,
                 description: 'Successful response'
-            )
+            ),
         ]
     )]
     public function __invoke(Request $request): Response
