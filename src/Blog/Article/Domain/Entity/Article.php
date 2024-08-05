@@ -71,7 +71,7 @@ class Article extends AggregateRoot
         ArticleAuthorId $authorId,
         ArticleMainImageId $mainImageId,
         ArticleViews $views,
-        \DateTimeInterface $dateTime
+        \DateTimeImmutable $dateTime
     ) {
         $this->id = $id;
         $this->title = $title;
@@ -86,8 +86,8 @@ class Article extends AggregateRoot
 
         $this->recordDomainEvent(new ArticleCreatedEvent(
             $this->id->getValue(),
-            $title->getValue(),
-            $mainImageId->getValue(),
+            $this->title->getValue(),
+            $this->mainImageId->getValue(),
         ));
     }
 
