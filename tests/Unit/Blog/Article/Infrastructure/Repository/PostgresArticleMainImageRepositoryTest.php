@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Blog\Article\Infrastructure\Repository;
 
+use App\Blog\Article\Application\Dto\ArticleMainImageDto;
 use App\Blog\Article\Application\Transformer\ArticleMainImageTransformer;
 use App\Blog\Article\Domain\Exception\ArticleMainImageNotFoundException;
 use App\Blog\Article\Infrastructure\Repository\PostgresArticleMainImageRepository;
@@ -15,6 +16,7 @@ use App\Tests\UnitTestCase;
 
 final class PostgresArticleMainImageRepositoryTest extends UnitTestCase
 {
+    private ArticleMainImageDto $mainImageDto;
     private ImageService $imageService;
     private ArticleMainImageTransformer $articleMainImageTransformer;
     private PostgresArticleMainImageRepository $postgresArticleMainImageRepository;
