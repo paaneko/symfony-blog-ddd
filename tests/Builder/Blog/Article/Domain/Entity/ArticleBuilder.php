@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Builder;
+namespace App\Tests\Builder\Blog\Article\Domain\Entity;
 
 use App\Blog\Article\Domain\Entity\Article;
 use App\Blog\Article\Domain\Entity\Comment;
@@ -14,9 +14,10 @@ use App\Blog\Article\Domain\ValueObject\ArticleTitle;
 use App\Blog\Article\Domain\ValueObject\ArticleViews;
 use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
 use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
-use App\SharedKernel\Test\FakeUuid;
+use App\Tests\Builder\UuidFactoryBuilder;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Faker\Factory;
 
 final class ArticleBuilder
 {
@@ -43,13 +44,16 @@ final class ArticleBuilder
 
     public function __construct()
     {
+        $uuidFactory = (new UuidFactoryBuilder())->build();
+        $faker = Factory::create();
+
         $this->id = ArticleId::generate();
-        $this->title = new ArticleTitle('Lorem ipsum dolor sit amet');
-        $this->content = new ArticleContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in.');
-        $this->categoryId = new CategoryId(FakeUuid::generate());
-        $this->sectionId = new NullableSectionId(FakeUuid::generate());
-        $this->authorId = new ArticleAuthorId(FakeUuid::generate());
-        $this->mainImageId = new ArticleMainImageId(FakeUuid::generate());
+        $this->title = new ArticleTitle($faker->realTextBetween(15, 50));
+        $this->content = new ArticleContent($faker->realTextBetween(250, 300));
+        $this->categoryId = new CategoryId((string) $uuidFactory->create());
+        $this->sectionId = new NullableSectionId((string) $uuidFactory->create());
+        $this->authorId = new ArticleAuthorId((string) $uuidFactory->create());
+        $this->mainImageId = new ArticleMainImageId((string) $uuidFactory->create());
         $this->views = ArticleViews::init();
         $this->dateTime = new \DateTimeImmutable();
         $this->comments = new ArrayCollection();

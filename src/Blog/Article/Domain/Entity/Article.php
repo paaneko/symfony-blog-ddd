@@ -60,7 +60,7 @@ class Article extends AggregateRoot
     private ArticleViews $views;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private \DateTimeInterface $dateTime;
+    private \DateTimeImmutable $dateTime;
 
     public function __construct(
         ArticleId $id,
@@ -152,7 +152,7 @@ class Article extends AggregateRoot
     }
 
     /** @psalm-suppress UnusedMethod */
-    public function getDateTime(): \DateTimeInterface
+    public function getDateTime(): \DateTimeImmutable
     {
         return $this->dateTime;
     }

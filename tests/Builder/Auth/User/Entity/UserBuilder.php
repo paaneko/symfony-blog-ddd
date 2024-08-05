@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Builder;
+namespace App\Tests\Builder\Auth\User\Entity;
 
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\ValueObject\UserEmail;

@@ -19,8 +19,10 @@ use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
 use App\Blog\Shared\Domain\Providers\Interfaces\CategoryProviderInterface;
 use App\Blog\Shared\Domain\Providers\Interfaces\SectionProviderInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Uid\Factory\UuidFactory;
 
 #[AsMessageHandler]
 final class CreateArticleHandler
@@ -33,7 +35,9 @@ final class CreateArticleHandler
         private ArticleAuthorRepositoryInterface $articleAuthorRepository,
         private ArticleMainImageRepositoryInterface $articleMainImageRepository,
         private CategoryProviderInterface $categoryProvider,
-        private SectionProviderInterface $sectionProvider
+        private SectionProviderInterface $sectionProvider,
+        private UuidFactory $uuidFactory,
+        private ClockInterface $clock
     ) {
     }
 
@@ -47,7 +51,7 @@ final class CreateArticleHandler
             ? null : $this->sectionProvider->getById($createArticleCommand->sectionId);
 
         $article = new Article(
-            ArticleId::generate(),
+            new ArticleId((string) $this->uuidFactory->create()),
             new ArticleTitle($createArticleCommand->title),
             new ArticleContent($createArticleCommand->content),
             new CategoryId($categoryDto->id),
@@ -55,7 +59,7 @@ final class CreateArticleHandler
             new ArticleAuthorId($articleAuthorDto->id),
             new ArticleMainImageId($articleMainImageDto->id),
             ArticleViews::init(),
-            new \DateTimeImmutable()
+            $this->clock->now(),
         );
 
         try {
