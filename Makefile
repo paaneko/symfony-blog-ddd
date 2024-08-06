@@ -11,6 +11,12 @@ composer-install:
 composer-update:
 	${PHP_RUN} composer update
 
+require:
+	${PHP_RUN} composer require
+
+require-dev:
+	${PHP_RUN} composer require --dev
+
 up:
 	docker compose up -d
 
@@ -39,13 +45,13 @@ test-all:
 	${PHP_RUN} composer test
 
 test-unit:
-	${PHP_RUN} composer test -- --testsuite=unit
-
-test-update:
-	${PHP_RUN} composer test-update -- --testsuite=unit
+	${PHP_RUN} composer test --testsuite=Unit
 
 test-unit-coverage:
-	${PHP_RUN} composer test-coverage -- --testsuite=unit
+	${PHP_RUN} composer test-coverage --testsuite=unit
+
+infection:
+	${PHP_RUN} ./vendor/bin/infection --test-framework-options="--testsuite=Unit" --show-mutations -j8
 
 swagger-generate:
 	${PHP_RUN} ./vendor/bin/openapi -o docs/swagger.json src

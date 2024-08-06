@@ -14,10 +14,10 @@
         <env name="APP_DEBUG" value="1" force="true"/>
     </php>
     <testsuites>
-        <testsuite name="unit">
+        <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
-        <testsuite name="integration">
+        <testsuite name="Integration">
         </testsuite>
     </testsuites>
     <coverage/>
