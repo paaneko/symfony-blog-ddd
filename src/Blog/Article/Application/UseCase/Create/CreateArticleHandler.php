@@ -19,7 +19,8 @@ use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
 use App\Blog\Shared\Domain\Providers\Interfaces\CategoryProviderInterface;
 use App\Blog\Shared\Domain\Providers\Interfaces\SectionProviderInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Clock\ClockInterface;
+use Psr\Clock\ClockInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Uid\Factory\UuidFactory;
@@ -37,7 +38,8 @@ final class CreateArticleHandler
         private CategoryProviderInterface $categoryProvider,
         private SectionProviderInterface $sectionProvider,
         private UuidFactory $uuidFactory,
-        private ClockInterface $clock
+        private ClockInterface $clock,
+        private LoggerInterface $logger
     ) {
     }
 
@@ -67,9 +69,14 @@ final class CreateArticleHandler
             $this->articleService->add($article);
             $this->entityManager->flush();
             $this->entityManager->commit();
+            $this->logger->info('Article created successfully', ['articleId' => $article]);
         } catch (\Exception $exception) {
             $this->entityManager->rollback();
-            // Add logger
+            $this->logger->error('Failed to create article', [
+                'article' => $article,
+                'command' => $createArticleCommand,
+                'exception' => $exception,
+            ]);
             throw $exception;
         }
 
