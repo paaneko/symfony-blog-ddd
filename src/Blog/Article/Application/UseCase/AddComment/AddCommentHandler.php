@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace App\Blog\Article\Application\UseCase\AddComment;
 
 use App\Blog\Article\Application\Service\ArticleService;
-use App\Blog\Article\Domain\Entity\Comment;
 use App\Blog\Article\Domain\Exception\ArticleNotFoundException;
 use App\Blog\Article\Domain\ValueObject\ArticleId;
-use App\Blog\Article\Domain\ValueObject\CommentEmail;
-use App\Blog\Article\Domain\ValueObject\CommentId;
-use App\Blog\Article\Domain\ValueObject\CommentMessage;
-use App\Blog\Article\Domain\ValueObject\CommentName;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Clock\ClockInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Uid\Factory\UuidFactory;
 
 #[AsMessageHandler]
 final class AddCommentHandler
@@ -24,6 +20,7 @@ final class AddCommentHandler
     public function __construct(
         private ArticleService $articleService,
         private EntityManagerInterface $entityManager,
+        private UuidFactory $uuidFactory,
         private ClockInterface $clock,
         private LoggerInterface $logger
     ) {
@@ -37,11 +34,11 @@ final class AddCommentHandler
             throw new ArticleNotFoundException();
         }
 
-        $comment = new Comment(
-            CommentId::generate(),
-            new CommentName($addCommentCommand->name),
-            new CommentEmail($addCommentCommand->email),
-            new CommentMessage($addCommentCommand->message),
+        $comment = $article->createComment(
+            (string) $this->uuidFactory->create(),
+            $addCommentCommand->name,
+            $addCommentCommand->email,
+            $addCommentCommand->message,
             $this->clock->now()
         );
 

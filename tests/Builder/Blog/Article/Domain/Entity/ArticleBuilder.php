@@ -47,7 +47,7 @@ final class ArticleBuilder
         $uuidFactory = (new UuidFactoryBuilder())->build();
         $faker = Factory::create();
 
-        $this->id = ArticleId::generate();
+        $this->id = new ArticleId((string) $uuidFactory->create());
         $this->title = new ArticleTitle($faker->realTextBetween(15, 50));
         $this->content = new ArticleContent($faker->realTextBetween(250, 300));
         $this->categoryId = new CategoryId((string) $uuidFactory->create());
@@ -80,7 +80,9 @@ final class ArticleBuilder
     public function withComment(): self
     {
         $clone = clone $this;
-        $clone->comments[] = (new CommentBuilder())->build();
+        $clone->comments[] = (new CommentBuilder())
+            ->withArticleId($this->id)
+            ->build();
 
         return $clone;
     }

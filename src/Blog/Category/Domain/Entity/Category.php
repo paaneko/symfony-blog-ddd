@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table('categories')]
-class Category extends AggregateRoot
+final class Category extends AggregateRoot
 {
     #[ORM\Id]
     #[ORM\Column(type: CategoryIdType::NAME)]

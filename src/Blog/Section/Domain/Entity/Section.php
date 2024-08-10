@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table('sections')]
-class Section extends AggregateRoot
+final class Section extends AggregateRoot
 {
     #[ORM\Id]
     #[ORM\Column(type: SectionIdType::NAME, length: 255)]

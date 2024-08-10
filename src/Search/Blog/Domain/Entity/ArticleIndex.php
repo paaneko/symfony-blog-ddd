@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table('search_blog_index')]
-class ArticleIndex extends AggregateRoot
+final class ArticleIndex extends AggregateRoot
 {
     #[ORM\Id]
     #[ORM\Column(type: ArticleIndexIdType::NAME, length: 255)]

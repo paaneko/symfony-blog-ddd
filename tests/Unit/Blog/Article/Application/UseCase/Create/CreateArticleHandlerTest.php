@@ -24,6 +24,7 @@ use App\Tests\Builder\Blog\Shared\Application\CategoryDtoBuilder;
 use App\Tests\Builder\Blog\Shared\Application\SectionDtoBuilder;
 use App\Tests\UnitTestCase;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Uid\Factory\UuidFactory;
@@ -41,6 +42,8 @@ final class CreateArticleHandlerTest extends UnitTestCase
     private MessageBusInterface $eventBus;
     private UuidFactory $uuidFactory;
     private ClockInterface $clock;
+    private LoggerInterface $logger;
+
     private ArticleAuthorDto $articleAuthorDto;
     private ArticleMainImageDto $articleMainImageDto;
     private CategoryDto $categoryDto;
@@ -63,6 +66,7 @@ final class CreateArticleHandlerTest extends UnitTestCase
         $this->eventBus = $this->createMock(MessageBusInterface::class);
         $this->uuidFactory = $this->createStub(UuidFactory::class);
         $this->clock = $this->createStub(ClockInterface::class);
+        $this->logger = $this->createStub(LoggerInterface::class);
 
         $this->articleAuthorDto = (new ArticleAuthorDtoBuilder())->fromArticle($this->fakeArticle)->build();
         $this->articleMainImageDto = (new ArticleMainImageDtoBuilder())->fromArticle($this->fakeArticle)->build();
@@ -87,7 +91,8 @@ final class CreateArticleHandlerTest extends UnitTestCase
             $this->categoryProvider,
             $this->sectionProvider,
             $this->uuidFactory,
-            $this->clock
+            $this->clock,
+            $this->logger
         );
     }
 
@@ -101,15 +106,15 @@ final class CreateArticleHandlerTest extends UnitTestCase
         $this->articleMainImageRepository->method('getById')->willReturn($this->articleMainImageDto);
         $this->categoryProvider->method('getById')->willReturn($this->categoryDto);
         $this->sectionProvider->method('getById')->willReturn($this->sectionDto);
-        $this->entityManager->expects(self::once())->method('beginTransaction');
-        $this->articleService->expects(self::once())->method('add')
+        $this->entityManager->expects($this->once())->method('beginTransaction');
+        $this->articleService->expects($this->once())->method('add')
             ->with($this->equalTo($this->fakeArticle));
-        $this->entityManager->expects(self::once())->method('flush');
-        $this->entityManager->expects(self::once())->method('flush');
-        $this->entityManager->expects(self::once())->method('commit');
-        $this->entityManager->expects(self::never())->method('rollback');
+        $this->entityManager->expects($this->once())->method('flush');
+        $this->entityManager->expects($this->once())->method('flush');
+        $this->entityManager->expects($this->once())->method('commit');
+        $this->entityManager->expects($this->never())->method('rollback');
 
-        $this->eventBus->expects(self::once())->method('dispatch')
+        $this->eventBus->expects($this->once())->method('dispatch')
             ->with($this->equalTo($articleCreatedEvent));
 
         $this->createArticleHandler->__invoke($this->createArticleCommand);
@@ -127,11 +132,11 @@ final class CreateArticleHandlerTest extends UnitTestCase
             ->with($this->equalTo($this->fakeArticle))
             ->willThrowException(new \Exception('Exception while adding article'));
 
-        $this->entityManager->expects(self::once())->method('beginTransaction');
-        $this->entityManager->expects(self::never())->method('flush');
-        $this->entityManager->expects(self::never())->method('commit');
-        $this->entityManager->expects(self::once())->method('rollback');
-        $this->eventBus->expects(self::never())->method('dispatch');
+        $this->entityManager->expects($this->once())->method('beginTransaction');
+        $this->entityManager->expects($this->never())->method('flush');
+        $this->entityManager->expects($this->never())->method('commit');
+        $this->entityManager->expects($this->once())->method('rollback');
+        $this->eventBus->expects($this->never())->method('dispatch');
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Exception while adding article');

@@ -20,7 +20,7 @@ final class UuidFactoryBuilder
     public function version(Uuid $version): self
     {
         $clone = clone $this;
-        $clone->uuidVersion = $version;
+        $clone->uuidVersion = $version::class;
 
         return $clone;
     }

@@ -19,6 +19,10 @@ use App\Blog\Article\Domain\ValueObject\ArticleId;
 use App\Blog\Article\Domain\ValueObject\ArticleMainImageId;
 use App\Blog\Article\Domain\ValueObject\ArticleTitle;
 use App\Blog\Article\Domain\ValueObject\ArticleViews;
+use App\Blog\Article\Domain\ValueObject\CommentEmail;
+use App\Blog\Article\Domain\ValueObject\CommentId;
+use App\Blog\Article\Domain\ValueObject\CommentMessage;
+use App\Blog\Article\Domain\ValueObject\CommentName;
 use App\Blog\Shared\Domain\Entity\ValueObject\CategoryId;
 use App\Blog\Shared\Domain\Entity\ValueObject\NullableSectionId;
 use App\SharedKernel\Domain\Aggregate\AggregateRoot;
@@ -28,7 +32,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'articles')]
-class Article extends AggregateRoot
+final class Article extends AggregateRoot
 {
     #[ORM\Id]
     #[ORM\Column(type: ArticleIdType::NAME, length: 255)]
@@ -91,9 +95,26 @@ class Article extends AggregateRoot
         ));
     }
 
+    public function createComment(
+        string $commentId,
+        string $commentName,
+        string $commentEmail,
+        string $commentMessage,
+        \DateTimeImmutable $createdAt
+    ): Comment
+    {
+        return new Comment(
+            new CommentId($commentId),
+            $this->id,
+            new CommentName($commentName),
+            new CommentEmail($commentEmail),
+            new CommentMessage($commentMessage),
+            $createdAt
+        );
+    }
+
     public function addComment(Comment $comment): void
     {
-        $comment->setArticle($this);
         $this->comments[] = $comment;
     }
 

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'images')]
-class Image extends AggregateRoot
+final class Image extends AggregateRoot
 {
     #[ORM\Id]
     #[ORM\Column(type: ImageIdType::NAME, length: 255)]

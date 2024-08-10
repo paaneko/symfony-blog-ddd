@@ -6,7 +6,7 @@ namespace App\SharedKernel\Domain\ValueObject;
 
 use Webmozart\Assert\Assert;
 
-abstract class AggregateRootId
+abstract class AggregateRootId implements UuidInterface
 {
     protected string $value;
 

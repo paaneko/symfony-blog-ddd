@@ -6,7 +6,7 @@ namespace App\SharedKernel\Domain\ValueObject;
 
 use Webmozart\Assert\Assert;
 
-abstract class NullableAggregateRootId
+abstract class NullableAggregateRootId implements NullableUuidInterface
 {
     protected ?string $value;
 
