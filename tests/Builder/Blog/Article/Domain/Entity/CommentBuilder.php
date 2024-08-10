@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Builder\Blog\Article\Domain\Entity;
 
-use App\Blog\Article\Domain\Entity\Article;
 use App\Blog\Article\Domain\Entity\Comment;
 use App\Blog\Article\Domain\ValueObject\ArticleId;
 use App\Blog\Article\Domain\ValueObject\CommentEmail;
@@ -29,7 +28,7 @@ final class CommentBuilder
     private \DateTimeImmutable $createdAt;
 
     public function __construct()
-     {
+    {
         $uuidFactory = (new UuidFactoryBuilder())->build();
         $faker = Factory::create();
 
@@ -45,6 +44,7 @@ final class CommentBuilder
     {
         $clone = clone $this;
         $clone->articleId = $articleId;
+
         return $clone;
     }
 

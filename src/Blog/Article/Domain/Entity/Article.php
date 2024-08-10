@@ -101,8 +101,7 @@ final class Article extends AggregateRoot
         string $commentEmail,
         string $commentMessage,
         \DateTimeImmutable $createdAt
-    ): Comment
-    {
+    ): Comment {
         return new Comment(
             new CommentId($commentId),
             $this->id,
