@@ -1,0 +1,22 @@
+# Auth
+controllerUser:
+    resource: ../src/Auth/User/Infrastructure/Controller/
+    type: attribute
+
+# Image
+controllersImage:
+    resource: ../src/Image/Infrastructure/Controller/
+    type: attribute
+
+# Blog
+controllersArticle:
+    resource: ../src/Blog/Article/Infrastructure/Controller/
+    type: attribute
+
+controllersCategory:
+    resource: ../src/Blog/Category/Infrastructure/Controller/
+    type: attribute
+
+controllerSection:
+    resource: ../src/Blog/Section/Infrastructure/Controller/
+    type: attribute

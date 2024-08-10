@@ -1,0 +1,47 @@
+services:
+  nginx:
+    image: "nginx:alpine"
+    ports:
+      - "8000:80"
+    volumes:
+      - ./dockerfiles/nginx/conf.d:/etc/nginx/conf.d
+      - ./:/var/www/html
+    depends_on:
+      - php
+      - postgres
+
+  php:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.Dockerfile
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - PHP_IDE_CONFIG=serverName=API
+    volumes:
+      - ./:/var/www/html
+
+  postgres:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+    restart: always
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./docs:/schema
+    environment:
+      - SWAGGER_JSON=/schema/swagger.json
+      - BASE_URL=/swagger
+
+volumes:
+  database_data:

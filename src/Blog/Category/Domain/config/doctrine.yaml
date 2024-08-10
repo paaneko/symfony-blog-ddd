@@ -1,0 +1,6 @@
+doctrine:
+  dbal:
+    types:
+      category_id: App\Blog\Category\Domain\Type\CategoryIdType
+      category_name: App\Blog\Category\Domain\Type\CategoryNameType
+      category_slug: App\Blog\Category\Domain\Type\CategorySlugType

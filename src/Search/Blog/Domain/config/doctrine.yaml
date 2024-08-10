@@ -1,0 +1,5 @@
+doctrine:
+  dbal:
+    types:
+      search_article_index_id: App\Search\Blog\Domain\Type\ArticleIndexIdType
+      search_article_identifier: App\Search\Blog\Domain\Type\ArticleIdentifierType

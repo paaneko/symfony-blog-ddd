@@ -1,0 +1,88 @@
+imports:
+    - { resource: ../../src/Auth/User/Domain/config/doctrine.yaml }
+    - { resource: ../../src/Blog/Article/Domain/config/doctrine.yaml }
+    - { resource: ../../src/Blog/Category/Domain/config/doctrine.yaml }
+    - { resource: ../../src/Blog/Section/Domain/config/doctrine.yaml }
+    - { resource: ../../src/Image/Domain/config/doctrine.yaml }
+    - { resource: ../../src/Search/Blog/Domain/config/doctrine.yaml }
+
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+
+        profiling_collect_backtrace: '%kernel.debug%'
+        use_savepoints: true
+
+    orm:
+        auto_generate_proxy_classes: true
+        enable_lazy_ghost_objects: true
+        report_fields_where_declared: true
+        validate_xml_mapping: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            Article:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Blog/Article/Domain'
+                prefix: 'App\Blog\Article\Domain'
+                alias: Article
+            Category:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Blog/Category/Domain'
+                prefix: 'App\Blog\Category\Domain'
+                alias: Category
+            Section:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Blog/Section/Domain'
+                prefix: 'App\Blog\Section\Domain'
+                alias: Section
+            Image:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Image/Domain'
+                prefix: 'App\Image\Domain'
+                alias: Image
+            User:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Auth/User/Domain'
+                prefix: 'App\Auth\User\Domain'
+                alias: User
+            Index:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Search/Blog/Domain'
+                prefix: 'App\Search\Blog\Domain'
+                alias: Index
+
+        controller_resolver:
+            auto_mapping: false
+
+when@test:
+    doctrine:
+        dbal:
+            # "TEST_TOKEN" is typically set by ParaTest
+            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system

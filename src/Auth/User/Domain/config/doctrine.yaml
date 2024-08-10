@@ -1,0 +1,6 @@
+doctrine:
+  dbal:
+    types:
+      user_id: App\Auth\User\Domain\Type\UserIdType
+      user_name: App\Auth\User\Domain\Type\UserNameType
+      user_email: App\Auth\User\Domain\Type\UserEmailType

@@ -1,0 +1,20 @@
+parameters:
+    images_dir: '%kernel.project_dir%/public/images'
+
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\SharedKernel\Application\Listener\ExceptionListener:
+        arguments: [ '%kernel.environment%' ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
