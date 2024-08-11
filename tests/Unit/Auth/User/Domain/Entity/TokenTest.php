@@ -27,6 +27,7 @@ final class TokenTest extends UnitTestCase
         $token = (new TokenBuilder())->withExpires($now->modify('+1 hour'))->build();
 
         $this->expectException(InvalidTokenException::class);
+        $this->expectExceptionMessage('Token is invalid');
 
         $token->validate('invalid_token', $now);
     }
@@ -37,6 +38,7 @@ final class TokenTest extends UnitTestCase
         $token = (new TokenBuilder())->withExpires($now->modify('-1 hour'))->build();
 
         $this->expectException(TokenExpiredException::class);
+        $this->expectExceptionMessage('Token is expired');
 
         $token->validate($token->getValue(), $now);
     }
