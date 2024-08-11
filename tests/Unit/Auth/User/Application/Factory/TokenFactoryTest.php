@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit\Auth\User\Application\Factory;
 
 use App\Auth\User\Application\Factory\TokenFactory;

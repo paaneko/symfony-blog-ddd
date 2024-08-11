@@ -44,6 +44,7 @@ final class UserBuilder
     {
         $clone = clone $this;
         $clone->active = true;
+
         return $clone;
     }
 
@@ -51,6 +52,7 @@ final class UserBuilder
     {
         $clone = clone $this;
         $clone->joinConfirmToken = $token;
+
         return $clone;
     }
 
@@ -58,6 +60,7 @@ final class UserBuilder
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
+
         return $clone;
     }
 
@@ -65,6 +68,7 @@ final class UserBuilder
     {
         $clone = clone $this;
         $clone->passwordHash = $passwordHash;
+
         return $clone;
     }
 

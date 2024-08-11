@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Auth\User\Domain\Entity;
 
 use App\Auth\User\Domain\Event\RequestJoinByEmailEvent;
-use App\Auth\User\Domain\Type\UserStatusType;
 use App\Auth\User\Domain\Type\UserEmailType;
 use App\Auth\User\Domain\Type\UserIdType;
 use App\Auth\User\Domain\Type\UserNameType;
-use App\Auth\User\Domain\ValueObject\UserStatus;
+use App\Auth\User\Domain\Type\UserStatusType;
 use App\Auth\User\Domain\ValueObject\UserEmail;
 use App\Auth\User\Domain\ValueObject\UserId;
 use App\Auth\User\Domain\ValueObject\UserName;
+use App\Auth\User\Domain\ValueObject\UserStatus;
 use App\SharedKernel\Domain\Aggregate\AggregateRoot;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -128,7 +128,7 @@ final class User extends AggregateRoot
     #[ORM\PostLoad]
     public function loadTokens(): void
     {
-        if ($this->joinConfirmToken->getValue() === null) {
+        if (null === $this->joinConfirmToken->getValue()) {
             $this->joinConfirmToken = null;
         }
     }

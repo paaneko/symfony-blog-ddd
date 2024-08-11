@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit\Auth\User\Domain\Entity;
 
 use App\Auth\User\Domain\Entity\Token;

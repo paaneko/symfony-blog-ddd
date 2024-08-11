@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Auth\User\Domain\ValueObject;
 
 use Webmozart\Assert\Assert;
@@ -30,12 +32,12 @@ final class UserStatus
 
     public function isActive(): bool
     {
-        return $this->statusName === self::ACTIVE;
+        return self::ACTIVE === $this->statusName;
     }
 
     public function isInActive(): bool
     {
-        return $this->statusName === self::INACTIVE;
+        return self::INACTIVE === $this->statusName;
     }
 
     public function getStatusName(): string

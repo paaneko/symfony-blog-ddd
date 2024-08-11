@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Auth\User\Domain\Exception;
 
 use App\SharedKernel\Domain\Exception\DomainException;
@@ -10,6 +12,7 @@ final class TokenExpiredException extends DomainException
     {
         parent::__construct('Token is expired');
     }
+
     public function getTranslationTemplate(): string
     {
         return 'error.user.token-expired';

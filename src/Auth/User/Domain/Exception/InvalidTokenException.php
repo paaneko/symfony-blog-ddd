@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Auth\User\Domain\Exception;
 
 use App\SharedKernel\Domain\Exception\DomainException;

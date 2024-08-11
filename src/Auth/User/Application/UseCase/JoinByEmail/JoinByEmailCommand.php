@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Auth\User\Application\UseCase\JoinByEmail;
 
 use App\SharedKernel\Domain\Bus\CommandInterface;

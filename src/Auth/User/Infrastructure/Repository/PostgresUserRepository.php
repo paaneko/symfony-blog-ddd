@@ -7,7 +7,6 @@ namespace App\Auth\User\Infrastructure\Repository;
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\Repository\UserRepositoryInterface;
 use App\Auth\User\Domain\ValueObject\UserEmail;
-use App\Auth\User\Domain\ValueObject\UserId;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -33,6 +32,6 @@ final class PostgresUserRepository extends ServiceEntityRepository implements Us
     {
         $result = $this->findOneBy(['email' => $email->getValue()]);
 
-        return $result !== null;
+        return null !== $result;
     }
 }

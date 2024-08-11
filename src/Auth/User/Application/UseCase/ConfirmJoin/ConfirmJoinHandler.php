@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Auth\User\Application\UseCase\ConfirmJoin;
 
 use App\Auth\User\Application\Service\UserServiceInterface;
@@ -44,7 +46,7 @@ final class ConfirmJoinHandler
             $this->logger->error('Failed confirm user attempt', [
                 'user' => $user,
                 'command' => $command,
-                'exception' => $exception
+                'exception' => $exception,
             ]);
             throw $exception;
         }

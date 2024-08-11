@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Builder\Auth\User\Entity;
 
 use App\Auth\User\Domain\Entity\Token;
@@ -23,6 +25,7 @@ final class TokenBuilder
     {
         $clone = clone $this;
         $clone->expires = $expires;
+
         return $clone;
     }
 

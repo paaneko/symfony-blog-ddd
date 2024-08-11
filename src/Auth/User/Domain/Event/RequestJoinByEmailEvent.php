@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Auth\User\Domain\Event;
 
 use App\SharedKernel\Domain\Event\DomainEventInterface;

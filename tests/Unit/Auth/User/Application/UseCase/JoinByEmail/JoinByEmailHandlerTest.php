@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit\Auth\User\Application\UseCase\JoinByEmail;
 
 use App\Auth\User\Application\Factory\TokenFactoryInterface;
-use App\Auth\User\Application\Service\JoinConfirmEmailSenderInterface;
 use App\Auth\User\Application\Service\UserServiceInterface;
 use App\Auth\User\Application\UseCase\JoinByEmail\JoinByEmailCommand;
 use App\Auth\User\Application\UseCase\JoinByEmail\JoinByEmailHandler;
@@ -11,7 +12,6 @@ use App\Auth\User\Domain\Entity\Token;
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\Event\RequestJoinByEmailEvent;
 use App\Auth\User\Domain\Exception\EmailAlreadyRegisteredException;
-use App\Auth\User\Domain\Repository\UserRepositoryInterface;
 use App\Auth\User\Domain\ValueObject\UserEmail;
 use App\Tests\Builder\Auth\User\Entity\TokenBuilder;
 use App\Tests\Builder\Auth\User\Entity\UserBuilder;
@@ -61,7 +61,7 @@ final class JoinByEmailHandlerTest extends UnitTestCase
         $this->logger = $this->createStub(LoggerInterface::class);
 
         $this->token = (new TokenBuilder())->build();
-        $this->user = (new UserBuilder)
+        $this->user = (new UserBuilder())
             ->withPasswordHash('hashedPassword')
             ->withCreatedAt($this->clock->now())
             ->withToken($this->token)
@@ -87,7 +87,6 @@ final class JoinByEmailHandlerTest extends UnitTestCase
 
     public function testCanJoinByEmail(): void
     {
-
         $this->uuidFactory->method('create')->willReturn(new Uuid($this->user->getId()->getValue()));
         $this->tokenFactory->method('generate')->willReturn($this->token);
         $this->passwordHasherFactory->method('getPasswordHasher')

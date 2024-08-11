@@ -6,7 +6,6 @@ namespace App\Auth\User\Domain\Repository;
 
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\ValueObject\UserEmail;
-use App\Auth\User\Domain\ValueObject\UserId;
 
 interface UserRepositoryInterface
 {

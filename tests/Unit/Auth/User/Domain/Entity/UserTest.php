@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit\Auth\User\Domain\Entity;
 
-use App\Auth\User\Domain\Entity\Token;
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\ValueObject\UserEmail;
 use App\Auth\User\Domain\ValueObject\UserId;
@@ -20,7 +21,7 @@ final class UserTest extends UnitTestCase
             $userName = new UserName($this->faker->name()),
             $userEmail = new UserEmail($this->faker->email()),
             $userPassword = 'hashedPassword',
-            $joinConfirmToken = (new TokenBuilder)->build(),
+            $joinConfirmToken = (new TokenBuilder())->build(),
             $userCreatedAt = new \DateTimeImmutable()
         );
 
@@ -37,7 +38,7 @@ final class UserTest extends UnitTestCase
     {
         $now = new \DateTimeImmutable();
         $token = (new TokenBuilder())->build();
-        $user = (new UserBuilder)->withToken($token)->build();
+        $user = (new UserBuilder())->withToken($token)->build();
 
         $user->confirmJoin($token->getValue(), $now);
 

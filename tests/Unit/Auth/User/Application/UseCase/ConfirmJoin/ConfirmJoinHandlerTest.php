@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit\Auth\User\Application\UseCase\ConfirmJoin;
 
 use App\Auth\User\Application\Service\UserServiceInterface;
