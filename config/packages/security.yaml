@@ -1,0 +1,49 @@
+security:
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Auth\User\Domain\Entity\User
+                property: email
+
+    firewalls:
+        main:
+            security: false
+
+    password_hashers:
+        App\Auth\User\Domain\Entity\User:
+            algorithm: auto
+            cost: 15
+
+when@dev:
+    security:
+        providers:
+            app_user_provider:
+                entity:
+                    class: App\Auth\User\Domain\Entity\User
+                    property: email
+
+        firewalls:
+            main:
+                security: false
+
+        password_hashers:
+            App\Auth\User\Domain\Entity\User:
+                algorithm: auto
+                cost: 4
+
+when@test:
+    security:
+        providers:
+            app_user_provider:
+                entity:
+                    class: App\Auth\User\Domain\Entity\User
+                    property: email
+
+        firewalls:
+            main:
+                security: false
+
+        password_hashers:
+            App\Auth\User\Domain\Entity\User:
+                algorithm: auto
+                cost: 4

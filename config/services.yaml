@@ -14,6 +14,12 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Auth\User\Application\Factory\TokenFactoryInterface:
+        class: App\Auth\User\Application\Factory\TokenFactory
+        arguments:
+            $interval: '%env(TOKEN_TTL)%'
+            $uuidFactory: '@uuid.factory'
+
     App\SharedKernel\Application\Listener\ExceptionListener:
         arguments: [ '%kernel.environment%' ]
         tags:

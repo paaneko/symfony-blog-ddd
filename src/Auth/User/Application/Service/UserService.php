@@ -6,9 +6,10 @@ namespace App\Auth\User\Application\Service;
 
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\Repository\UserRepositoryInterface;
+use App\Auth\User\Domain\ValueObject\UserEmail;
 use App\Auth\User\Domain\ValueObject\UserId;
 
-final class UserService
+final class UserService implements UserServiceInterface
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(private UserRepositoryInterface $userRepository)
@@ -26,8 +27,8 @@ final class UserService
         $this->userRepository->add($user);
     }
 
-    public function get(UserId $userId): User
+    public function hasByEmail(UserEmail $email): bool
     {
-        return $this->userRepository->get($userId);
+        return $this->userRepository->hasByEmail($email);
     }
 }

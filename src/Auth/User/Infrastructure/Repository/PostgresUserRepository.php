@@ -6,7 +6,7 @@ namespace App\Auth\User\Infrastructure\Repository;
 
 use App\Auth\User\Domain\Entity\User;
 use App\Auth\User\Domain\Repository\UserRepositoryInterface;
-use App\Auth\User\Domain\ValueObject\UserId;
+use App\Auth\User\Domain\ValueObject\UserEmail;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -28,14 +28,10 @@ final class PostgresUserRepository extends ServiceEntityRepository implements Us
         $this->getEntityManager()->persist($user);
     }
 
-    public function get(UserId $userId): User
+    public function hasByEmail(UserEmail $email): bool
     {
-        /** @var User|null $entity */
-        $entity = $this->find($userId);
-        if (null === $entity) {
-            throw new \DomainException('User is not found');
-        }
+        $result = $this->findOneBy(['email' => $email->getValue()]);
 
-        return $entity;
+        return null !== $result;
     }
 }

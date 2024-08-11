@@ -15,6 +15,8 @@ final class UserEmail
         Assert::email($value);
         Assert::maxLength($value, 255);
 
+        mb_strtolower($value);
+
         $this->value = $value;
     }
 
