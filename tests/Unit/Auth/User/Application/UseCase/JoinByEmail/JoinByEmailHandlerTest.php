@@ -19,7 +19,6 @@ use App\Tests\UnitTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Clock\ClockInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Clock\ClockAwareTrait;
 use Symfony\Component\Clock\MockClock;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
@@ -29,8 +28,6 @@ use Symfony\Component\Uid\Uuid;
 
 final class JoinByEmailHandlerTest extends UnitTestCase
 {
-    use ClockAwareTrait;
-
     private UserServiceInterface $userService;
     private EntityManagerInterface $entityManager;
     private PasswordHasherFactoryInterface $passwordHasherFactory;
