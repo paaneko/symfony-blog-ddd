@@ -1,0 +1,5 @@
+doctrine:
+  dbal:
+    types:
+      follower_id: App\Account\Following\Domain\Type\FollowerIdType
+      followee_id: App\Account\Following\Domain\Type\FolloweeIdType

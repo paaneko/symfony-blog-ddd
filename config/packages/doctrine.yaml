@@ -1,4 +1,5 @@
 imports:
+    - { resource: ../../src/Account/Following/Domain/config/doctrine.yaml }
     - { resource: ../../src/Auth/User/Domain/config/doctrine.yaml }
     - { resource: ../../src/Blog/Article/Domain/config/doctrine.yaml }
     - { resource: ../../src/Blog/Category/Domain/config/doctrine.yaml }
@@ -21,6 +22,12 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
+            Following:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Account/Following/Domain'
+                prefix: 'App\Account\Following\Domain'
+                alias: Following
             Article:
                 type: attribute
                 is_bundle: false
