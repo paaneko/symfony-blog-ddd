@@ -35,4 +35,9 @@ final class PostgresFollowingRepository extends
             ->getQuery()
             ->getSingleScalarResult() > 0;
     }
+
+    public function remove(Following $following): void
+    {
+        $this->getEntityManager()->remove($following);
+    }
 }

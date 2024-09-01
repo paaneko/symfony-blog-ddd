@@ -11,4 +11,6 @@ interface FollowingRepositoryInterface
     public function add(Following $following): void;
 
     public function hasFollowing(FolloweeId $followeeId, FollowerId $followerId): bool;
+
+    public function remove(Following $following): void;
 }
