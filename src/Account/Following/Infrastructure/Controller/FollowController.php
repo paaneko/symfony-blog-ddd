@@ -35,8 +35,8 @@ class FollowController extends AbstractController
         tags: ['Account'],
         parameters: [
             new OA\Parameter(
-                name: 'uuid',
-                description: 'Follower UUID',
+                name: 'followeeId',
+                description: 'Followee UUID',
                 in: 'path',
                 required: true,
                 schema: new OA\Schema(type: 'string', default: '123e4567-e89b-12d3-a456-426614174000')

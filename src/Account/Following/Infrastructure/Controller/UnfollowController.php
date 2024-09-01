@@ -22,8 +22,8 @@ class UnfollowController extends AbstractController
     #[Route('/unfollow/{followeeId}', name: 'unfollow', methods: ['POST'])]
     #[OA\Post(
         path: '/unfollow/{followeeId}',
-        operationId: 'follow',
-        summary: 'Follow',
+        operationId: 'unfollow',
+        summary: 'Unfollow',
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
@@ -36,8 +36,8 @@ class UnfollowController extends AbstractController
         tags: ['Account'],
         parameters: [
             new OA\Parameter(
-                name: 'uuid',
-                description: 'Follower UUID',
+                name: 'followeeId',
+                description: 'Followee UUID',
                 in: 'path',
                 required: true,
                 schema: new OA\Schema(type: 'string', default: '123e4567-e89b-12d3-a456-426614174000')
