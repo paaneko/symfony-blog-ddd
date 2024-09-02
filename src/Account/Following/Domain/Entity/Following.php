@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'followings')]
-final class Following extends AggregateRoot
+class Following extends AggregateRoot
 {
     #[ORM\Id]
     #[ORM\Column(type: FollowerIdType::NAME, length: 255)]

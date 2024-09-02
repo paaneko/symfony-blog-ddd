@@ -32,11 +32,11 @@ final class GetArticleFetcher
         return [
             'articleId' => $article->getId()->getValue(),
             'title' => $article->getTitle()->getValue(),
-            'comments' => $article->getComments()->map(fn (Comment $comment) => [
-                'id' => $comment->getId()->getValue(),
-                'name' => $comment->getName()->getValue(),
-                'email' => $comment->getEmail()->getValue(),
-            ]),
+//            'comments' => $article->getComments()->map(fn (Comment $comment) => [
+//                'id' => $comment->getId()->getValue(),
+//                'name' => $comment->getName()->getValue(),
+//                'email' => $comment->getEmail()->getValue(),
+//            ]),
         ];
     }
 }

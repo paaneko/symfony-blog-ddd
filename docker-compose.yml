@@ -43,5 +43,11 @@ services:
       - SWAGGER_JSON=/schema/swagger.json
       - BASE_URL=/swagger
 
+  k6:
+    image: grafana/k6:latest
+    volumes:
+      - ./tests/Load:/scripts
+      - ./tests/Load/Results:/results
+
 volumes:
   database_data:
