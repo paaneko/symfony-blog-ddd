@@ -40,4 +40,18 @@ final class PostgresFollowingRepository extends
     {
         $this->getEntityManager()->remove($following);
     }
+
+    public function findFolloweeFollowers(FolloweeId $followeeId): array
+    {
+        $results = $this->createQueryBuilder('t')
+            ->select('t.followerId')
+            ->where('t.followeeId = :followeeId')
+            ->setParameter('followeeId', $followeeId->getValue())
+            ->getQuery();
+
+        return array_map(static function (array $result) {
+            /** @var array<string, FollowerId> $result */
+            return $result['followerId']->getValue();
+        }, $results->getArrayResult());
+    }
 }

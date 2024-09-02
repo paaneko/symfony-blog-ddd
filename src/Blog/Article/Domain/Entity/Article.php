@@ -92,6 +92,7 @@ final class Article extends AggregateRoot
             $this->id->getValue(),
             $this->title->getValue(),
             $this->mainImageId->getValue(),
+            $this->authorId->getValue()
         ));
     }
 

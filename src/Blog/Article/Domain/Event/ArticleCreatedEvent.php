@@ -12,6 +12,7 @@ final class ArticleCreatedEvent implements DomainEventInterface
         private string $id,
         private string $title,
         private string $mainImageId,
+        private string $authorId
     ) {
     }
 
@@ -28,5 +29,10 @@ final class ArticleCreatedEvent implements DomainEventInterface
     public function getMainImageId(): string
     {
         return $this->mainImageId;
+    }
+
+    public function getAuthorId(): string
+    {
+        return $this->authorId;
     }
 }
