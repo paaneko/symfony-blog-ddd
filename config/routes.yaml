@@ -1,3 +1,8 @@
+# Account
+controllerAccount:
+    resource: ../src/Account/Following/Infrastructure/Controller/
+    type: attribute
+
 # Auth
 controllerUser:
     resource: ../src/Auth/User/Infrastructure/Controller/
