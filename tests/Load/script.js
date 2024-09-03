@@ -27,5 +27,5 @@ export default function () {
     check(res, { 'status was 200': (r) => r.status === 200 });
 
     // Add a sleep period between requests to simulate real user behavior
-    sleep(1);
+    sleep(0.1);
 }
