@@ -58,3 +58,6 @@ swagger-generate:
 
 load-fixtures:
 	${PHP_RUN} php bin/console doctrine:fixtures:load
+
+test-load:
+	docker run --rm --net=mynetwork -i k6 run - <tests/Load/script.js

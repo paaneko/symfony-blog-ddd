@@ -9,6 +9,8 @@ services:
     depends_on:
       - php
       - postgres
+    networks:
+      - mynetwork
 
   php:
     build:
@@ -20,6 +22,8 @@ services:
       - PHP_IDE_CONFIG=serverName=API
     volumes:
       - ./:/var/www/html
+    networks:
+      - mynetwork
 
   postgres:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
@@ -32,6 +36,8 @@ services:
     ports:
       - "5432:5432"
     restart: always
+    networks:
+      - mynetwork
 
   swagger-ui:
     image: swaggerapi/swagger-ui:latest
@@ -42,12 +48,21 @@ services:
     environment:
       - SWAGGER_JSON=/schema/swagger.json
       - BASE_URL=/swagger
+    networks:
+      - mynetwork
 
   k6:
     image: grafana/k6:latest
     volumes:
       - ./tests/Load:/scripts
       - ./tests/Load/Results:/results
+    networks:
+      - mynetwork
 
 volumes:
   database_data:
+
+networks:
+  mynetwork:
+    driver: bridge
+    name: mynetwork
