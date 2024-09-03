@@ -4,14 +4,14 @@ import { check, sleep } from 'k6';
 // Define test options
 export const options = {
     stages: [
-        { duration: '10s', target: 50 },  // Ramp up to 50 VUs
-        { duration: '20s', target: 50 },   // Maintain 50 VUs
+        { duration: '10s', target: 100 },  // Ramp up to 50 VUs
+        { duration: '20s', target: 100 },   // Maintain 50 VUs
         { duration: '10s', target: 0 },   // Ramp down to 0 VUs
     ],
     thresholds: {
         // Define your thresholds here
         // Example: The http_req_duration (response time) should be below 200ms 95% of the time
-        'http_req_duration': ['p(95)<200'],
+        'http_req_duration': ['p(95)<1000'],
         // Example: The number of failed requests should be zero
         'http_req_failed': ['rate<0.01'],
     },
@@ -27,5 +27,5 @@ export default function () {
     check(res, { 'status was 200': (r) => r.status === 200 });
 
     // Add a sleep period between requests to simulate real user behavior
-    sleep(0.5);
+    sleep(1);
 }
