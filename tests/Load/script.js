@@ -18,7 +18,7 @@ export const options = {
 };
 
 export default function () {
-    const url = 'http://host.docker.internal:8000/article/df202d14-28c2-4d4c-962f-cc3a9fb96f7d';
+    const url = 'http://host.docker.internal:8000/article/c3d5d67a-986e-4733-a433-3924af775a4b';
 
     // Send an HTTP GET request
     const res = http.get(url);
