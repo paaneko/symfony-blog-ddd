@@ -48,8 +48,8 @@ final class ArticleBuilder
         $faker = Factory::create();
 
         $this->id = new ArticleId((string) $uuidFactory->create());
-        $this->title = new ArticleTitle($faker->realTextBetween(15, 50));
-        $this->content = new ArticleContent($faker->realTextBetween(250, 300));
+        $this->title = new ArticleTitle("Lorem Ipsum is simply dummy text of the printing and typesetting industry.");
+        $this->content = new ArticleContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
         $this->categoryId = new CategoryId((string) $uuidFactory->create());
         $this->sectionId = new NullableSectionId((string) $uuidFactory->create());
         $this->authorId = new ArticleAuthorId((string) $uuidFactory->create());
@@ -77,13 +77,33 @@ final class ArticleBuilder
         return $article;
     }
 
+    public function withId(ArticleId $id): self
+    {
+        $clone = clone $this;
+        $clone->id = $id;
+        return $clone;
+    }
+
+    public function withAuthor(ArticleAuthorId $authorId): self
+    {
+        $clone = clone $this;
+        $clone->authorId = $authorId;
+        return $clone;
+    }
+
+    public function withCategory(CategoryId $categoryId): self
+    {
+        $clone = clone $this;
+        $clone->categoryId = $categoryId;
+        return $clone;
+    }
+
     public function withComment(): self
     {
         $clone = clone $this;
         $clone->comments[] = (new CommentBuilder())
             ->withArticleId($this->id)
             ->build();
-
         return $clone;
     }
 

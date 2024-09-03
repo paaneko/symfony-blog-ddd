@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Table('users')]
-final class User extends AggregateRoot
+class User extends AggregateRoot
 {
     #[ORM\Id]
     #[ORM\Column(type: UserIdType::NAME, length: 255)]

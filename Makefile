@@ -55,3 +55,6 @@ infection:
 
 swagger-generate:
 	${PHP_RUN} ./vendor/bin/openapi -o docs/swagger.json src
+
+load-fixtures:
+	${PHP_RUN} php bin/console doctrine:fixtures:load

@@ -86,12 +86,13 @@
     },
     "require-dev": {
         "dg/bypass-finals": "^1.8",
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
         "friendsofphp/php-cs-fixer": "^3.59",
+        "infection/infection": "^0.27.10",
         "phpstan/phpstan": "^1.11",
         "phpunit/phpunit": "^10.5",
         "symfony/maker-bundle": "^1.60",
         "vimeo/psalm": "^5.25",
-        "zircote/swagger-php": "^4.10",
-        "infection/infection": "^0.27.10"
+        "zircote/swagger-php": "^4.10"
     }
 }
