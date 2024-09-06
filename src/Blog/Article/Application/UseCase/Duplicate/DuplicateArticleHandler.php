@@ -17,7 +17,7 @@ final class DuplicateArticleHandler
 {
     /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(
-        private MessageBusInterface $messageBus,
+        private MessageBusInterface $commandBus,
         private ArticleService $articleService,
         private LoggerInterface $logger
     ) {
@@ -45,6 +45,6 @@ final class DuplicateArticleHandler
             'command' => $command,
         ]);
 
-        $this->messageBus->dispatch($createArticleCommand);
+        $this->commandBus->dispatch($createArticleCommand);
     }
 }
